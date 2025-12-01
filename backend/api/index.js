@@ -46,15 +46,10 @@ app.use(cookieParser());
 //מתחבר למונגו שלי
 connectToMongoDB();
 
-// app.use("/api/auth", newUserRouter);
-// app.use("/api/post", postRouter);
-// app.use("/api/tag", tagRouter);
-// app.use("/api/payment", paymentRouter);
-
-app.use("/auth", newUserRouter);
-app.use("/post", postRouter);
-app.use("/tag", tagRouter);
-app.use("/payment", paymentRouter);
+app.use("/api/auth", newUserRouter);
+app.use("/api/post", postRouter);
+app.use("/api/tag", tagRouter);
+app.use("/api/payment", paymentRouter);
 
 // app.listen(port, "0.0.0.0", () => {
 //   console.log(`Example run on port ${port}!`);

@@ -36,12 +36,9 @@ export default function PaymentPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch(
-          "https://party-cards-with-react-node-js.vercel.app/api/auth/check-auth",
-          {
-            credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
-          }
-        );
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
+        });
 
         if (!res.ok) {
           throw new Error("Unauthorized");
@@ -68,17 +65,14 @@ export default function PaymentPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        "https://party-cards-with-react-node-js.vercel.app/api/payment/topay",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת
-        }
-      );
+      const res = await fetch("/api/payment/topay", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת
+      });
 
       const data = await res.json();
 
@@ -102,13 +96,10 @@ export default function PaymentPage() {
   const handleDeletePayment = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        "https://party-cards-with-react-node-js.vercel.app/api/payment/deletepay",
-        {
-          method: "DELETE",
-          credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת
-        }
-      );
+      const res = await fetch("/api/payment/deletepay", {
+        method: "DELETE",
+        credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת
+      });
 
       const data = await res.json();
 

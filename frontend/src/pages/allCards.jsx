@@ -13,12 +13,9 @@ export default function AllCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch(
-          "https://party-cards-with-react-node-js.vercel.app/api/auth/check-auth",
-          {
-            credentials: "include",
-          }
-        );
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include",
+        });
 
         if (!res.ok) {
           throw new Error("Unauthorized");
@@ -51,9 +48,7 @@ export default function AllCards() {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await fetch(
-          "https://party-cards-with-react-node-js.vercel.app/api/post/"
-        );
+        const response = await fetch("/api/post/");
 
         const data = await response.json();
 
