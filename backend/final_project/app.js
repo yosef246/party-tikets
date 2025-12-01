@@ -66,10 +66,10 @@ app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/payment", paymentRouter);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
 });
 
 app.listen(port, "0.0.0.0", () => {
