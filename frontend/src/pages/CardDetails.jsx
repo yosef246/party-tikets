@@ -12,7 +12,7 @@ export default function CardDetails() {
     const checkAuth = async () => {
       try {
         const res = await fetch(
-          "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/auth/check-auth",
+          "https://party-cards-with-react-node-js-server.onrender.com/api/auth/check-auth",
           {
             credentials: "include",
           }
@@ -38,7 +38,7 @@ export default function CardDetails() {
     async function fetchCard() {
       try {
         const response = await fetch(
-          `https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/post/${id}`,
+          `https://party-cards-with-react-node-js-server.onrender.com/api/post/${id}`,
           {
             credentials: "include",
           }

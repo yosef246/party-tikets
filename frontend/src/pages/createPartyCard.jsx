@@ -18,7 +18,7 @@ export default function CreatePartyCardPage({ handleHeader }) {
     const checkAuth = async () => {
       try {
         const res = await fetch(
-          "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/auth/check-auth",
+          "https://party-cards-with-react-node-js-server.onrender.com/api/auth/check-auth",
           {
             credentials: "include",
           }
@@ -45,7 +45,7 @@ export default function CreatePartyCardPage({ handleHeader }) {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/post/",
+        "https://party-cards-with-react-node-js-server.onrender.com/api/post/",
         {
           method: "POST",
           headers: {
@@ -81,7 +81,7 @@ export default function CreatePartyCardPage({ handleHeader }) {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/auth/logout",
+        "https://party-cards-with-react-node-js-server.onrender.com/api/auth/logout",
         {
           method: "POST",
           credentials: "include",

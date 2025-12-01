@@ -1,14 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "final_project/app.js",
   "type": "module",
   "engines": {
     "node": "24.x"
   },
   "scripts": {
-    "start": "node final_project/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node final_project/app.js"
   },
   "author": "",
   "license": "ISC",

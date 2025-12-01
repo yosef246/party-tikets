@@ -37,7 +37,7 @@ export default function PaymentPage() {
     const checkAuth = async () => {
       try {
         const res = await fetch(
-          "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/auth/check-auth",
+          "https://party-cards-with-react-node-js-server.onrender.com/api/auth/check-auth",
           {
             credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
           }
@@ -69,7 +69,7 @@ export default function PaymentPage() {
 
     try {
       const res = await fetch(
-        "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/payment/topay",
+        "https://party-cards-with-react-node-js-server.onrender.com/api/payment/topay",
         {
           method: "POST",
           headers: {
@@ -103,7 +103,7 @@ export default function PaymentPage() {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/payment/deletepay",
+        "https://party-cards-with-react-node-js-server.onrender.com/api/payment/deletepay",
         {
           method: "DELETE",
           credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת

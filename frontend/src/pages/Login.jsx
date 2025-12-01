@@ -16,7 +16,7 @@ export default function LoginPage() {
 
     try {
       const response = await fetch(
-        "https://party-cards-with-react-node-js-server-lo0i.onrender.com/api/auth/login",
+        "https://party-cards-with-react-node-js-server.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
