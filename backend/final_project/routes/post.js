@@ -1,12 +1,12 @@
 import { Router } from "express";
 import Post from "../models/post.js";
 import Tag from "../models/tag.js";
-import purify from "../utils/sanitize.js";
+import purify from "../../utils/sanitize.js";
 import {
   createPostValitation,
   updatePostValitation,
-} from "../valitations/post.js";
-import { isAdmin, verifyToken } from "../utils/token.js";
+} from "../../valitations/post.js";
+import { isAdmin, verifyToken } from "../../utils/token.js";
 
 const router = Router();
 

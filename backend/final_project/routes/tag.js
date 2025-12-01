@@ -1,7 +1,7 @@
 import { Router } from "express";
 import Tag from "../models/tag.js";
-import purify from "../utils/sanitize.js";
-import { verifyToken, isAdmin } from "../utils/token.js";
+import purify from "../../utils/sanitize.js";
+import { verifyToken, isAdmin } from "../../utils/token.js";
 const router = Router();
 
 router.get("/", async (req, res) => {

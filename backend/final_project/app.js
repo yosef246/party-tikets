@@ -9,7 +9,7 @@ import postRouter from "./routes/post.js";
 import tagRouter from "./routes/tag.js";
 import paymentRouter from "./routes/payment.js";
 
-import connectToMongoDB from "./utils/conectDB.js";
+import connectToMongoDB from "../utils/conectDB.js";
 
 const app = express();
 // const port = 3003;

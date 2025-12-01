@@ -2,8 +2,8 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import User from "../models/user.js";
 import Pay from "../models/pay.js";
-import { verifyToken } from "../utils/token.js";
-import { payValitation } from "../valitations/pay.js";
+import { verifyToken } from "../../utils/token.js";
+import { payValitation } from "../../valitations/pay.js";
 
 const router = Router();
 
