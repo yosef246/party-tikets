@@ -18,7 +18,7 @@ export default function RegisterPage() {
 
     try {
       const response = await fetch(
-        "https://party-cards-with-react-node-js-server.onrender.com/api/auth/register",
+        "https://party-cards-server.onrender.com/api/auth/register",
         {
           method: "POST",
           headers: {

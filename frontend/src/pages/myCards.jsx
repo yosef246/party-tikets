@@ -13,7 +13,7 @@ export default function MyCards() {
     const checkAuth = async () => {
       try {
         const res = await fetch(
-          "https://party-cards-with-react-node-js-server.onrender.com/api/auth/check-auth",
+          "https://party-cards-server.onrender.com/api/auth/check-auth",
           {
             credentials: "include",
           }
@@ -40,7 +40,7 @@ export default function MyCards() {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://party-cards-with-react-node-js-server.onrender.com/api/post/my-cards",
+          "https://party-cards-server.onrender.com/api/post/my-cards",
           {
             credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
           }
