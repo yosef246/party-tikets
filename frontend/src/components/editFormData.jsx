@@ -14,14 +14,17 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/post/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ title, location, date, body, imageUrl }),
-      });
+      const response = await fetch(
+        `https://party-cards-with-react-node-js-serv.vercel.app/api/post/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ title, location, date, body, imageUrl }),
+        }
+      );
 
       //המידע החדש שעידכנת
       const data = await response.json();

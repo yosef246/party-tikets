@@ -17,9 +17,12 @@ export default function CreatePartyCardPage({ handleHeader }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://party-cards-with-react-node-js-serv.vercel.app/api/auth/check-auth",
+          {
+            credentials: "include",
+          }
+        );
 
         if (!res.ok) {
           throw new Error("Unauthorized");
@@ -41,14 +44,17 @@ export default function CreatePartyCardPage({ handleHeader }) {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
     setLoading(true);
     try {
-      const response = await fetch("/api/post/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", //שולח קוקיז לשרת בשביל האימות
-        body: JSON.stringify({ title, location, date, body, imageUrl }),
-      });
+      const response = await fetch(
+        "https://party-cards-with-react-node-js-serv.vercel.app/api/post/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", //שולח קוקיז לשרת בשביל האימות
+          body: JSON.stringify({ title, location, date, body, imageUrl }),
+        }
+      );
 
       const data = await response.json(); //מחזירה את התגובה מהשרת
 
@@ -74,10 +80,13 @@ export default function CreatePartyCardPage({ handleHeader }) {
   async function handleLogout() {
     setLoading(true);
     try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://party-cards-with-react-node-js-serv.vercel.app/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       const data = await response.json();
 

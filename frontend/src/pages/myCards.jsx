@@ -12,9 +12,12 @@ export default function MyCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://party-cards-with-react-node-js-serv.vercel.app/api/auth/check-auth",
+          {
+            credentials: "include",
+          }
+        );
 
         if (!res.ok) {
           throw new Error("Unauthorized");
@@ -36,9 +39,12 @@ export default function MyCards() {
     async function fetchMyPosts() {
       setLoading(true);
       try {
-        const response = await fetch("/api/post/my-cards", {
-          credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
-        });
+        const response = await fetch(
+          "https://party-cards-with-react-node-js-serv.vercel.app/api/post/my-cards",
+          {
+            credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
+          }
+        );
 
         const data = await response.json();
 

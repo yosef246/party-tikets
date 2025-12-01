@@ -10,10 +10,13 @@ export default function MyCardItem(props) {
 
   async function handleDelete() {
     try {
-      const response = await fetch(`p/api/post/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `https://party-cards-with-react-node-js-serv.vercel.app/api/post/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
 
       const data = await response.json();
 
