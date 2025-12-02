@@ -20,6 +20,7 @@ function Header() {
         const data = await res.json();
         console.log("המשתמש מחובר:", data);
         setIsTrue(true);
+        alert("המשתמש מחובר");
       } catch (err) {
         setIsTrue(false);
         console.log("עליך להתחבר כדי לגשת לדף");
@@ -27,7 +28,7 @@ function Header() {
     };
 
     checkAuth();
-  }, [navigate]);
+  }, []);
 
   return (
     <header className={styles.header}>
