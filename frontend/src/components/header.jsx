@@ -1,9 +1,33 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./header.module.css";
 
-function Header({ handleHeader }) {
+function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isTrue, setIsTrue] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
+
+        const data = await res.json();
+        console.log("המשתמש מחובר:", data);
+        setIsTrue(true);
+      } catch (err) {
+        setIsTrue(false);
+        console.log("עליך להתחבר כדי לגשת לדף");
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   return (
     <header className={styles.header}>
@@ -27,7 +51,7 @@ function Header({ handleHeader }) {
             </Link>
           </li>
 
-          {handleHeader ? (
+          {isTrue ? (
             <li>
               <Link className={styles.navLink} to="/party-cards">
                 עריכה
@@ -61,7 +85,7 @@ function Header({ handleHeader }) {
           צרו קשר
         </Link>
 
-        {handleHeader ? (
+        {isTrue ? (
           <Link to="/party-cards" onClick={() => setIsOpen(false)}>
             עריכה
           </Link>

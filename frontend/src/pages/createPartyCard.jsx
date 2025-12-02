@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function CreatePartyCardPage({ setHandleHeader }) {
+export default function CreatePartyCardPage() {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
@@ -27,7 +27,6 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
 
         const data = await res.json();
         console.log("המשתמש מחובר:", data);
-        setHandleHeader(true);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
         navigate("/login");
@@ -35,7 +34,7 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
     };
 
     checkAuth();
-  }, [navigate, setHandleHeader]);
+  }, [navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
@@ -85,7 +84,6 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
         alert(data.message || "שגיאה בהתנתקות");
       } else {
         alert(data.message);
-        setHandleHeader(false);
         navigate("/login");
       }
     } catch (error) {

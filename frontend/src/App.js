@@ -10,25 +10,18 @@ import AllCards from "./pages/allCards";
 import MyCards from "./pages/myCards";
 import CardDetails from "./pages/CardDetails";
 import PaymentPage from "./pages/PaymentPage";
-import { useState } from "react";
 
 function App() {
-  const [isTrue, setIsTrue] = useState(false);
-
   return (
     <>
-      <p>isTrue: {isTrue.toString()}</p>
-      <Header handleHeader={isTrue} />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login setHandleHeader={setIsTrue} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/party-cards"
-          element={<CreatePartyCard setHandleHeader={setIsTrue} />}
-        />
+        <Route path="/party-cards" element={<CreatePartyCard />} />
         <Route path="/all-cards" element={<AllCards />} />
         <Route path="/my-cards" element={<MyCards />} />
         <Route path="/card-details/:id" element={<CardDetails />} />
