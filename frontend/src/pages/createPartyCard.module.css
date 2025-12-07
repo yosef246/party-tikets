@@ -19,7 +19,7 @@
 .mainbutton {
   width: 60px;
   height: 55px;
-  background-color: #61dafb;
+  background-color: #15657b;
   color: white;
   border: none;
   border-radius: 50%;
@@ -32,7 +32,7 @@
 }
 
 .mainbutton:hover {
-  background-color: #016ad2;
+  background-color: #095368;
 }
 
 .submenu {
@@ -53,7 +53,7 @@
   width: 113px;
   margin-top: 8px;
   padding: 0.4rem 0.8rem;
-  background-color: #61dafb;
+  background-color: #15657b;
   color: #fff;
   border: none;
   border-radius: 8px;
