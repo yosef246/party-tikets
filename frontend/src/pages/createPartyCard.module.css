@@ -1,6 +1,6 @@
 .middle {
   background: linear-gradient(to top, #030304, #222226);
-  height: 130vh;
+  height: 140vh;
   position: relative;
   color: aliceblue;
   text-align: right;
@@ -187,7 +187,7 @@
 
   .container {
     width: 80%;
-    
+    padding: 1.5rem;
     height: auto;
     padding: 20px;
     margin: 40px auto;
@@ -201,7 +201,6 @@
   .textarea {
     font-size: 0.9rem;
     width: 88%;
-    box-sizing: border-box;
   }
 
   .form button {
