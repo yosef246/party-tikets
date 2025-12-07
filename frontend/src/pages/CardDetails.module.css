@@ -71,7 +71,7 @@
 /* 📱 טלפון - עד 495px */
 @media (max-width: 495px) {
    .middle {
-    min-height: 90vh;
+    min-height: 100vh;
     height: auto;
     padding-top: 1.5rem;
   }
