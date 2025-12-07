@@ -86,7 +86,7 @@ export default function CardDetails() {
             className={styles.cardButton}
             onClick={() => {
               navigator.clipboard.writeText(
-                `/card-details/${id}?ref=${userId}`
+                `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
               );
               alert("קישור הועתק ✔");
             }}
