@@ -160,7 +160,6 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            placeholder="תאריך המסיבה"
             required
           />
           <textarea
