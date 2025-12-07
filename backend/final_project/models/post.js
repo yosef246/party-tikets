@@ -16,6 +16,12 @@ const postSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  price: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 3,
+  },
   imageUrl: {
     type: String,
     trim: true,

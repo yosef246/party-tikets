@@ -75,6 +75,7 @@ export default function MyCards() {
             key={card._id}
             title={card.title}
             location={card.location}
+            price={card.price}
             date={card.date}
             body={card.body}
             imageUrl={card.imageUrl}

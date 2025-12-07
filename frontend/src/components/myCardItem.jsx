@@ -56,7 +56,10 @@ export default function MyCardItem(props) {
               <strong>מיקום:</strong> {postData.location}
             </p>
             <p>
-              <strong>תאריך:</strong>
+              <strong>מחיר כרטיס:</strong> ₪{postData.price}
+            </p>
+            <p>
+              <strong>תאריך: </strong>
               {new Date(postData.date).toLocaleDateString()}
             </p>
             <p>

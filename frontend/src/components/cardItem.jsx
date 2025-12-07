@@ -5,6 +5,7 @@ export default function CardItem({
   id,
   title,
   location,
+  price,
   date,
   body,
   imageUrl,
@@ -19,6 +20,9 @@ export default function CardItem({
           <h2>{title}</h2>
           <p>
             <strong>מיקום:</strong> {location}
+          </p>
+          <p>
+            <strong>מחיר כרטיס:</strong> ₪{price}
           </p>
           <p>
             <strong>תאריך:</strong> {new Date(date).toLocaleDateString()}

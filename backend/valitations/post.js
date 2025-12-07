@@ -6,6 +6,7 @@ export const createPostValitation = Joi.object({
   title: Joi.string().min(3).max(20).required(),
   location: Joi.string().min(3).max(20).required(),
   date: Joi.date().required(),
+  price: Joi.string().max(3).min(2).required(),
   imageUrl: Joi.string().uri().required(),
   body: Joi.string().min(3).max(200).required(),
   author_id: Joi.objectId().optional(), // אז ככה אנחנו מוודאים בוולידציה שזה ערך נכוןobjectId בגלל שזה מסוג של
@@ -16,6 +17,7 @@ export const updatePostValitation = Joi.object({
   title: Joi.string().min(3).max(20).optional(),
   location: Joi.string().min(3).max(20).optional(),
   date: Joi.date().optional(),
+  price: Joi.string().max(3).min(2).optional(),
   imageUrl: Joi.string().uri().optional(),
   body: Joi.string().min(3).max(200).optional(),
 });

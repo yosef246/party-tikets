@@ -7,6 +7,7 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
+  const [price, setPrice] = useState("");
   const [body, setBody] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,7 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
           "Content-Type": "application/json",
         },
         credentials: "include", //שולח קוקיז לשרת בשביל האימות
-        body: JSON.stringify({ title, location, date, body, imageUrl }),
+        body: JSON.stringify({ title, location, price, date, body, imageUrl }),
       });
 
       const data = await response.json(); //מחזירה את התגובה מהשרת
@@ -61,6 +62,7 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
       setTitle("");
       setLocation("");
       setDate("");
+      setPrice("");
       setBody("");
       setImageUrl("");
     } catch (error) {
@@ -145,6 +147,13 @@ export default function CreatePartyCardPage({ setHandleHeader }) {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="מיקום המסיבה"
+            required
+          />
+          <input
+            type="text"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="מחיר כרטיס"
             required
           />
           <input

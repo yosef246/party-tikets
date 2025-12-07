@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
   });
 
   const { error } = registerValitation.validate(req.body);
-  if (error) return res.status(400).send({ message: error.details[0].message });
+  if (error) return res.status(400).json({ message: error.details[0].message });
 
   //בודק האם האימייל קיים כבר במערכת
   const checkEmail = await NewUser.findOne({ email: req.body.email });
@@ -64,7 +64,7 @@ router.post("/forgot-password", async (req, res) => {
   });
 
   const user = await NewUser.findOne({ email: req.body.email });
-  if (!user) return res.status(200).send({ message: "Check your Email" });
+  if (!user) return res.status(200).json({ message: "Check your Email" });
 
   const salt = await bcrypt.genSalt(10); //יוצר לך רצף גיבריש שמצטרף לסיסמא כדי לאבטח אותה
   console.log("salt:", salt);
@@ -92,7 +92,7 @@ router.post("/login", async (req, res) => {
   });
 
   const { error } = loginValitation.validate(req.body);
-  if (error) return res.status(400).send({ message: error.details[0].message });
+  if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
     const user = await NewUser.findOne({ email: req.body.email });

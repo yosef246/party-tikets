@@ -36,9 +36,13 @@
 }
 
 .submenu {
+  position: absolute;
+  bottom: 70px;  
+  right: 0;
+  margin: 0;     
   display: none;
-  flex-direction: column-reverse;
-  margin-top: 15px;
+  flex-direction: column;
+  gap: 8px;     
 }
 
 .submenu.open {
@@ -46,7 +50,8 @@
 }
 
 .submenu button {
-  margin-top: 12px;
+  width: 113px;
+  margin-top: 8px;
   padding: 0.4rem 0.8rem;
   background-color: #1976d2;
   color: #fff;
@@ -164,6 +169,11 @@
     right: 10px;
   }
 
+  .submenu {
+    bottom: 60px; 
+    right: 5px;
+  }
+
   .mainbutton {
     position:fixed;
     right: 10px;
@@ -178,7 +188,7 @@
   .container {
     width: 80%;
     padding: 1.5rem;
-     height: auto;
+    height: auto;
     padding: 20px;
     margin: 40px auto;
   }

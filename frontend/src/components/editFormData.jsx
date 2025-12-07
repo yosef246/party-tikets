@@ -4,6 +4,7 @@ import styles from "./editFormData.module.css";
 export default function EditPostForm({ id, post, onUpdate, onCancel }) {
   const [title, setTitle] = useState(post.title);
   const [location, setLocation] = useState(post.location);
+  const [price, setPrice] = useState(post.price);
   const [date, setDate] = useState(post.date.slice(0, 10));
   const [body, setBody] = useState(post.body);
   const [imageUrl, setImageUrl] = useState(post.imageUrl);
@@ -20,7 +21,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ title, location, date, body, imageUrl }),
+        body: JSON.stringify({ title, location, price, date, body, imageUrl }),
       });
 
       //המידע החדש שעידכנת
@@ -33,6 +34,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
       if (
         data.title === post.title &&
         data.location === post.location &&
+        data.price === post.price &&
         data.date === post.date &&
         data.body === post.body &&
         data.imageUrl === post.imageUrl
@@ -69,6 +71,13 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         placeholder="מיקום"
+        required
+      />
+      <input
+        type="text"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="מחיר כרטיס"
         required
       />
       <input

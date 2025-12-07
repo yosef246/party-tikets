@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-// import cors from "cors";
+import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -38,17 +38,6 @@ dotenv.config();
 //   })
 // );
 
-// app.options(
-//   "*",
-//   cors({
-//     origin: [
-//       "http://localhost:3000",
-//       "https://party-cards-client.onrender.com",
-//     ],
-//     credentials: true,
-//   })
-// );
-
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());
 
@@ -63,14 +52,15 @@ app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/payment", paymentRouter);
 
-// לוקח את הקובץ APP.JS וממיר אותו לנתיב יחסי
+// לוקח את הנתיב לקובץ הנוכחי שזה app.js ומכניס אותו לקובץ
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // בונה נתיב יחסי מהתקייה הזאת לתיקיית הבילד
 app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
-// Any route → send index.html
+// כל בקשה שלא מובילה לקובץ סטטי עוברת ל-index.html
+//  וה-react-routers יודע לפי ה-url איזה דף להציג
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
 });

@@ -1,6 +1,6 @@
 .middle {
   background: linear-gradient(to top, #030304, #222226);
-  height: 130vh;
+  height: 140vh;
   position: relative;
   color: aliceblue;
   text-align: center;
@@ -52,6 +52,20 @@
 
 .cardContent strong {
   color: #1976d2;
+}
+
+.cardButton {
+  background: linear-gradient(90deg, #00aaff, #0044ff);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 /* 📱 טלפון - עד 495px */

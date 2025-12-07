@@ -1,10 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { data, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן
@@ -20,6 +21,7 @@ export default function CardDetails() {
         }
 
         const data = await res.json();
+        setUserId(data.user.username);
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
@@ -71,12 +73,32 @@ export default function CardDetails() {
             <strong>📍 מיקום:</strong> {card.location}
           </p>
           <p>
-            <strong>📅 תאריך:</strong>{" "}
+            <strong>מחיר כרטיס:</strong> ₪{card.price}
+          </p>
+          <p>
+            <strong>📅 תאריך:</strong>
             {new Date(card.date).toLocaleDateString()}
           </p>
           <p>
             <strong>📝 תיאור:</strong> {card.body}
           </p>
+          <button
+            className={styles.cardButton}
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `/card-details/${id}?ref=${userId}`
+              );
+              alert("קישור הועתק ✔");
+            }}
+          >
+            העתק קישור
+          </button>
+          {/* <button
+            className={styles.cardButton}
+            onClick={() => navigate("/payment")}
+          >
+            לחץ לתשלום
+          </button> */}
         </div>
       </div>
     </div>

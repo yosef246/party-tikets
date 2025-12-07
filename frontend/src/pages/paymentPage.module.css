@@ -1,6 +1,6 @@
 .paymentContainer {
   background: linear-gradient(to top, #0a0a0a, #1a1a1d, #222226);
-  min-height: 80vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,8 +144,9 @@
 
   .paymentBox {
     width: 70%;
-    max-width: 90%;
+    max-width: 70%;
     padding: 25px;
+    margin-bottom: 35%;
   }
 
   .paymentBox h1 {
@@ -166,7 +167,7 @@
   }
 
   .inputField {
-     width: 90%;
+    width: 90%;
     padding: 10px;
     font-size: 0.9rem;
   }

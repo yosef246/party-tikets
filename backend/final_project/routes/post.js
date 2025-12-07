@@ -86,7 +86,7 @@ router.post("/", [verifyToken], async (req, res) => {
   });
 
   const { error } = createPostValitation.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).json(error.details[0].message);
 
   const post = await Post.create({ ...req.body, author_id: req.user.id });
   res.status(200).send(post);
@@ -104,7 +104,7 @@ router.put("/:id", [verifyToken], async (req, res) => {
   });
 
   const { error } = updatePostValitation.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).json(error.details[0].message);
 
   try {
     const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
@@ -124,7 +124,7 @@ router.put("/:id", [verifyToken], async (req, res) => {
 });
 
 //DELETE post
-router.delete("/:id", [verifyToken, isAdmin], async (req, res) => {
+router.delete("/:id", [verifyToken], async (req, res) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.id);
     if (!post)
