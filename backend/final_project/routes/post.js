@@ -93,7 +93,7 @@ router.get("/:username/stats", async (req, res) => {
   try {
     const username = req.params.username;
 
-    const clickView = await clickView.countDocuments({
+    const clickView = await ClickView.countDocuments({
       referrer_username: username,
     }); //סופר כמה צפיות היו למשתמש הזה לפי התנאי ששמת
 
