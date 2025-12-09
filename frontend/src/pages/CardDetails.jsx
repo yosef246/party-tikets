@@ -70,7 +70,7 @@ export default function CardDetails() {
     async function fetchStats() {
       try {
         const res = await fetch(
-          `/api/post/$${encodeURIComponent(userId)}/stats`,
+          `/api/post/${encodeURIComponent(userId)}/stats`,
           {
             credentials: "include",
           }
