@@ -96,6 +96,6 @@ const purchaseSchema = new mongoose.Schema({
   },
 });
 
-const Purchases = mongoose.model("Purchase", purchaseSchema);
+const Purchases = mongoose.model("Purchases", purchaseSchema);
 
 export { Post, ClickView, Purchases };
