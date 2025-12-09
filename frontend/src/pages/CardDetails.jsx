@@ -67,11 +67,14 @@ export default function CardDetails() {
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
     if (!userId) return;
-    async function fetchStats(username) {
+    async function fetchStats() {
       try {
-        const res = await fetch(`/api/post/${username}/stats`, {
-          credentials: "include",
-        });
+        const res = await fetch(
+          `/api/post/$${encodeURIComponent(userId)}/stats`,
+          {
+            credentials: "include",
+          }
+        );
 
         if (!res.ok) throw new Error(data.message || "Error fetching stats");
 
@@ -81,7 +84,7 @@ export default function CardDetails() {
         console.error("Error fetching stats:", err);
       }
     }
-    fetchStats(userId);
+    fetchStats();
   }, [userId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש
