@@ -111,7 +111,6 @@ router.get("/:username/stats", async (req, res) => {
       clickView,
       ticketsSold,
       totalRevenue,
-      commission,
       totalCommission,
     });
   } catch (error) {

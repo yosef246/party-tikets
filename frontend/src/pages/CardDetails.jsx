@@ -76,9 +76,10 @@ export default function CardDetails() {
           }
         );
 
+        const data = await res.json();
+
         if (!res.ok) throw new Error(data.message || "Error fetching stats");
 
-        const data = await res.json();
         setStats(data);
       } catch (err) {
         console.error("Error fetching stats:", err);
