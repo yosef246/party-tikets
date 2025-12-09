@@ -41,7 +41,9 @@ router.get("/:id", [verifyToken], async (req, res) => {
     const visitorId = req.user?.id || req.ip;
 
     //Number of views of the user
-    const ref = req.query.ref;
+    const refRwa = req.query.ref;
+    const ref = decodeURIComponent(refRwa);
+
     if (ref && visitorId) {
       const exists = await ClickView.findOne({
         post_id: post._id,
@@ -72,7 +74,8 @@ router.post("/:id/purchases", [verifyToken], async (req, res) => {
     if (!post) return res.status(404).send({ message: "Post not found" });
 
     const PurchaserId = req.user?.id || req.ip;
-    const { ref } = req.body;
+    const refRaw = req.body.ref;
+    const ref = decodeURIComponent(refRaw);
 
     const purchases = await Purchases.create({
       post_id: post._id,
