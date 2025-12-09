@@ -36,7 +36,7 @@ export default function CardDetails() {
 
   const finalRef = refFromUrl || userId || ""; // תן לי את התנאי הראשון שמתקיים ב - ref
   const link = finalRef
-    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${finalRef}`
+    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${encodeURIComponent(finalRef)}`
     : `https://party-tikets.onrender.com/card-details/${id}`;
 
   //ייבוא פוסט אחד לפי האיידי שלו

@@ -9,12 +9,12 @@
 
 .statsFloating {
   position: fixed;
-  top: 20px;
+  top: 40px;
   right: 20px;
   background: rgb(16, 2, 2);
   padding: 15px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(29, 29, 29, 0.15);
   z-index: 999;
   width: 220px;
   transition: all 0.3s ease;
