@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./CardDetails.module.css";
 
@@ -43,9 +43,12 @@ export default function CardDetails() {
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `/api/post/${id}?ref=${encodeURIComponent(finalRef)}`,
+          {
+            credentials: "include",
+          }
+        );
 
         const data = await response.json();
 
@@ -62,7 +65,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id]);
+  }, [id, finalRef]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -70,10 +73,7 @@ export default function CardDetails() {
     async function fetchStats() {
       try {
         const res = await fetch(
-          `/api/post/${encodeURIComponent(userId)}/stats`,
-          {
-            credentials: "include",
-          }
+          `/api/post/${encodeURIComponent(userId)}/stats`
         );
 
         const data = await res.json();
@@ -86,12 +86,12 @@ export default function CardDetails() {
       }
     }
     fetchStats();
-  }, [userId]);
+  }, [userId, stats]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש
-  async function handlePurchase(postId, ref = "") {
+  async function handlePurchase(id, ref = "") {
     try {
-      const res = await fetch(`/api/post/${postId}/purchases`, {
+      const res = await fetch(`/api/post/${id}/purchases`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,10 +122,11 @@ export default function CardDetails() {
     <div className={styles.middle}>
       {stats && (
         <div className={styles.statsFloating}>
-          <h3>סטטיסטיקות שלך:</h3>
-          <p>📈 צפיות: {stats.clickView}</p>
-          <p>🎟 מכירות: {stats.ticketsSold}</p>
-          <p>💰 עמלה צבורה: ₪{stats.totalCommission.toFixed(2)}</p>
+          <h3>:הנתונים שקרו דרכיך</h3>
+          <p>📈 צפו אצליך: {stats.clickView}</p>
+          <p>🎟 כמות שמכרת: {stats.ticketsSold}</p>
+          <p>🎟 הרווחת למערכת: {stats.totalRevenue}</p>
+          <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
         </div>
       )}
       <div className={styles.cardDetails}>
@@ -158,7 +159,7 @@ export default function CardDetails() {
           </button>
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(card._id, finalRef)}
+            onClick={() => handlePurchase(id, finalRef)}
           >
             לחץ לתשלום
           </button>

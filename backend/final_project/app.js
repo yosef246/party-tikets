@@ -14,29 +14,29 @@ import connectToMongoDB from "../utils/conectDB.js";
 
 const app = express();
 // const port = 3003;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 //env מאפשר לי להשתמש בערכים שנמצאים בקובץ
 dotenv.config();
 
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:3000",
-//       "https://party-cards-client.onrender.com",
-//     ],
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-//     allowedHeaders: [
-//       "Content-Type",
-//       "Authorization",
-//       "Accept",
-//       "Cookie",
-//       "Set-Cookie",
-//     ],
-//     exposedHeaders: ["Set-Cookie"],
-//   })
-// );
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://party-cards-client.onrender.com",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Accept",
+      "Cookie",
+      "Set-Cookie",
+    ],
+    exposedHeaders: ["Set-Cookie"],
+  })
+);
 
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());

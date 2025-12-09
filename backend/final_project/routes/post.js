@@ -36,6 +36,8 @@ router.get("/my-cards", [verifyToken], async (req, res) => {
 router.get("/:id", [verifyToken], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).send({ message: "Post not found" });
+
     const visitorId = req.user?.id || req.ip;
 
     //Number of views of the user
@@ -46,9 +48,6 @@ router.get("/:id", [verifyToken], async (req, res) => {
         referrer_username: ref,
         visitor_id: visitorId,
       });
-
-      if (exists)
-        return res.status(400).send({ message: "The viewer already exist!" });
 
       if (!exists) {
         await ClickView.create({
@@ -67,17 +66,18 @@ router.get("/:id", [verifyToken], async (req, res) => {
 });
 
 //POST Amount of freedom for the user
-router.post("/:id/purchases", async (req, res) => {
+router.post("/:id/purchases", [verifyToken], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const PurchaserId = req.user?.id || req.ip;
+    if (!post) return res.status(404).send({ message: "Post not found" });
 
+    const PurchaserId = req.user?.id || req.ip;
     const { ref } = req.body;
 
     const purchases = await Purchases.create({
       post_id: post._id,
-      referrer_username: ref || "",
-      Purchaser_id: PurchaserId,
+      referrer_username: ref || "", // מי פירסם את הכרטיס
+      Purchaser_id: PurchaserId, // מזהה את הקונה של הכרטיס כדי לדעת מי קנה וכמה
       price: post.price,
     });
 
@@ -97,7 +97,7 @@ router.get("/:username/stats", async (req, res) => {
       referrer_username: username,
     }); //סופר כמה צפיות היו למשתמש הזה לפי התנאי ששמת
 
-    const purchases = await Purchases.find({ referrer_username: username }); //מביא לי את המודול רכישות לפי משתמש
+    const purchases = await Purchases.find({ referrer_username: username }); //לך למודול הנל ותמצא לי כמה רכישות יש למשתמש הזה
     const ticketsSold = purchases.length; //סופר את כמות הרכישות שיש למשתמש בפועל
     const commissionsPerPurchase = purchases.map((p) => p.price * 0.1); // לוקח את ה-10 אחוז עמלה מכל רכישה
     const totalCommission = commissionsPerPurchase.reduce(
