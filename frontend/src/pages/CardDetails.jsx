@@ -4,7 +4,8 @@ import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
   const { id } = useParams();
-  const refFromUrl = useSearchParams("ref"); // ← לוקחים את מה שב-URL
+  const [searchParams] = useSearchParams();
+  const refFromUrl = searchParams.get("ref"); // ← לוקחים את מה שב-URL
   const [card, setCard] = useState();
   const [userId, setUserId] = useState("");
 
