@@ -7,6 +7,19 @@
   padding-top: 2rem;
 }
 
+.statsFloating {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 999;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+
 .loading {
   font-size: 1.2rem;
   color: #0c0101;
@@ -92,6 +105,15 @@
     height: auto;
     padding-top: 1rem;
   }
+
+  .statsFloating {
+    width: 90vw;
+    right: 50%;
+    transform: translateX(50%);
+    top: 10px;
+    padding: 12px 15px;
+    font-size: 14px;
+  }
 }
 
 /* 💻 טאבלט - עד 1398px */
@@ -106,5 +128,13 @@
 
   .cardContent p {
     font-size: 1rem;
+  }
+
+  .statsFloating {
+    width: 260px;
+    right: 15px;
+    top: 15px;
+    padding: 14px 18px;
+    font-size: 15px;
   }
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Post from "../models/post.js";
+import { Post, ClickView, Purchases } from "../models/post.js";
 import Tag from "../models/tag.js";
 import purify from "../../utils/sanitize.js";
 import {
@@ -36,10 +36,87 @@ router.get("/my-cards", [verifyToken], async (req, res) => {
 router.get("/:id", [verifyToken], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    const visitorId = req.user?.id || req.ip;
+
+    //Number of views of the user
+    const ref = req.query.ref;
+    if (ref && visitorId) {
+      const exists = await ClickView.findOne({
+        post_id: post._id,
+        referrer_username: ref,
+        visitor_id: visitorId,
+      });
+
+      if (exists)
+        return res.status(400).send({ message: "The viewer already exist!" });
+
+      if (!exists) {
+        await ClickView.create({
+          post_id: post._id,
+          referrer_username: ref,
+          visitor_id: visitorId,
+        });
+      }
+    }
+
     res.status(200).send(post);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Somthing went wrong with getting post" });
+  }
+});
+
+//POST Amount of freedom for the user
+router.post("/:id/purchases", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const PurchaserId = req.user?.id || req.ip;
+
+    const { ref } = req.body;
+
+    const purchases = await Purchases.create({
+      post_id: post._id,
+      referrer_username: ref || "",
+      Purchaser_id: PurchaserId,
+      price: post.price,
+    });
+
+    res.status(200).send({ message: "Purchase saved", data: purchases });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong with purchase" });
+  }
+});
+
+//GET Sales statistics per user
+router.get("/:username/stats", async (req, res) => {
+  try {
+    const username = req.params.username;
+
+    const clickView = await clickView.countDocuments({
+      referrer_username: username,
+    }); //סופר כמה צפיות היו למשתמש הזה לפי התנאי ששמת
+
+    const purchases = await Purchases.find({ referrer_username: username }); //מביא לי את המודול רכישות לפי משתמש
+    const ticketsSold = purchases.length; //סופר את כמות הרכישות שיש למשתמש בפועל
+    const commissionsPerPurchase = purchases.map((p) => p.price * 0.1); // לוקח את ה-10 אחוז עמלה מכל רכישה
+    const totalCommission = commissionsPerPurchase.reduce(
+      (sum, c) => sum + c,
+      0
+    ); // מחשב כמה עמלה המשתמש צבר
+    const totalRevenue = purchases.reduce((sum, p) => sum + p.price, 0); // מחשב את סהכ ההכנסות של המשתמש למערכת
+
+    res.status(200).send({
+      username,
+      clickView,
+      ticketsSold,
+      totalRevenue,
+      commission,
+      totalCommission,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong with stats" });
   }
 });
 
