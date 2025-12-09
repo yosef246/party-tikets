@@ -1,12 +1,12 @@
-import { data, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
   const { id } = useParams();
+  const refFromUrl = useSearchParams("ref"); // ← לוקחים את מה שב-URL
   const [card, setCard] = useState();
   const [userId, setUserId] = useState("");
-  const navigate = useNavigate();
 
   //בדיקה שיש טוקאן
   useEffect(() => {
@@ -25,12 +25,18 @@ export default function CardDetails() {
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
-        navigate("/login");
+        setUserId("");
       }
     };
 
     checkAuth();
-  }, [navigate]);
+  }, []);
+
+  const finalRef = refFromUrl || userId || ""; // תן לי את התנאי הראשון שמתקיים ב - ref
+
+  const link = finalRef
+    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${finalRef}`
+    : `https://party-tikets.onrender.com/card-details/${id}`;
 
   //ייבוא פוסט אחד לפי האיידי שלו
   useEffect(() => {
@@ -85,9 +91,7 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              navigator.clipboard.writeText(
-                `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
-              );
+              navigator.clipboard.writeText(link);
               alert("קישור הועתק ✔");
             }}
           >
