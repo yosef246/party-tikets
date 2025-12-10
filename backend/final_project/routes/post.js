@@ -79,9 +79,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     if (!post) return res.status(404).send({ message: "Post not found" });
 
     const PurchaserId = req.user?.id || req.ip;
-    const ref = req.body.ref
-      ? Buffer.from(req.query.ref, "base64").toString("utf-8")
-      : null;
+    const ref = req.body.ref;
 
     const purchases = await Purchases.create({
       post_id: post._id,
