@@ -19,10 +19,6 @@ export const verifyTokenOptional = (req, res, next) => {
   const token = req.cookies["access_token"];
 
   if (token) {
-    return next();
-  }
-
-  if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decoded;
