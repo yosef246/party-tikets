@@ -35,13 +35,9 @@ export default function CardDetails() {
   }, []);
 
   const finalRef = refFromUrl || userId || ""; // תן לי את התנאי הראשון שמתקיים ב - ref
-  const cleanRef = finalRef
-    .trim()
-    .replace(/\s+/g, " ") // רווחים רצופים לרווח אחד
-    .replace(/[\u200B-\u200D\uFEFF]/g, ""); // תווים בלתי־נראים
-
+  const encodedRef = btoa(finalRef);
   const link = finalRef
-    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${encodeURIComponent(cleanRef)}`
+    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${encodeURIComponent(encodedRef)}`
     : `https://party-tikets.onrender.com/card-details/${id}`;
 
   //ייבוא פוסט אחד לפי האיידי שלו

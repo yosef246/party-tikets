@@ -6,7 +6,11 @@ import {
   createPostValitation,
   updatePostValitation,
 } from "../../valitations/post.js";
-import { isAdmin, verifyToken } from "../../utils/token.js";
+import {
+  isAdmin,
+  verifyToken,
+  verifyTokenOptional,
+} from "../../utils/token.js";
 
 const router = Router();
 
@@ -33,7 +37,7 @@ router.get("/my-cards", [verifyToken], async (req, res) => {
 });
 
 //GET all posts by :id
-router.get("/:id", [verifyToken], async (req, res) => {
+router.get("/:id", [verifyTokenOptional], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
@@ -41,8 +45,9 @@ router.get("/:id", [verifyToken], async (req, res) => {
     const visitorId = req.user?.id || req.ip;
 
     //Number of views of the user
-    const refRwa = req.query.ref;
-    const ref = decodeURIComponent(refRwa);
+    const ref = req.query.ref
+      ? Buffer.from(req.query.ref, "base64").toString("utf-8")
+      : null;
 
     if (ref && visitorId) {
       const exists = await ClickView.findOne({
@@ -68,14 +73,15 @@ router.get("/:id", [verifyToken], async (req, res) => {
 });
 
 //POST Amount of freedom for the user
-router.post("/:id/purchases", [verifyToken], async (req, res) => {
+router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
 
     const PurchaserId = req.user?.id || req.ip;
-    const refRaw = req.body.ref;
-    const ref = decodeURIComponent(refRaw);
+    const ref = req.body.ref
+      ? Buffer.from(req.query.ref, "base64").toString("utf-8")
+      : null;
 
     const purchases = await Purchases.create({
       post_id: post._id,

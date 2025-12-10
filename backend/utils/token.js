@@ -14,6 +14,26 @@ export const generateToken = ({ id, email, isAdmin, hasPaid }) => {
   );
 };
 
+//בודק האם יש טוקאן ואם אין עדיין ממשיכים
+export const verifyTokenOptional = (req, res, next) => {
+  const token = req.cookies["access_token"];
+
+  if (token) {
+    return next();
+  }
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = decoded;
+    } catch (error) {
+      console.log("Invalid token (optional):", err.message);
+    }
+  }
+
+  next();
+};
+
 export const verifyToken = (req, res, next) => {
   if (req.headers.cookie) {
     //והשני זה הטוקאן עצמו אז כדי לחלץ רק את הטוקאן access_token כיוון שהטוקאן שלנו מורכב משני חלקים אחד השם שלו שזה
