@@ -44,7 +44,7 @@ export default function CardDetails() {
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${userId}`, {
+        const response = await fetch(`/api/post/${id}?ref=${finalRef}`, {
           credentials: "include",
         });
 

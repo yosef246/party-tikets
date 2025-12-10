@@ -50,14 +50,14 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     if (ref && visitorId) {
       const exists = await ClickView.findOne({
         post_id: post._id,
-        referrer_username: ref || " ",
+        referrer_username: ref,
         visitor_id: visitorId,
       });
 
       if (!exists) {
         await ClickView.create({
           post_id: post._id,
-          referrer_username: ref || " ",
+          referrer_username: ref,
           visitor_id: visitorId,
         });
       }
