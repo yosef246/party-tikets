@@ -23,7 +23,7 @@ export default function CardDetails() {
         }
 
         const data = await res.json();
-        setUserId(data.user.username);
+        setUserId(data.user._id);
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
@@ -35,21 +35,18 @@ export default function CardDetails() {
   }, []);
 
   const finalRef = refFromUrl || userId || ""; // תן לי את התנאי הראשון שמתקיים ב - ref
-  const encodedRef = btoa(finalRef);
+  // const encodedRef = btoa(finalRef);
   const link = finalRef
-    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${encodeURIComponent(encodedRef)}`
+    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
     : `https://party-tikets.onrender.com/card-details/${id}`;
 
   //ייבוא פוסט אחד לפי האיידי שלו
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(
-          `/api/post/${id}?ref=${encodeURIComponent(finalRef)}`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`/api/post/${id}?ref=${userId}`, {
+          credentials: "include",
+        });
 
         const data = await response.json();
 
@@ -73,9 +70,7 @@ export default function CardDetails() {
     if (!userId) return;
     async function fetchStats() {
       try {
-        const res = await fetch(
-          `/api/post/${encodeURIComponent(userId)}/stats`
-        );
+        const res = await fetch(`/api/post/${userId}stats`);
 
         const data = await res.json();
 

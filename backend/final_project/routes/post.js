@@ -45,9 +45,7 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     const visitorId = req.user?.id || req.ip;
 
     //Number of views of the user
-    const ref = req.query.ref
-      ? Buffer.from(req.query.ref, "base64").toString("utf-8")
-      : null;
+    const ref = req.query.ref;
 
     if (ref && visitorId) {
       const exists = await ClickView.findOne({
