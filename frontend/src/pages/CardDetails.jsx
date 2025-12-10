@@ -151,7 +151,7 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              navigator.clipboard.writeText(link);
+              navigator.clipboard.writeText(link.trim());
               alert("קישור הועתק ✔");
             }}
           >
