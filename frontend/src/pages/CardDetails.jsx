@@ -8,6 +8,7 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
   const [userId, setUserId] = useState(null);
+  const [buttonId, setButtonId] = useState(true);
   const { isAuthenticated } = useContext(AuthContext);
 
   //בדיקה שיש טוקאן
@@ -20,9 +21,11 @@ export default function CardDetails() {
 
         const data = await res.json();
         if (!data.user._id) {
-          setUserId(false);
+          setUserId(null);
+          setButtonId(false);
         }
 
+        setUserId(data.user._id);
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
@@ -141,7 +144,7 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              if (!userId) {
+              if (!buttonId) {
                 alert("אין לך טוקאן");
                 return;
               }
