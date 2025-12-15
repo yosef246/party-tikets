@@ -7,7 +7,7 @@ export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState("");
 
   // const { isAuthenticated } = useContext(AuthContext);
 
@@ -19,13 +19,18 @@ export default function CardDetails() {
           credentials: "include",
         });
 
+        if (!res.ok) {
+          setUserId(null);
+          return;
+        }
+
         const data = await res.json();
 
         setUserId(data.user._id);
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
-        setUserId("");
+        setUserId(null);
       }
     };
 
