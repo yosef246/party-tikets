@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
-// import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import styles from "./header.module.css";
 
-function Header({ cangeButton }) {
+function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  // const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <header className={styles.header}>
@@ -29,7 +29,7 @@ function Header({ cangeButton }) {
             </Link>
           </li>
 
-          {cangeButton ? (
+          {isAuthenticated ? (
             <li>
               <Link className={styles.navLink} to="/party-cards">
                 עריכה
@@ -63,7 +63,7 @@ function Header({ cangeButton }) {
           צרו קשר
         </Link>
 
-        {cangeButton ? (
+        {isAuthenticated ? (
           <Link to="/party-cards" onClick={() => setIsOpen(false)}>
             עריכה
           </Link>

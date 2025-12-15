@@ -2,13 +2,13 @@ import styles from "./login.module.css";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-export default function LoginPage({ setChange }) {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  // const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export default function LoginPage({ setChange }) {
       alert("נכנסת בהצלחה!");
       setEmail("");
       setPassword("");
-      setChange(true);
+      setIsAuthenticated(true);
       navigate("/party-cards");
     } catch (error) {
       console.error("Error during logined:", error);
