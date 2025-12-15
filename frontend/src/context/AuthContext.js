@@ -12,11 +12,11 @@ export function AuthProvider({ children }) {
           credentials: "include",
         });
 
-        const data = await res.json();
-
         if (!res.ok) {
           setIsAuthenticated(false);
         }
+
+        const data = await res.json();
 
         setIsAuthenticated(true);
       } catch (error) {
