@@ -22,10 +22,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://party-cards-client.onrender.com",
-    ],
+    origin: ["http://localhost:3000", "https://party-tikets.onrender.com"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: [
