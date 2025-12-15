@@ -107,9 +107,9 @@
   }
 
   .statsFloating {
-    width: 90vw;
-    right: 50%;
-    transform: translateX(50%);
+    margin-top: 570px;
+    left: 1px;
+    transform: translateX(20%);
     top: 10px;
     padding: 12px 15px;
     font-size: 14px;

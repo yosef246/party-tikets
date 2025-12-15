@@ -1,14 +1,14 @@
-import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
   const { id } = useParams();
-  const [searchParams] = useSearchParams();
-  const refFromUrl = searchParams.get("ref"); // ← לוקחים את מה שב-URL
   const [card, setCard] = useState();
-  const [userId, setUserId] = useState("");
   const [stats, setStats] = useState("");
+  const [userId, setUserId] = useState(null);
+  const { isAuthenticated } = useContext(AuthContext);
 
   //בדיקה שיש טוקאן
   useEffect(() => {
@@ -34,17 +34,11 @@ export default function CardDetails() {
     checkAuth();
   }, []);
 
-  const finalRef = refFromUrl || userId || ""; // תן לי את התנאי הראשון שמתקיים ב - ref
-  // const encodedRef = btoa(finalRef);
-  const link = finalRef
-    ? `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
-    : `https://party-tikets.onrender.com/card-details/${id}`;
-
-  //ייבוא פוסט אחד לפי האיידי שלו
+  //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${finalRef}`, {
+        const response = await fetch(`/api/post/${id}?ref=${userId}}`, {
           credentials: "include",
         });
 
@@ -63,7 +57,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, finalRef]);
+  }, [id]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -84,8 +78,8 @@ export default function CardDetails() {
     fetchStats();
   }, [userId, stats]);
 
-  //פונקציה לתשלום והצגת מספר הרכישות של המשתמש
-  async function handlePurchase(id, ref = "") {
+  //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
+  async function handlePurchase(id, ref) {
     try {
       const res = await fetch(`/api/post/${id}/purchases`, {
         method: "POST",
@@ -102,7 +96,7 @@ export default function CardDetails() {
         throw new Error(data.message || "Error purchasing ticket");
       }
 
-      alert("!רכישה בוצעה בהצלחה");
+      alert("רכישה בוצעה בהצלחה !");
       console.log(data);
     } catch (error) {
       console.error("Error during getting:", error);
@@ -144,18 +138,26 @@ export default function CardDetails() {
           <p>
             <strong>📝 תיאור:</strong> {card.body}
           </p>
+
           <button
             className={styles.cardButton}
             onClick={() => {
-              navigator.clipboard.writeText(link.trim());
+              if (userId) {
+                alert("אין לך טוקאן");
+                return;
+              }
+              navigator.clipboard.writeText(
+                `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
+              );
               alert("קישור הועתק ✔");
             }}
           >
             העתק קישור
           </button>
+
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(id, finalRef)}
+            onClick={() => handlePurchase(id, userId)}
           >
             לחץ לתשלום
           </button>

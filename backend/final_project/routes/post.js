@@ -42,7 +42,8 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
 
-    const visitorId = req.user?.id || req.ip;
+    const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip;
+    const visitorId = req.user?.id || realIp;
 
     //Number of views of the user
     const ref = req.query.ref;
@@ -76,12 +77,19 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
 
-    const PurchaserId = req.user?.id || req.ip;
+    const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip;
+    const PurchaserId = req.user?.id || realIp;
+    console.log(PurchaserId);
+
     const ref = req.body.ref;
+
+    if (!ref) {
+      return res.status(400).send({ message: "you dont have Ref" });
+    }
 
     const purchases = await Purchases.create({
       post_id: post._id,
-      referrer_username: ref || "", // מי פירסם את הכרטיס
+      referrer_username: ref, // מי פירסם את הכרטיס
       Purchaser_id: PurchaserId, // מזהה את הקונה של הכרטיס כדי לדעת מי קנה וכמה
       price: post.price,
     });
@@ -102,7 +110,7 @@ router.get("/:username/stats", async (req, res) => {
       referrer_username: username,
     }); //סופר כמה צפיות היו למשתמש הזה לפי התנאי ששמת
 
-    const purchases = await Purchases.find({ referrer_username: username }); //לך למודול הנל ותמצא לי כמה רכישות יש למשתמש הזה
+    const purchases = await Purchases.find({ referrer_username: username }); //לך למודול הנל ותמצא לי את המשתמש הזה
     const ticketsSold = purchases.length; //סופר את כמות הרכישות שיש למשתמש בפועל
     const commissionsPerPurchase = purchases.map((p) => p.price * 0.1); // לוקח את ה-10 אחוז עמלה מכל רכישה
     const totalCommission = commissionsPerPurchase.reduce(

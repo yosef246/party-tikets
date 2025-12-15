@@ -12,7 +12,7 @@ export default function MyCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth", {
+        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
           credentials: "include",
         });
 

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 import styles from "./header.module.css";
 
-function Header({ handleHeader }) {
+function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <header className={styles.header}>
@@ -27,7 +29,7 @@ function Header({ handleHeader }) {
             </Link>
           </li>
 
-          {handleHeader ? (
+          {isAuthenticated ? (
             <li>
               <Link className={styles.navLink} to="/party-cards">
                 עריכה
@@ -61,7 +63,7 @@ function Header({ handleHeader }) {
           צרו קשר
         </Link>
 
-        {handleHeader ? (
+        {isAuthenticated ? (
           <Link to="/party-cards" onClick={() => setIsOpen(false)}>
             עריכה
           </Link>

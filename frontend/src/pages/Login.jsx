@@ -1,12 +1,14 @@
 import styles from "./login.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
-export default function LoginPage({ setHandleHeader }) {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { setIsAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -35,9 +37,9 @@ export default function LoginPage({ setHandleHeader }) {
 
       console.log("Login successful:", data);
       alert("נכנסת בהצלחה!");
-      setHandleHeader(true);
       setEmail("");
       setPassword("");
+      setIsAuthenticated(true);
       navigate("/party-cards");
     } catch (error) {
       console.error("Error during logined:", error);

@@ -10,7 +10,7 @@ export const generateToken = ({ id, email, isAdmin, hasPaid }) => {
       hasPaid,
     },
     process.env.JWT_SECRET,
-    { expiresIn: "2h" } //אומר לי לכמה זמן הטוקאן תקף במקרה הזה ל2 שעות
+    { expiresIn: "1d" } //אומר לי לכמה זמן הטוקאן תקף במקרה הזה ל2 שעות
   );
 };
 
