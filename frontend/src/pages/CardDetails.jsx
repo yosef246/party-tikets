@@ -36,7 +36,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, userId]);
+  }, [id, userId, loading]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
