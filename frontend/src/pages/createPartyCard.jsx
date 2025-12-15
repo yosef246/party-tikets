@@ -2,10 +2,10 @@ import styles from "./createPartyCard.module.css";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+// import { AuthContext } from "../context/AuthContext";
 
-export default function CreatePartyCardPage() {
-  const { setIsAuthenticated } = useContext(AuthContext);
+export default function CreatePartyCardPage({ setChange }) {
+  // const { setIsAuthenticated } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
@@ -88,7 +88,7 @@ export default function CreatePartyCardPage() {
         alert(data.message || "שגיאה בהתנתקות");
       } else {
         alert(data.message);
-        setIsAuthenticated(false);
+        setChange(false);
         navigate("/login");
       }
     } catch (error) {
