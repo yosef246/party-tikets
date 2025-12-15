@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+// import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
@@ -9,7 +9,7 @@ export default function CardDetails() {
   const [stats, setStats] = useState("");
   const [userId, setUserId] = useState(null);
   const [buttonId, setButtonId] = useState(true);
-  const { isAuthenticated } = useContext(AuthContext);
+  // const { isAuthenticated } = useContext(AuthContext);
 
   //בדיקה שיש טוקאן
   useEffect(() => {
@@ -30,6 +30,7 @@ export default function CardDetails() {
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
         setUserId("");
+        setButtonId(false);
       }
     };
 
