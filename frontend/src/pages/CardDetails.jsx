@@ -13,9 +13,11 @@ export default function CardDetails() {
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     if (loading) return;
+    const refParam = userId ? `?ref=${userId}` : "";
+
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${userId}`, {
+        const response = await fetch(`/api/post/${id}?ref=${refParam}`, {
           credentials: "include",
         });
 
