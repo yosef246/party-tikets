@@ -42,7 +42,7 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
 
-    const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip;
+    const realIp = req.headers["x-forwarded-for"]?.split(",")[0];
     const visitorId = req.user?.id || realIp;
 
     //Number of views of the user

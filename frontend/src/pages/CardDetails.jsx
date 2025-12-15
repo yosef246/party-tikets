@@ -7,14 +7,14 @@ export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const { isAuthenticated, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const userId = user?._id;
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${userId}}`, {
+        const response = await fetch(`/api/post/${id}?ref=${userId}`, {
           credentials: "include",
         });
 
