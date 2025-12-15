@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import purify from "../../utils/sanitize.js";
 import { loginValitation, registerValitation } from "../../valitations/user.js";
 import NewUser from "../models/user.js";
-import { generateToken } from "../../utils/token.js";
+import { generateToken, verifyTokenOptional } from "../../utils/token.js";
 import { verifyToken } from "../../utils/token.js";
 
 const router = Router();
@@ -138,6 +138,21 @@ router.get("/check-auth", [verifyToken], async (req, res) => {
 
     if (!user) {
       return res.status(404).json({ message: "משתמש לא קיים" });
+    }
+
+    res.json({ user: user });
+    console.log(user, "you have a token now");
+  } catch (err) {
+    return res.status(403).json({ message: "אין לך משתמש" });
+  }
+});
+
+router.get("/check-auth-optional", [verifyTokenOptional], async (req, res) => {
+  try {
+    const user = await NewUser.findById(req.user.id).select("-password"); // בלי הסיסמה
+
+    if (!req.user) {
+      return res.json({ user: null }); // אין טוקן – מחזיר null
     }
 
     res.json({ user: user });
