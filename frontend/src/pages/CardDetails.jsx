@@ -17,7 +17,7 @@ export default function CardDetails() {
 
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refParam}`, {
+        const response = await fetch(`/api/post/${id}${refParam}`, {
           credentials: "include",
         });
 
