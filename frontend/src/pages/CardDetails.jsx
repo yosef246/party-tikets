@@ -1,41 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-// import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
 
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const [userId, setUserId] = useState("");
-
-  // const { isAuthenticated } = useContext(AuthContext);
-
-  //בדיקה שיש טוקאן
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
-
-        if (!res.ok) {
-          setUserId(null);
-          return;
-        }
-
-        const data = await res.json();
-
-        setUserId(data.user._id);
-        console.log("המשתמש מחובר:", data);
-      } catch (err) {
-        console.log("עליך להתחבר כדי לגשת לדף");
-        setUserId(null);
-      }
-    };
-
-    checkAuth();
-  }, []);
+  const { isAuthenticated, user } = useContext(AuthContext);
+  const userId = user?._id;
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
