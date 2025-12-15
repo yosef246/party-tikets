@@ -18,12 +18,11 @@ export default function CardDetails() {
           credentials: "include",
         });
 
-        if (!res.ok) {
-          throw new Error("Unauthorized");
+        const data = await res.json();
+        if (!data.user._id) {
+          setUserId(false);
         }
 
-        const data = await res.json();
-        setUserId(data.user._id);
         console.log("המשתמש מחובר:", data);
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
@@ -142,7 +141,7 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              if (userId) {
+              if (!userId) {
                 alert("אין לך טוקאן");
                 return;
               }
