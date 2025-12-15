@@ -149,11 +149,10 @@ router.get("/check-auth", [verifyToken], async (req, res) => {
 
 router.get("/check-auth-optional", [verifyTokenOptional], async (req, res) => {
   try {
-    const user = await NewUser.findById(req.user.id).select("-password"); // בלי הסיסמה
-
     if (!req.user) {
       return res.json({ user: null }); // אין טוקן – מחזיר null
     }
+    const user = await NewUser.findById(req.user.id).select("-password"); // בלי הסיסמה
 
     res.json({ user: user });
     console.log(user, "you have a token now");
