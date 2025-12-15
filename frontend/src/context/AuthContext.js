@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth-optional", {
+        const res = await fetch("/api/auth/check-auth", {
           credentials: "include",
         });
 
