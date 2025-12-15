@@ -118,10 +118,14 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              navigator.clipboard.writeText(
-                `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
-              );
-              alert("קישור הועתק ✔");
+              if (userId) {
+                navigator.clipboard.writeText(
+                  `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
+                );
+                alert("קישור הועתק ✔");
+              } else {
+                alert("עליך להתחבר כדי להעתיק את הקישור");
+              }
             }}
           >
             העתק קישור
