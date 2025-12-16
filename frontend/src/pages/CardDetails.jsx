@@ -8,14 +8,13 @@ export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const userId = user?._id;
   const refQuery = userId ? `?ref=${userId}` : location.search;
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    // if (loading) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}${refQuery}`, {
@@ -61,7 +60,7 @@ export default function CardDetails() {
 
     const interval = setInterval(fetchStats, 2000);
     return () => clearInterval(interval);
-  }, [userId, loading]);
+  }, [userId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
