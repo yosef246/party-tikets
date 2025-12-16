@@ -14,10 +14,11 @@ export default function CardDetails() {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setRefId(searchParams.get("ref") || userId);
-  }, [userId]);
+  }, []);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
+    if (!refId) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
