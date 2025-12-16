@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
 
@@ -8,16 +9,16 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
   const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
   const userId = user?._id;
+  const refQuery = userId ? `?ref=${userId}` : location.search;
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     if (loading) return;
-    const refParam = userId ? `?ref=${userId}` : "";
-
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}${refParam}`, {
+        const response = await fetch(`/api/post/${id}${refQuery}`, {
           credentials: "include",
         });
 
@@ -57,7 +58,7 @@ export default function CardDetails() {
       }
     }
     fetchStats();
-  }, [userId, stats]);
+  }, [userId, stats, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
