@@ -39,7 +39,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, userId, loading]);
+  }, [id, userId]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function CardDetails() {
 
     const interval = setInterval(fetchStats, 2000);
     return () => clearInterval(interval);
-  }, [userId, loading]);
+  }, [userId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
