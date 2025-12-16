@@ -12,9 +12,11 @@ export default function CardDetails() {
   const [refId, setRefId] = useState(null);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    setRefId(searchParams.get("ref") || userId);
-  }, []);
+    if (!refId) {
+      const searchParams = new URLSearchParams(window.location.search);
+      setRefId(searchParams.get("ref") || userId);
+    }
+  }, [user, refId]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
@@ -90,7 +92,7 @@ export default function CardDetails() {
     }
   }
 
-  if (!card) {
+  if (!card || !refId) {
     return <p className={styles.loading}>טוען . . .</p>;
   }
 
@@ -134,7 +136,7 @@ export default function CardDetails() {
                 );
                 alert("קישור הועתק ✔");
               } else {
-                alert("עליך להתחבר כדי להעתיק את הקישור");
+                alert("התחבר כדי להעתיק את הקישור ולהרוויח משיתופים");
               }
             }}
           >
