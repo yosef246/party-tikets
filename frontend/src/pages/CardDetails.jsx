@@ -61,7 +61,7 @@ export default function CardDetails() {
 
     const interval = setInterval(fetchStats, 2000);
     return () => clearInterval(interval);
-  }, [userId]);
+  }, [userId, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
