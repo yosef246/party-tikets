@@ -9,15 +9,14 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
   const { user, loading } = useContext(AuthContext);
-  const location = useLocation();
+  // const location = useLocation();
   const userId = user?._id;
-  const refQuery = userId ? `?ref=${userId}` : location.search || "";
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}${refQuery}`, {
+        const response = await fetch(`/api/post/${id}?ref=${userId}`, {
           credentials: "include",
         });
 
