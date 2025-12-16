@@ -15,7 +15,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading) return;
+    // if (loading) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}${refQuery}`, {
