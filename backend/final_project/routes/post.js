@@ -37,7 +37,7 @@ router.get("/my-cards", [verifyToken], async (req, res) => {
 });
 
 //GET all posts by :id
-router.get("/:id", [verifyToken], async (req, res) => {
+router.get("/:id", [verifyTokenOptional], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });

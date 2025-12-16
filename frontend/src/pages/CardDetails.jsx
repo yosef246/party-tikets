@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
@@ -7,22 +7,19 @@ export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const [refId, setRefId] = useState(null);
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    setRefId(searchParams.get("ref") || userId);
-  }, []);
+  const refQuery = userId ? `?ref=${userId}` : "";
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
+        const response = await fetch(`/api/post/${id}${refQuery}`, {
           credentials: "include",
         });
+
+        console.log("userId:", userId);
 
         const data = await response.json();
 
@@ -39,7 +36,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, refId]);
+  }, [id, userId]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -142,7 +139,7 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(id, refId)}
+            onClick={() => handlePurchase(id, userId)}
           >
             לחץ לתשלום
           </button>
