@@ -58,7 +58,10 @@ export default function CardDetails() {
       }
     }
     fetchStats();
-  }, [userId, stats, loading]);
+
+    const interval = setInterval(fetchStats, 2000);
+    return () => clearInterval(interval);
+  }, [userId, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
@@ -139,7 +142,7 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(id, refQuery)}
+            onClick={() => handlePurchase(id, userId)}
           >
             לחץ לתשלום
           </button>
