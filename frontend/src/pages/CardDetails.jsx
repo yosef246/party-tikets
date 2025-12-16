@@ -139,7 +139,7 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(id, userId)}
+            onClick={() => handlePurchase(id, refQuery)}
           >
             לחץ לתשלום
           </button>
