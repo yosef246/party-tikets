@@ -15,15 +15,11 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading) return;
     async function fetchCard() {
       try {
-        const response = await fetch(
-          `/api/post/${id}${refQuery && refQuery !== "?ref=undefined" ? refQuery : ""}`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`/api/post/${id}${refQuery}`, {
+          credentials: "include",
+        });
 
         console.log("userId:", userId);
 
@@ -42,7 +38,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, userId, loading]);
+  }, [id, userId]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
