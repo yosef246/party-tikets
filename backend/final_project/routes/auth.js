@@ -147,20 +147,6 @@ router.get("/check-auth", [verifyToken], async (req, res) => {
   }
 });
 
-router.get("/check-auth-optional", [verifyTokenOptional], async (req, res) => {
-  try {
-    if (!req.user) {
-      return res.json({ user: null }); // אין טוקן – מחזיר null
-    }
-    const user = await NewUser.findById(req.user.id).select("-password"); // בלי הסיסמה
-
-    res.json({ user: user });
-    console.log(user, "you have a token now");
-  } catch (err) {
-    return res.status(403).json({ message: "אין לך משתמש" });
-  }
-});
-
 router.post("/logout", async (req, res) => {
   try {
     res.clearCookie("access_token", {

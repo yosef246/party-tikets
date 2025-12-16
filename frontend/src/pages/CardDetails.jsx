@@ -9,17 +9,20 @@ export default function CardDetails() {
   const [stats, setStats] = useState("");
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
-  const refQuery = userId ? `?ref=${userId}` : "";
+  const [refId, setRefId] = useState(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setRefId(searchParams.get("ref") || userId);
+  }, [userId]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}${refQuery}`, {
+        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
           credentials: "include",
         });
-
-        console.log("userId:", userId);
 
         const data = await response.json();
 
@@ -36,7 +39,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, userId]);
+  }, [id, refId]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -139,7 +142,7 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            onClick={() => handlePurchase(id, userId)}
+            onClick={() => handlePurchase(id, refId)}
           >
             לחץ לתשלום
           </button>
