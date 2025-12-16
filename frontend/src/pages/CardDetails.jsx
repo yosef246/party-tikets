@@ -8,18 +8,22 @@ export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
   const [stats, setStats] = useState("");
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   const userId = user?._id;
-  const refQuery = userId ? `?ref=${userId}` : location.search;
+  const refQuery = userId ? `?ref=${userId}` : location.search || "";
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
+    if (loading) return;
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}${refQuery}`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `/api/post/${id}${refQuery && refQuery !== "?ref=undefined" ? refQuery : ""}`,
+          {
+            credentials: "include",
+          }
+        );
 
         console.log("userId:", userId);
 
@@ -38,7 +42,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, userId]);
+  }, [id, userId, loading]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
@@ -60,7 +64,7 @@ export default function CardDetails() {
 
     const interval = setInterval(fetchStats, 2000);
     return () => clearInterval(interval);
-  }, [userId]);
+  }, [userId, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
