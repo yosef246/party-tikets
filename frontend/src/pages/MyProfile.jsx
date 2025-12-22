@@ -13,9 +13,7 @@ export default function MyProfile() {
     if (!userId) return;
     async function fetchStats() {
       try {
-        const res = await fetch(
-          `http://localhost:3001/api/post/${userId}/stats`
-        );
+        const res = await fetch(`/api/post/${userId}/stats`);
 
         const data = await res.json();
 

@@ -13,7 +13,7 @@ export default function MyCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
+        const res = await fetch("/api/auth/check-auth", {
           credentials: "include",
         });
 
@@ -37,12 +37,9 @@ export default function MyCards() {
     async function fetchMyPosts() {
       setLoading(true);
       try {
-        const response = await fetch(
-          "http://localhost:3001/api/post/my-cards",
-          {
-            credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
-          }
-        );
+        const response = await fetch("/api/post/my-cards", {
+          credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
+        });
 
         const data = await response.json();
 

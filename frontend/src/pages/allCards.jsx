@@ -14,7 +14,7 @@ export default function AllCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
+        const res = await fetch("/api/auth/check-auth", {
           credentials: "include",
         });
 
@@ -49,7 +49,7 @@ export default function AllCards() {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:3001/api/post/");
+        const response = await fetch("/api/post/");
 
         const data = await response.json();
 

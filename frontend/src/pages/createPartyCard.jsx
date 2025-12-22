@@ -20,7 +20,7 @@ export default function CreatePartyCardPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
+        const res = await fetch("/api/auth/check-auth", {
           credentials: "include",
         });
 
@@ -43,7 +43,7 @@ export default function CreatePartyCardPage() {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/api/post/", {
+      const response = await fetch("/api/post/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function CreatePartyCardPage() {
   async function handleLogout() {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/api/auth/logout", {
+      const response = await fetch("/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

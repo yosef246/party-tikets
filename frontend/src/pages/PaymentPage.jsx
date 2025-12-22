@@ -36,7 +36,7 @@ export default function PaymentPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
+        const res = await fetch("/api/auth/check-auth", {
           credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
         });
 
@@ -65,7 +65,7 @@ export default function PaymentPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3001/api/payment/topay", {
+      const res = await fetch("/api/payment/topay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function PaymentPage() {
   const handleDeletePayment = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/api/payment/deletepay", {
+      const res = await fetch("/api/payment/deletepay", {
         method: "DELETE",
         credentials: "include", //גורם לדפדפן לשלוח את הקוקיז אוטומטית לשרת
       });
