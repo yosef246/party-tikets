@@ -32,13 +32,13 @@ function Header() {
           {isAuthenticated ? (
             <>
               <li>
-                <Link className={styles.navLink} to="/party-cards">
-                  עריכה
+                <Link className={styles.signup} to="/profile">
+                  פרופיל אישי
                 </Link>
               </li>
               <li>
-                <Link className={styles.signup} to="/profile">
-                  פרופיל אישי
+                <Link className={styles.navLink} to="/party-cards">
+                  עריכה
                 </Link>
               </li>
             </>
