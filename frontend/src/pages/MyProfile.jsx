@@ -8,6 +8,8 @@ export default function MyProfile() {
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
 
+  // כאשר אני מרענן את הדף הזה בטלפון לא מופיע לי כלום והוא מנתק אותי מהטוקאן שלי
+
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
     if (!userId) return;
