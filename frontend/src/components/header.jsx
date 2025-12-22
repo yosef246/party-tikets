@@ -32,13 +32,13 @@ function Header() {
           {isAuthenticated ? (
             <>
               <li>
-                <Link className={styles.signup} to="/profile">
-                  פרופיל אישי
+                <Link className={styles.navLink} to="/party-cards">
+                  עריכה
                 </Link>
               </li>
               <li>
-                <Link className={styles.navLink} to="/party-cards">
-                  עריכה
+                <Link className={styles.navLink} to="/profile">
+                  פרופיל אישי
                 </Link>
               </li>
             </>
@@ -50,7 +50,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link className={styles.signup} to="/login">
+                <Link className={styles.navLink} to="/login">
                   התחברות
                 </Link>
               </li>
@@ -73,11 +73,11 @@ function Header() {
 
         {isAuthenticated ? (
           <>
-            <Link to="/profile" onClick={() => setIsOpen(false)}>
-              פרופיל אישי
-            </Link>
             <Link to="/party-cards" onClick={() => setIsOpen(false)}>
               עריכה
+            </Link>
+            <Link to="/profile" onClick={() => setIsOpen(false)}>
+              פרופיל אישי
             </Link>
           </>
         ) : (
