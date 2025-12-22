@@ -12,7 +12,7 @@ export default function MyProfile() {
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
-    if (!userId) return;
+    if (!userId || loading) return;
     async function fetchStats() {
       try {
         const res = await fetch(`/api/post/${userId}/stats`);
