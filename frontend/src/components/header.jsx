@@ -5,8 +5,7 @@ import styles from "./header.module.css";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, loading } = useContext(AuthContext);
-  if (loading) return null;
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <header className={styles.header}>
@@ -31,31 +30,31 @@ function Header() {
           </li>
 
           {isAuthenticated ? (
-            <li>
-              <Link className={styles.navLink} to="/party-cards">
-                עריכה
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link className={styles.navLink} to="/party-cards">
+                  עריכה
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.signup} to="/profile">
+                  פרופיל אישי
+                </Link>
+              </li>
+            </>
           ) : (
-            <li>
-              <Link className={styles.navLink} to="/register">
-                הרשמה
-              </Link>
-            </li>
-          )}
-
-          {isAuthenticated ? (
-            <li>
-              <Link className={styles.signup} to="/profile">
-                פרופיל אישי
-              </Link>
-            </li>
-          ) : (
-            <li>
-              <Link className={styles.signup} to="/login">
-                התחברות
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link className={styles.navLink} to="/register">
+                  הרשמה
+                </Link>
+              </li>
+              <li>
+                <Link className={styles.signup} to="/login">
+                  התחברות
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>
