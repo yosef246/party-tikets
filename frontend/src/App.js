@@ -10,6 +10,7 @@ import AllCards from "./pages/allCards";
 import MyCards from "./pages/myCards";
 import CardDetails from "./pages/CardDetails";
 import PaymentPage from "./pages/PaymentPage";
+import MyProfile from "./pages/MyProfile";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/my-cards" element={<MyCards />} />
           <Route path="/card-details/:id" element={<CardDetails />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/profile" element={<MyProfile />} />
         </Routes>
       </AuthProvider>
     </>

@@ -1,0 +1,74 @@
+.middle {
+  background: linear-gradient(to top, #030304, #222226);
+  height: 100vh;
+  position: relative;
+  color: aliceblue;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.statsFloating {
+  position: relative;
+  top: 100px;
+  left: 450px;
+  background: rgb(43, 37, 37);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(138, 56, 56, 0.15);
+  z-index: 999;
+  width: 620px;
+  height: 400px;
+  transition: all 0.3s ease;
+}
+
+.statsFloating h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.statsDescription {
+  padding-top: 20px;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.statsList p {
+  padding-top: 15px;
+  font-size: 18px;
+  margin: 6px 0;
+}
+
+/* 📱 טלפון - עד 495px */
+@media (max-width: 495px) {
+ .middle {
+    min-height: 100vh;
+    height: auto;
+    padding-top: 1.5rem;
+  }
+
+  .statsFloating {
+    margin-top: 210px;
+    height: 470px;
+    left: 1px;
+    transform: translateX(20%);
+    top: 10px;
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+/* 💻 טאבלט - עד 1398px */
+@media (max-width: 1398px) {
+ 
+  .statsFloating {
+    width: 260px;
+    right: 15px;
+    top: 15px;
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+}

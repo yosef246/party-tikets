@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
+import Loader from "../components/Loader";
 
 export default function MyCards() {
   const [loading, setLoading] = useState(false);
@@ -12,7 +13,7 @@ export default function MyCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth", {
+        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
           credentials: "include",
         });
 
@@ -36,9 +37,12 @@ export default function MyCards() {
     async function fetchMyPosts() {
       setLoading(true);
       try {
-        const response = await fetch("/api/post/my-cards", {
-          credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
-        });
+        const response = await fetch(
+          "http://localhost:3001/api/post/my-cards",
+          {
+            credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
+          }
+        );
 
         const data = await response.json();
 
@@ -63,7 +67,7 @@ export default function MyCards() {
   }
 
   if (loading) {
-    return <p className={styles.loading}>טוען . . .</p>;
+    return <Loader text="טוען..." />;
   }
 
   return cards.length > 0 ? (
@@ -85,6 +89,6 @@ export default function MyCards() {
       </div>
     </div>
   ) : (
-    <p className={styles.loading}>No cards available</p>
+    <p className={styles.loading}>לא נמצאו כרטיסים</p>
   );
 }

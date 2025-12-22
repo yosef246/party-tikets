@@ -3,6 +3,7 @@ import styles from "./register.module.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import sendWelcomeEmail from "../components/emailjsRegister";
+import Loader from "../components/Loader";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("http://localhost:3001/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,11 +53,7 @@ export default function RegisterPage() {
   }
 
   if (loading) {
-    return (
-      <div style={{ textAlign: "center", marginTop: "50px" }}>
-        ...עוד רגע ונכנסים
-      </div>
-    );
+    return <Loader text="עוד רגע ונכנסים..." />;
   }
 
   return (

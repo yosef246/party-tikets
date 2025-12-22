@@ -6,26 +6,28 @@ import styles from "./CardDetails.module.css";
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
-  const [stats, setStats] = useState("");
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
   const [refId, setRefId] = useState(null);
 
   useEffect(() => {
+    //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
     if (!refId) {
       const searchParams = new URLSearchParams(window.location.search);
       setRefId(searchParams.get("ref") || userId);
     }
   }, [user, refId]);
-
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     if (!refId) return;
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `http://localhost:3001/api/post/${id}?ref=${refId}`,
+          {
+            credentials: "include",
+          }
+        );
 
         const data = await response.json();
 
@@ -44,41 +46,22 @@ export default function CardDetails() {
     fetchCard();
   }, [id, refId]);
 
-  // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
-  useEffect(() => {
-    if (!userId) return;
-    async function fetchStats() {
-      try {
-        const res = await fetch(`/api/post/${userId}/stats`);
-
-        const data = await res.json();
-
-        if (!res.ok) throw new Error(data.message || "Error fetching stats");
-
-        setStats(data);
-      } catch (err) {
-        console.error("Error fetching stats:", err);
-      }
-    }
-    fetchStats();
-
-    const interval = setInterval(fetchStats, 2000);
-    return () => clearInterval(interval);
-  }, [userId, loading]);
-
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
     try {
-      const res = await fetch(`/api/post/${id}/purchases`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          ref,
-        }),
-      });
+      const res = await fetch(
+        `http://localhost:3001/api/post/${id}/purchases`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            ref,
+          }),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.message || "Error purchasing ticket");
@@ -98,15 +81,6 @@ export default function CardDetails() {
 
   return (
     <div className={styles.middle}>
-      {stats && (
-        <div className={styles.statsFloating}>
-          <h3>:הנתונים שקרו דרכיך</h3>
-          <p>📈 צפו אצליך: {stats.clickView}</p>
-          <p>🎟 כמות שמכרת: {stats.ticketsSold}</p>
-          <p>🎟 הרווחת למערכת: {stats.totalRevenue}</p>
-          <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
-        </div>
-      )}
       <div className={styles.cardDetails}>
         <div className={styles.cardImage}>
           <img src={card.imageUrl} alt={card.title} />

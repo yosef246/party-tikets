@@ -43,11 +43,19 @@ function Header() {
             </li>
           )}
 
-          <li>
-            <Link className={styles.signup} to="/login">
-              התחברות
-            </Link>
-          </li>
+          {isAuthenticated ? (
+            <li>
+              <Link className={styles.signup} to="/profile">
+                פרופיל אישי
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link className={styles.signup} to="/login">
+                התחברות
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
 
@@ -73,9 +81,15 @@ function Header() {
           </Link>
         )}
 
-        <Link to="/login" onClick={() => setIsOpen(false)}>
-          התחברות
-        </Link>
+        {isAuthenticated ? (
+          <Link to="/profile" onClick={() => setIsOpen(false)}>
+            פרופיל אישי
+          </Link>
+        ) : (
+          <Link to="/login" onClick={() => setIsOpen(false)}>
+            התחברות
+          </Link>
+        )}
       </div>
     </header>
   );

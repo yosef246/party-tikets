@@ -15,7 +15,7 @@ import connectToMongoDB from "../utils/conectDB.js";
 const app = express();
 
 // const port = 3003;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 //env מאפשר לי להשתמש בערכים שנמצאים בקובץ
 dotenv.config();

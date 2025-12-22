@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import CardItem from "../components/cardItem";
+import Loader from "../components/Loader";
 
 export default function AllCards() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
@@ -13,7 +14,7 @@ export default function AllCards() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/check-auth", {
+        const res = await fetch("http://localhost:3001/api/auth/check-auth", {
           credentials: "include",
         });
 
@@ -48,7 +49,7 @@ export default function AllCards() {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await fetch("/api/post/");
+        const response = await fetch("http://localhost:3001/api/post/");
 
         const data = await response.json();
 
@@ -67,10 +68,10 @@ export default function AllCards() {
   }, [isCheckingAuth]);
 
   if (loading) {
-    return <p className={styles.loading}>. . . טוען</p>;
+    return <Loader text="טוען..." />;
   }
   if (isCheckingAuth) {
-    return <p className={styles.loading}>. . . בודק הרשאות</p>;
+    return <Loader text="בודק הרשאות..." />;
   }
 
   return cards.length > 0 ? (
@@ -91,6 +92,6 @@ export default function AllCards() {
       </div>
     </div>
   ) : (
-    <p className={styles.loading}>No cards available</p>
+    <p className={styles.loading}>לא נמצאו כרטיסים</p>
   );
 }
