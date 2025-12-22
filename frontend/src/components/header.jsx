@@ -38,7 +38,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link className={styles.navLink} to="/profile">
+                <Link className={styles.signup} to="/profile">
                   פרופיל אישי
                 </Link>
               </li>
@@ -51,7 +51,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link className={styles.navLink} to="/login">
+                <Link className={styles.signup} to="/login">
                   התחברות
                 </Link>
               </li>
