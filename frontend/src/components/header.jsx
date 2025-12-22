@@ -5,7 +5,8 @@ import styles from "./header.module.css";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, loading } = useContext(AuthContext);
+  if (loading) return null;
 
   return (
     <header className={styles.header}>
