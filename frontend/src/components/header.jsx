@@ -72,23 +72,23 @@ function Header() {
         </Link>
 
         {isAuthenticated ? (
-          <Link to="/party-cards" onClick={() => setIsOpen(false)}>
-            עריכה
-          </Link>
+          <>
+            <Link to="/party-cards" onClick={() => setIsOpen(false)}>
+              עריכה
+            </Link>
+            <Link to="/profile" onClick={() => setIsOpen(false)}>
+              פרופיל אישי
+            </Link>
+          </>
         ) : (
-          <Link to="/register" onClick={() => setIsOpen(false)}>
-            הרשמה
-          </Link>
-        )}
-
-        {isAuthenticated ? (
-          <Link to="/profile" onClick={() => setIsOpen(false)}>
-            פרופיל אישי
-          </Link>
-        ) : (
-          <Link to="/login" onClick={() => setIsOpen(false)}>
-            התחברות
-          </Link>
+          <>
+            <Link to="/register" onClick={() => setIsOpen(false)}>
+              הרשמה
+            </Link>
+            <Link to="/login" onClick={() => setIsOpen(false)}>
+              התחברות
+            </Link>
+          </>
         )}
       </div>
     </header>
