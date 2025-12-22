@@ -73,11 +73,11 @@ function Header() {
 
         {isAuthenticated ? (
           <>
-            <Link to="/party-cards" onClick={() => setIsOpen(false)}>
-              עריכה
-            </Link>
             <Link to="/profile" onClick={() => setIsOpen(false)}>
               פרופיל אישי
+            </Link>
+            <Link to="/party-cards" onClick={() => setIsOpen(false)}>
+              עריכה
             </Link>
           </>
         ) : (

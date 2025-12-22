@@ -1,12 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./CardDetails.module.css";
+import Loader from "../components/Loader";
 
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const userId = user?._id;
   const [refId, setRefId] = useState(null);
 
@@ -70,7 +71,7 @@ export default function CardDetails() {
   }
 
   if (!card || !refId) {
-    return <p className={styles.loading}>טוען . . .</p>;
+    return <Loader text="טוען..." />;
   }
 
   return (
