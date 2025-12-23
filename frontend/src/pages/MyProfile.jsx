@@ -15,7 +15,9 @@ export default function MyProfile() {
     if (!userId || loading) return;
     async function fetchStats() {
       try {
-        const res = await fetch(`/api/post/${userId}/stats`);
+        const res = await fetch(`/api/post/${userId}/stats`, {
+          credentials: "include",
+        });
 
         const data = await res.json();
 
