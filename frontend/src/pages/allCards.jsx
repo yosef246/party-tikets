@@ -6,15 +6,15 @@ import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
 
 export default function AllCards() {
-  const { isAuthenticated, user } = useContext(AuthContext);
+  const { isAuthenticated, user, loading } = useContext(AuthContext);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
-  const [loading, setLoading] = useState(false);
+  const [lloading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן
   useEffect(() => {
-    if (isAuthenticated === null || !user) return;
+    if (isAuthenticated === null || !user || loading) return;
     if (!isAuthenticated) {
       console.log("עליך להתחבר כדי לגשת לדף");
       navigate("/login");
@@ -59,7 +59,7 @@ export default function AllCards() {
     fetchData();
   }, [isCheckingAuth]);
 
-  if (loading) {
+  if (lloading) {
     return <Loader text="טוען..." />;
   }
   if (isCheckingAuth) {

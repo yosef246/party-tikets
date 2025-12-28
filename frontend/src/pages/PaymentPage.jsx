@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function PaymentPage() {
-  const { isAuthenticated, user, setUser } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
+  const { isAuthenticated, user, setUser, loading } = useContext(AuthContext);
+  const [lloading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [haspaid, setHaspaid] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ export default function PaymentPage() {
 
   //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
-    if (isAuthenticated === null || !user) return;
+    if (isAuthenticated === null || !user || loading) return;
 
     if (!isAuthenticated) {
       console.log("עליך להתחבר כדי לגשת לדף");
@@ -49,7 +49,7 @@ export default function PaymentPage() {
     }
 
     console.log("המשתמש מחובר:", user);
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user, loading, navigate]);
 
   //שליחת הבקשה לאחר התשלום
   const handlePayment = async () => {
@@ -149,10 +149,10 @@ export default function PaymentPage() {
 
         <button
           onClick={handlePayment}
-          disabled={loading}
+          disabled={lloading}
           className={styles.payBtn}
         >
-          {loading ? "מעבד תשלום..." : "שלם עכשיו"}
+          {lloading ? "מעבד תשלום..." : "שלם עכשיו"}
         </button>
 
         {haspaid && (
