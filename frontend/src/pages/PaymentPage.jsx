@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "./paymentPage.module.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function PaymentPage() {
+  const { isAuthenticated, user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [haspaid, setHaspaid] = useState(false);
@@ -34,33 +36,22 @@ export default function PaymentPage() {
 
   //בדיקה שיש טוקאן
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
-        });
+    if (isAuthenticated === null || !user) return;
 
-        if (!res.ok) {
-          throw new Error("Unauthorized");
-        }
+    if (!isAuthenticated) {
+      console.log("עליך להתחבר כדי לגשת לדף");
+      navigate("/login");
+      return;
+    }
 
-        const data = await res.json();
-        console.log("data:", data.user);
+    if (user.haspaid) {
+      setHaspaid(true);
+    }
 
-        if (data.user.hasPaid) {
-          setHaspaid(true);
-        }
+    console.log("המשתמש מחובר:", user);
+  }, [isAuthenticated, navigate]);
 
-        console.log("המשתמש מחובר:", data);
-      } catch (err) {
-        console.log("עליך להתחבר כדי לגשת לדף");
-        navigate("/login");
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
-
+  //שליחת הבקשה לאחר התשלום
   const handlePayment = async () => {
     setLoading(true);
 
@@ -82,8 +73,9 @@ export default function PaymentPage() {
         return;
       }
 
-      if (data.user.hasPaid) {
+      if (data.user.haspaid) {
         setHaspaid(true);
+        setUser({ ...user, hasPaid: true });
       }
 
       setMessage(data.message);
@@ -93,6 +85,7 @@ export default function PaymentPage() {
     }
   };
 
+  //שליחת הבקשה לאחר מחיקת התשלום
   const handleDeletePayment = async () => {
     setLoading(true);
     try {
@@ -104,6 +97,7 @@ export default function PaymentPage() {
       const data = await res.json();
 
       setHaspaid(false);
+      setUser({ ...user, hasPaid: false });
       setMessage(data.message);
     } catch (err) {
       setMessage("שגיאה במחיקה");

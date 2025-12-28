@@ -52,8 +52,9 @@ export default function AllCards() {
         setCards(data);
       } catch (err) {
         console.log("ייבוא הכרטיסים נכשל", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchData();
   }, [isCheckingAuth]);
