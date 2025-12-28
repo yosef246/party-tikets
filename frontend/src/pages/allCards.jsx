@@ -31,7 +31,7 @@ export default function AllCards() {
 
     console.log("המשתמש מחובר:", user);
     setIsCheckingAuth(false); // הבדיקה הסתיימה
-  }, [isAuthenticated, user?.hasPaid, navigate, loading]);
+  }, [isAuthenticated, navigate, loading]);
 
   //ייבוא כל הכרטיסים שקיימים במערכת
   useEffect(() => {
