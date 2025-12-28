@@ -1,37 +1,46 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
 
 export default function AllCards() {
-  const { isAuthenticated, user, loading } = useContext(AuthContext);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
-  const [lloading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
-  //בדיקה שיש טוקאן דרך USECONTEXT
+  //בדיקה שיש טוקאן
   useEffect(() => {
-    if (isAuthenticated === null || !user || loading) return;
-    if (!isAuthenticated) {
-      console.log("עליך להתחבר כדי לגשת לדף");
-      navigate("/login");
-      setIsCheckingAuth(false);
-      return;
-    }
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include",
+        });
 
-    if (!user.hasPaid) {
-      alert("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
-      navigate("/party-cards");
-      setIsCheckingAuth(false);
-      return;
-    }
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
 
-    console.log("המשתמש מחובר:", user);
-    setIsCheckingAuth(false); // הבדיקה הסתיימה
-  }, [isAuthenticated, navigate, loading]);
+        const data = await res.json();
+
+        if (!data.user.hasPaid) {
+          alert("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
+          navigate("/party-cards");
+          return;
+        }
+
+        console.log("המשתמש מחובר:", data);
+      } catch (err) {
+        console.log("עליך להתחבר כדי לגשת לדף");
+        navigate("/login");
+      } finally {
+        setIsCheckingAuth(false); // הבדיקה הסתיימה
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   //ייבוא כל הכרטיסים שקיימים במערכת
   useEffect(() => {
@@ -52,14 +61,13 @@ export default function AllCards() {
         setCards(data);
       } catch (err) {
         console.log("ייבוא הכרטיסים נכשל", err);
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     }
     fetchData();
   }, [isCheckingAuth]);
 
-  if (lloading) {
+  if (loading) {
     return <Loader text="טוען..." />;
   }
   if (isCheckingAuth) {

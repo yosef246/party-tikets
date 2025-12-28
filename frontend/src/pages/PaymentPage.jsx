@@ -1,11 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import styles from "./paymentPage.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 
 export default function PaymentPage() {
-  const { isAuthenticated, user, setUser, loading } = useContext(AuthContext);
-  const [lloading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [haspaid, setHaspaid] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,24 +32,35 @@ export default function PaymentPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //בדיקה שיש טוקאן דרך USECONTEXT
+  //בדיקה שיש טוקאן
   useEffect(() => {
-    if (isAuthenticated === null || !user || loading) return;
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
+        });
 
-    if (!isAuthenticated) {
-      console.log("עליך להתחבר כדי לגשת לדף");
-      navigate("/login");
-      return;
-    }
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
 
-    if (user.hasPaid) {
-      setHaspaid(true);
-    }
+        const data = await res.json();
+        console.log("data:", data.user);
 
-    console.log("המשתמש מחובר:", user);
-  }, [isAuthenticated, user, loading, navigate]);
+        if (data.user.hasPaid) {
+          setHaspaid(true);
+        }
 
-  //שליחת הבקשה לאחר התשלום
+        console.log("המשתמש מחובר:", data);
+      } catch (err) {
+        console.log("עליך להתחבר כדי לגשת לדף");
+        navigate("/login");
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
   const handlePayment = async () => {
     setLoading(true);
 
@@ -75,7 +84,6 @@ export default function PaymentPage() {
 
       if (data.user.hasPaid) {
         setHaspaid(true);
-        setUser({ ...user, hasPaid: true });
       }
 
       setMessage(data.message);
@@ -85,7 +93,6 @@ export default function PaymentPage() {
     }
   };
 
-  //שליחת הבקשה לאחר מחיקת התשלום
   const handleDeletePayment = async () => {
     setLoading(true);
     try {
@@ -97,7 +104,6 @@ export default function PaymentPage() {
       const data = await res.json();
 
       setHaspaid(false);
-      setUser({ ...user, hasPaid: false });
       setMessage(data.message);
     } catch (err) {
       setMessage("שגיאה במחיקה");
@@ -149,10 +155,10 @@ export default function PaymentPage() {
 
         <button
           onClick={handlePayment}
-          disabled={lloading}
+          disabled={loading}
           className={styles.payBtn}
         >
-          {lloading ? "מעבד תשלום..." : "שלם עכשיו"}
+          {loading ? "מעבד תשלום..." : "שלם עכשיו"}
         </button>
 
         {haspaid && (
