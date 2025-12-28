@@ -34,7 +34,7 @@ export default function PaymentPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //בדיקה שיש טוקאן
+  //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
     if (isAuthenticated === null || !user) return;
 
