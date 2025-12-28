@@ -1,39 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
 import Loader from "../components/Loader";
+import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
+  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  //בדיקה שיש טוקאן
+  //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
-
-        if (!res.ok) {
-          throw new Error("Unauthorized");
-        }
-
-        const data = await res.json();
-        console.log("המשתמש מחובר:", data);
-      } catch (err) {
-        console.log("עליך להתחבר כדי לגשת לדף");
-        navigate("/login");
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
   //ייבוא כל הכרטיסים של המשתמש בלבד
   useEffect(() => {
+    if (!isAuthenticated) return;
     async function fetchMyPosts() {
       setLoading(true);
       try {
@@ -56,7 +43,7 @@ export default function MyCards() {
     }
 
     fetchMyPosts();
-  }, []);
+  }, [isAuthenticated]);
 
   // פונקציה שמקבלת id ומסירה אותו מה-state
   function handleDelete(id) {

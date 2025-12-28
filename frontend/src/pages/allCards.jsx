@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
 
 export default function AllCards() {
+  const { isAuthenticated, user } = useContext(AuthContext);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
@@ -12,35 +14,24 @@ export default function AllCards() {
 
   //בדיקה שיש טוקאן
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
+    if (isAuthenticated === null || !user) return;
+    if (!isAuthenticated) {
+      console.log("עליך להתחבר כדי לגשת לדף");
+      navigate("/login");
+      setIsCheckingAuth(false);
+      return;
+    }
 
-        if (!res.ok) {
-          throw new Error("Unauthorized");
-        }
+    if (!user.hasPaid) {
+      alert("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
+      navigate("/party-cards");
+      setIsCheckingAuth(false);
+      return;
+    }
 
-        const data = await res.json();
-
-        if (!data.user.hasPaid) {
-          alert("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
-          navigate("/party-cards");
-          return;
-        }
-
-        console.log("המשתמש מחובר:", data);
-      } catch (err) {
-        console.log("עליך להתחבר כדי לגשת לדף");
-        navigate("/login");
-      } finally {
-        setIsCheckingAuth(false); // הבדיקה הסתיימה
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
+    console.log("המשתמש מחובר:", user);
+    setIsCheckingAuth(false); // הבדיקה הסתיימה
+  }, [isAuthenticated, user, navigate]);
 
   //ייבוא כל הכרטיסים שקיימים במערכת
   useEffect(() => {

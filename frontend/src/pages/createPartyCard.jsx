@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function CreatePartyCardPage() {
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
@@ -14,30 +14,14 @@ export default function CreatePartyCardPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
   const navigate = useNavigate();
 
+  //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/check-auth", {
-          credentials: "include",
-        });
-
-        if (!res.ok) {
-          throw new Error("Unauthorized");
-        }
-
-        const data = await res.json();
-        console.log("המשתמש מחובר:", data);
-      } catch (err) {
-        console.log("עליך להתחבר כדי לגשת לדף");
-        navigate("/login");
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
