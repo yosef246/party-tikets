@@ -44,7 +44,7 @@ export default function PaymentPage() {
       return;
     }
 
-    if (user.haspaid) {
+    if (user.hasPaid) {
       setHaspaid(true);
     }
 
@@ -73,7 +73,7 @@ export default function PaymentPage() {
         return;
       }
 
-      if (data.user.haspaid) {
+      if (data.user.hasPaid) {
         setHaspaid(true);
         setUser({ ...user, hasPaid: true });
       }
