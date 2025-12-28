@@ -12,7 +12,7 @@ export default function AllCards() {
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
-  //בדיקה שיש טוקאן
+  //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
     if (isAuthenticated === null || !user || loading) return;
     if (!isAuthenticated) {
@@ -31,7 +31,7 @@ export default function AllCards() {
 
     console.log("המשתמש מחובר:", user);
     setIsCheckingAuth(false); // הבדיקה הסתיימה
-  }, [isAuthenticated, user, navigate, loading]);
+  }, [isAuthenticated, user?.hasPaid, navigate, loading]);
 
   //ייבוא כל הכרטיסים שקיימים במערכת
   useEffect(() => {
