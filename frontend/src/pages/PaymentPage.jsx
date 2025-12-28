@@ -49,7 +49,7 @@ export default function PaymentPage() {
     }
 
     console.log("המשתמש מחובר:", user);
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, user, navigate]);
 
   //שליחת הבקשה לאחר התשלום
   const handlePayment = async () => {
