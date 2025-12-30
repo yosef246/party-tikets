@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Loader from "./Loader";
 import styles from "./editFormData.module.css";
 
 export default function EditPostForm({ id, post, onUpdate, onCancel }) {
@@ -15,7 +16,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
     setLoading(true);
 
     try {
-      const response = await fetch(`/api/post/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/post/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
   };
 
   if (loading) {
-    return <p className={styles.loading}>טוען . . .</p>;
+    return <Loader text="טוען..." />;
   }
 
   return (

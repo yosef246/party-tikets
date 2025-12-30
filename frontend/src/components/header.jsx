@@ -1,12 +1,36 @@
 import { Link } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, loading } = useContext(AuthContext);
+  const { isAuthenticated, loading, setIsAuthenticated } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
   if (loading) return null;
+
+  async function handleLogout() {
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "שגיאה בהתנתקות");
+      } else {
+        alert(data.message);
+        setIsAuthenticated(false);
+        navigate("/login");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   return (
     <header className={styles.header}>
@@ -38,9 +62,18 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link className={styles.signup} to="/profile">
+                <Link className={styles.navLink} to="/profile">
                   פרופיל אישי
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className={styles.signup}
+                >
+                  התנתקות
+                </button>
               </li>
             </>
           ) : (
@@ -62,9 +95,6 @@ function Header() {
 
       {/* תפריט מובייל בבועה */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.open : ""}`}>
-        <Link to="/" onClick={() => setIsOpen(false)}>
-          בית
-        </Link>
         <Link to="/about" onClick={() => setIsOpen(false)}>
           עלינו
         </Link>
@@ -80,6 +110,16 @@ function Header() {
             <Link to="/profile" onClick={() => setIsOpen(false)}>
               פרופיל אישי
             </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                handleLogout();
+              }}
+              className={styles.navLink}
+            >
+              התנתקות
+            </button>
           </>
         ) : (
           <>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default function CreatePartyCardPage() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
@@ -27,7 +27,7 @@ export default function CreatePartyCardPage() {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
     setLoading(true);
     try {
-      const response = await fetch("/api/post/", {
+      const response = await fetch("http://localhost:3001/api/post/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,30 +53,6 @@ export default function CreatePartyCardPage() {
     } catch (error) {
       console.error("Error during logined:", error);
       alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handleLogout() {
-    setLoading(true);
-    try {
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || "שגיאה בהתנתקות");
-      } else {
-        alert(data.message);
-        setIsAuthenticated(false);
-        navigate("/login");
-      }
-    } catch (error) {
-      alert(date.message);
     } finally {
       setLoading(false);
     }
@@ -161,11 +137,7 @@ export default function CreatePartyCardPage() {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
-
           <button type="submit">{loading ? "שולח.." : "צור כרטיס"}</button>
-          <button onClick={handleLogout}>
-            {loading ? "מתנתק.." : "התנתקות"}
-          </button>
         </form>
       </div>
     </div>

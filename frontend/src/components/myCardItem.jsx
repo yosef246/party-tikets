@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./cardItem.module.css";
+import styles from "./myCardItem.module.css";
 import EditPostForm from "./editFormData";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default function MyCardItem(props) {
 
   async function handleDelete() {
     try {
-      const response = await fetch(`/api/post/${id}`, {
+      const response = await fetch(`http://localhost:3001/api/post/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -66,10 +66,10 @@ export default function MyCardItem(props) {
               <strong>תיאור:</strong> {postData.body}
             </p>
             <button onClick={handleDelete} className={styles.button}>
-              מחק כרטיס
+              למחוק
             </button>
             <button onClick={() => setEdit(true)} className={styles.button}>
-              שנה כרטיס
+              לשנות
             </button>
           </div>
         </>
