@@ -16,7 +16,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3001/api/post/${id}`, {
+      const response = await fetch(`/api/post/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

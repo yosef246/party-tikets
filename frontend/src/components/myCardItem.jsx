@@ -10,7 +10,7 @@ export default function MyCardItem(props) {
 
   async function handleDelete() {
     try {
-      const response = await fetch(`http://localhost:3001/api/post/${id}`, {
+      const response = await fetch(`/api/post/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

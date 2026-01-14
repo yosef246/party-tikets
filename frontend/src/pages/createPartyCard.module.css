@@ -1,5 +1,5 @@
 .middle {
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   height: 140vh;
   position: relative;
   color: aliceblue;
@@ -104,8 +104,8 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 2rem;
-  background: #242429;
   border-radius: 2rem;
+  background: linear-gradient(to top,  #004B8E,#010528);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   text-align: center;
   direction: rtl;
@@ -128,7 +128,7 @@
 
 .textarea,
 .form input {
-  width: 98%;
+  width: 96%;
   padding: 0.8rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
@@ -138,7 +138,7 @@
 
 .form button {
   margin: 10px;
-  background-color: #ff4081;
+  background-color: #181847;
   color: #fff;
   border: none;
   padding: 0.9rem 1.5rem;
@@ -149,7 +149,7 @@
 }
 
 .form button:hover {
-  background-color: #e73370;
+  background-color: #1d1d62;
 }
 
 /* ============================= */

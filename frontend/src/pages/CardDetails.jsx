@@ -18,17 +18,15 @@ export default function CardDetails() {
       setRefId(searchParams.get("ref") || userId);
     }
   }, [user, refId]);
+
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
     if (!refId) return;
     async function fetchCard() {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/post/${id}?ref=${refId}`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
+          credentials: "include",
+        });
 
         const data = await response.json();
 
@@ -50,19 +48,16 @@ export default function CardDetails() {
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
     try {
-      const res = await fetch(
-        `http://localhost:3001/api/post/${id}/purchases`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            ref,
-          }),
-        }
-      );
+      const res = await fetch(`/api/post/${id}/purchases/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          ref,
+        }),
+      });
       const data = await res.json();
       if (!res.ok) {
         throw new Error(data.message || "Error purchasing ticket");

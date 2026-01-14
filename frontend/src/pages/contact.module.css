@@ -1,5 +1,5 @@
 .middle {
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   height: 170vh;
   position: relative;
   color: aliceblue;
@@ -81,8 +81,8 @@
 }
 
 .cta a {
-  background-color: #61dafb;
-  color: #000;
+  background-color: #181847;
+  color: #e7ebeb;
   text-decoration: none;
   padding: 14px 28px;
   border-radius: 30px;
@@ -93,7 +93,7 @@
 }
 
 .cta a:hover {
-  background-color: #4fb5d6;
+  background-color: #1d1d62;
 }
 
 /* ============================= */

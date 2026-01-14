@@ -1,12 +1,12 @@
 .card {
-   box-shadow: 0 0 25px rgba(114, 210, 236, 0.3);
+  background: linear-gradient(to top,  #004B8E,#010528);
+  box-shadow: 0 0 25px rgba(114, 210, 236, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
   padding: 1rem;
   margin: 1rem;
-  background: linear-gradient(to top, #21212c, #222226);
   max-width: 400px;
 }
 

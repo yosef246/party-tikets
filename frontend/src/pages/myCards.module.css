@@ -1,5 +1,5 @@
 .middle {
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   min-height: 100vh;
   position: relative;
   text-align: center;
@@ -48,7 +48,7 @@
   .cardsContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* שני כרטיסים בשורה */
-    gap: 10px;  /* רווח בין הכרטיסים */
+    gap: 10px;  
     padding: 10px;
   }
 

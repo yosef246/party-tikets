@@ -1,5 +1,5 @@
 .middle {
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   height: 130vh;
   position: relative;
   color: aliceblue;
@@ -23,8 +23,8 @@
   height: 740px;
   margin: 50px auto;
   padding: 30px;
-  background: linear-gradient(to top, #21212c, #222226);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to top,  #004B8E,#010528);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   border-radius: 12px;
   text-align: center;
   direction: rtl;
@@ -43,7 +43,7 @@
   width: 90%;
   padding: 20px;
   font-size: 1.1rem;
-  background-color: #2196f3;
+  background-color: #1b1b3c;
   color: white;
   border: none;
   border-radius: 20px;
@@ -54,7 +54,7 @@
 }
 
 .loginForm button:hover {
-  background-color: #1976d2;
+  background-color: #1d1d62;
 }
 
 .signup {
@@ -73,7 +73,7 @@
 }
 
 .signup:hover {
-  background-color: #19528b;
+  background-color: #1d1d62;
 }
 
 /* --- התאמה למסכים בינוניים (טאבלטים) --- */

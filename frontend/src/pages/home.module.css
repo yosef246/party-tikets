@@ -2,7 +2,7 @@
   direction: rtl;
   height: 125vh;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   color: #f0f0f0;
   padding: 2rem;
   text-align: right;
@@ -27,8 +27,8 @@
 
 .cta,
 .ctaLarge {
-  background-color: #61dafb;
-  color: #000;
+  background-color: #012b4f;
+  color: #e7ebeb;
   padding: 12px 24px;
   border-radius: 30px;
   font-weight: bold;
@@ -41,7 +41,7 @@
 
 .cta:hover,
 .ctaLarge:hover {
-  background-color: #4fb5d6;
+  background-color: #1d1d62;
 }
 
 .steps {
@@ -169,6 +169,11 @@
     display: block;
     margin: 1rem auto;
   }
+
+  .cta:hover,
+  .ctaLarge:hover { 
+  background-color: #1d1d62;
+} 
 
   .finalCta {
     margin-top: 2rem;

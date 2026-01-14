@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Post, ClickView, Purchases } from "../models/post.js";
+import User from "../models/user.js";
 import Tag from "../models/tag.js";
 import purify from "../../utils/sanitize.js";
 import {
@@ -79,7 +80,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
 
     const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip;
     const PurchaserId = req.user?.id || realIp;
-    console.log(PurchaserId);
+    console.log("PurchaserId :", PurchaserId);
 
     const ref = req.body.ref;
 
@@ -102,9 +103,12 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
 });
 
 //GET Sales statistics per user
-router.get("/:username/stats", async (req, res) => {
+router.get("/:username/stats", [verifyToken], async (req, res) => {
   try {
-    const username = req.params.username;
+    const username = req.user.id;
+
+    const findUnameUser = await User.findById(username); //מוציא את השם של המשתמש המחובר בכדי להציג אותו בפרופיל האישי
+    const nameOfUser = findUnameUser.username;
 
     const clickView = await ClickView.countDocuments({
       referrer_username: username,
@@ -120,7 +124,7 @@ router.get("/:username/stats", async (req, res) => {
     const totalRevenue = purchases.reduce((sum, p) => sum + p.price, 0); // מחשב את סהכ ההכנסות של המשתמש למערכת
 
     res.status(200).send({
-      username,
+      nameOfUser,
       clickView,
       ticketsSold,
       totalRevenue,

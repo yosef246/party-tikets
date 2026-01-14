@@ -18,6 +18,7 @@ export default function CreatePartyCardPage() {
 
   //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
+    if (loading) return;
     if (!isAuthenticated) {
       navigate("/login");
     }
@@ -27,7 +28,7 @@ export default function CreatePartyCardPage() {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/api/post/", {
+      const response = await fetch("/api/post/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

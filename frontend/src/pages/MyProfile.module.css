@@ -1,5 +1,5 @@
 .middle {
-  background: linear-gradient(to top, #030304, #222226);
+  background: linear-gradient(to top,  #004B8E,#010528);
   min-height: 100vh;
   position: relative;
   color: aliceblue;
@@ -11,10 +11,10 @@
 }
 
 .statsFloating {
-  background: rgb(43, 37, 37);
+  background: linear-gradient(to top,  #004B8E,#010528);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(138, 56, 56, 0.15);
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
   z-index: 10;
   width: 620px;
   max-width: 100%;

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import styles from "./allCards.module.css";
+import styles from "./myCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
 import Loader from "../components/Loader";
@@ -13,6 +13,7 @@ export default function MyCards() {
 
   //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
+    if (loading) return;
     if (!isAuthenticated) {
       navigate("/login");
     }
@@ -24,12 +25,9 @@ export default function MyCards() {
     async function fetchMyPosts() {
       setLoading(true);
       try {
-        const response = await fetch(
-          "http://localhost:3001/api/post/my-cards",
-          {
-            credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
-          }
-        );
+        const response = await fetch("/api/post/my-cards", {
+          credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
+        });
 
         const data = await response.json();
 

@@ -1,48 +1,66 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./MyProfile.module.css";
 import Loader from "../components/Loader";
 
 export default function MyProfile() {
   const [stats, setStats] = useState(null);
-  const { user, loading } = useContext(AuthContext);
+  const [statsLoading, setStatsloading] = useState(true);
+  const { user, loading, isAuthenticated } = useContext(AuthContext);
   const userId = user?._id;
+  const navigate = useNavigate();
+
+  //בדיקה שיש טוקאן דרך USECONTEXT
+  useEffect(() => {
+    if (loading) return;
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
     if (!userId || loading) return;
+
+    let isMounted = true;
+
     async function fetchStats() {
       try {
-        const res = await fetch(
-          `http://localhost:3001/api/post/${userId}/stats`,
-          {
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`/api/post/${userId}/stats`, {
+          credentials: "include",
+        });
 
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.message || "Error fetching stats");
 
-        setStats(data);
+        if (isMounted) {
+          setStats(data);
+          setStatsloading(false);
+        }
       } catch (err) {
         console.error("Error fetching stats:", err);
       }
     }
     fetchStats();
 
-    const interval = setInterval(fetchStats, 1000);
-    return () => clearInterval(interval);
+    const interval = setInterval(fetchStats, 5000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, [userId, loading]);
 
-  if (loading) {
+  if (loading || statsLoading) {
     return <Loader text="טוען.." />;
   }
 
   return (
     <div className={styles.middle}>
-      {stats && (
+      {stats ? (
         <div className={styles.statsFloating}>
+          <h1>{stats.nameOfUser} שלום</h1>
           <h2>סטטיסטיקות המשתמש שלך</h2>
 
           <p className={styles.statsDescription}>
@@ -57,6 +75,8 @@ export default function MyProfile() {
             <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
           </div>
         </div>
+      ) : (
+        setStatsloading(true)
       )}
     </div>
   );
