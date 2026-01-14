@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 export default function MyProfile() {
   const [stats, setStats] = useState(null);
-  const [statsLoading, setStatsloading] = useState(false);
+  const [statsLoading, setStatsloading] = useState(true);
   const { user, loading, isAuthenticated } = useContext(AuthContext);
   const userId = user?._id;
   const navigate = useNavigate();
