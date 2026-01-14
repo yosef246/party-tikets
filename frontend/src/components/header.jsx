@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
@@ -9,6 +9,28 @@ function Header() {
   const { isAuthenticated, loading, setIsAuthenticated } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const menuRef = useRef(null); // רפרנס לתפריט המובייל
+  const hamburgerRef = useRef(null); // רפרנס לכפתור ההמבורגר
+
+  // זה הuseEffect שמאזין ללחיצה על המסך
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   if (loading) return null;
 
   async function handleLogout() {
@@ -37,7 +59,11 @@ function Header() {
       <Link className={styles.icon} to="/">
         PARTY TIKETS
       </Link>
-      <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+      <div
+        ref={hamburgerRef}
+        className={styles.hamburger}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         ☰
       </div>
 
@@ -94,7 +120,10 @@ function Header() {
       </nav>
 
       {/* תפריט מובייל בבועה */}
-      <div className={`${styles.mobileMenu} ${isOpen ? styles.open : ""}`}>
+      <div
+        ref={menuRef}
+        className={`${styles.mobileMenu} ${isOpen ? styles.open : ""}`}
+      >
         <Link to="/about" onClick={() => setIsOpen(false)}>
           עלינו
         </Link>
