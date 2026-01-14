@@ -47,11 +47,11 @@ export default function MyProfile() {
     }
     fetchStats();
 
-    const interval = setInterval(fetchStats, 5000);
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
+    // const interval = setInterval(fetchStats, 5000);
+    // return () => {
+    //   isMounted = false;
+    //   clearInterval(interval);
+    // };
   }, [userId, loading]);
 
   if (loading || statsLoading) {
