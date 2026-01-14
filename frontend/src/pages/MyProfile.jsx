@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 export default function MyProfile() {
   const [stats, setStats] = useState(null);
-  const [statsLoading, setStatsloading] = useState(true);
+  const [statsLoading, setStatsloading] = useState(false);
   const { user, loading, isAuthenticated } = useContext(AuthContext);
   const userId = user?._id;
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function MyProfile() {
     let isMounted = true;
 
     async function fetchStats() {
+      setStatsloading(true);
       try {
         const res = await fetch(`/api/post/${userId}/stats`, {
           credentials: "include",
@@ -41,6 +42,7 @@ export default function MyProfile() {
         }
       } catch (err) {
         console.error("Error fetching stats:", err);
+        if (isMounted) setStatsloading(false);
       }
     }
     fetchStats();
@@ -58,7 +60,7 @@ export default function MyProfile() {
 
   return (
     <div className={styles.middle}>
-      {stats ? (
+      {stats && (
         <div className={styles.statsFloating}>
           <h1>{stats.nameOfUser} שלום</h1>
           <h2>סטטיסטיקות המשתמש שלך</h2>
@@ -75,8 +77,6 @@ export default function MyProfile() {
             <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
           </div>
         </div>
-      ) : (
-        setStatsloading(true)
       )}
     </div>
   );
