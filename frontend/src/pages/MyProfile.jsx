@@ -60,24 +60,22 @@ export default function MyProfile() {
 
   return (
     <div className={styles.middle}>
-      {stats && (
-        <div className={styles.statsFloating}>
-          <h1>{stats.nameOfUser} שלום</h1>
-          <h2>סטטיסטיקות המשתמש שלך</h2>
+      <div className={styles.statsFloating}>
+        <h1>{stats.nameOfUser} שלום</h1>
+        <h2>סטטיסטיקות המשתמש שלך</h2>
 
-          <p className={styles.statsDescription}>
-            כאן תוכל לראות את כל הנתונים החשובים שקשורים לפעילות שלך במערכת.
-            מידע זה יעזור לך להבין את הביצועים שלך ולשפר את ההכנסות.
-          </p>
+        <p className={styles.statsDescription}>
+          כאן תוכל לראות את כל הנתונים החשובים שקשורים לפעילות שלך במערכת. מידע
+          זה יעזור לך להבין את הביצועים שלך ולשפר את ההכנסות.
+        </p>
 
-          <div className={styles.statsList}>
-            <p>📈 צפיות אצלך: {stats.clickView}</p>
-            <p>🎟 כמות כרטיסים שנמכרו: {stats.ticketsSold}</p>
-            <p>💸 הרווח של המערכת: ₪{stats.totalRevenue}</p>
-            <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
-          </div>
+        <div className={styles.statsList}>
+          <p>📈 צפיות אצלך: {stats.clickView}</p>
+          <p>🎟 כמות כרטיסים שנמכרו: {stats.ticketsSold}</p>
+          <p>💸 הרווח של המערכת: ₪{stats.totalRevenue}</p>
+          <p>💰 עמלה שצברת: ₪{stats.totalCommission.toFixed(2)}</p>
         </div>
-      )}
+      </div>
     </div>
   );
 }
