@@ -87,17 +87,15 @@ router.post("/forgot-password", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   //עובר לי גם על שם פרטי שם משפחה וגם על אימייל שלא נכנס אליהם קוד זדוני
-  Object.keys(req.body).forEach((key) => {
-    const originalValue = req.body[key];
-    const sanitizedValue = purify.sanitize(originalValue); //מנקה לך את הקוד שנכנס מקטעי קוד או סקריפטים זדוניים
-
-    if (originalValue !== sanitizedValue) {
-      return res.status(400).json({
-        message: "נמצא קלט לא חוקי. אין להזין קוד או תגיות HTML",
-      });
-    }
-    originalValue = sanitizedValue;
+  const sanitizeing = Object.keys(req.body).forEach((key) => {
+    req.body[key] = purify.sanitize(req.body[key]); //מנקה לך את הקוד שנכנס מקטעי קוד או סקריפטים זדוניים
   });
+
+  if (sanitizeing) {
+    return res.status(400).json({
+      message: "נמצא קלט לא חוקי. אין להזין קוד או תגיות HTML",
+    });
+  }
 
   const { error } = loginValitation.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
