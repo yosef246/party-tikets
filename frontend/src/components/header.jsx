@@ -61,7 +61,7 @@ function Header() {
       </Link>
       <div
         ref={hamburgerRef}
-        className={styles.hamburger}
+        className={`${styles.hamburger} ${isOpen ? styles.rotate : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         ☰

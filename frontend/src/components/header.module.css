@@ -77,45 +77,53 @@
 /* כפתור המבורגר */
 .hamburger {
   display: none; /*לא מראה אותו בגודל של מחשב*/
-  font-size: 32px;
+   font-size: 32px;
   cursor: pointer;
   position: absolute;
   right: 20px;
   top: 15px;
   user-select: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
 
 /* תפריט מובייל בבועה */
 .mobileMenu {
-  position: absolute;
-  top: 80px;
-  right: 20px;
-  background: rgba(18, 58, 137, 0.8);
-  padding: 20px;
-  border-radius: 18px;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100px;
+  height: 100vh;
+  background: rgba(18, 58, 137, 0.90);
+  padding: 100px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  gap: 20px;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.4);
   z-index: 999;
-  opacity: 0;
-  transform: scale(0.9);
-  pointer-events: none; 
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: right 0.35s ease-in-out;
 }
 
 .mobileMenu.open {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
+  right: 0;
 }
 
-.mobileMenu a {
+
+.mobileMenu a,
+.mobileMenu button {
   color: #4bafca;
   font-weight: bold;
   text-decoration: none;
   font-size: 1.2rem;
+  background: none;
+  border: none;
+  text-align: right;
+  cursor: pointer;
 }
+
 
 /* ============================= */
 /* 💻 טלפון - עד 495 */
