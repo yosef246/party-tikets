@@ -47,7 +47,7 @@
 @media (max-width: 495px) {
   .cardsContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* שני כרטיסים בשורה */
+     grid-template-columns: 1fr; /* סרטיס אחד בשורה */
     gap: 10px;  
     padding: 10px;
   }
