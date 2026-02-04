@@ -22,7 +22,7 @@ export default function MyProfile() {
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
     if (loading) return;
-    if (!isAuthenticated || !user) return;
+    // if (!isAuthenticated || !user) return;
 
     let isMounted = true;
 
@@ -56,7 +56,7 @@ export default function MyProfile() {
     //   isMounted = false;
     //   clearInterval(interval);
     // };
-  }, [user, loading, isAuthenticated]);
+  }, [loading]);
 
   if (loading || statsLoading) {
     return <Loader text="טוען.." />;
