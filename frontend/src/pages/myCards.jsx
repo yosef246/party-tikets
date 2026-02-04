@@ -6,14 +6,14 @@ import Loader from "../components/Loader";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
-  const [loading, setLoading] = useState(false);
+  const [loding, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
-    if (loading) return;
+    if (loding) return;
     if (!isAuthenticated) {
       navigate("/login");
     }
@@ -21,7 +21,7 @@ export default function MyCards() {
 
   //ייבוא כל הכרטיסים של המשתמש בלבד
   useEffect(() => {
-    // if (!isAuthenticated) return;
+    if (loading) return;
     async function fetchMyPosts() {
       setLoading(true);
       try {
@@ -44,14 +44,14 @@ export default function MyCards() {
     }
 
     fetchMyPosts();
-  }, []);
+  }, [loading]);
 
   // פונקציה שמקבלת id ומסירה אותו מה-state
   function handleDelete(id) {
     setCards((prevCards) => prevCards.filter((card) => card._id !== id));
   }
 
-  if (loading) {
+  if (loding) {
     return <Loader text="טוען..." />;
   }
 

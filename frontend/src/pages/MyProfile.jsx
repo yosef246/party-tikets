@@ -22,7 +22,6 @@ export default function MyProfile() {
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
     if (loading) return;
-    // if (!isAuthenticated || !user) return;
 
     let isMounted = true;
 
@@ -50,12 +49,6 @@ export default function MyProfile() {
       }
     }
     fetchStats();
-
-    // const interval = setInterval(fetchStats, 5000);
-    // return () => {
-    //   isMounted = false;
-    //   clearInterval(interval);
-    // };
   }, [loading]);
 
   if (loading || statsLoading) {
