@@ -21,7 +21,7 @@ export default function MyCards() {
 
   //ייבוא כל הכרטיסים של המשתמש בלבד
   useEffect(() => {
-    if (!isAuthenticated) return;
+    // if (!isAuthenticated) return;
     async function fetchMyPosts() {
       setLoading(true);
       try {
@@ -44,7 +44,7 @@ export default function MyCards() {
     }
 
     fetchMyPosts();
-  }, [isAuthenticated]);
+  }, []);
 
   // פונקציה שמקבלת id ומסירה אותו מה-state
   function handleDelete(id) {
