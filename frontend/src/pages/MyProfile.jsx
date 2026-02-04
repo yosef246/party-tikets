@@ -56,7 +56,7 @@ export default function MyProfile() {
     //   isMounted = false;
     //   clearInterval(interval);
     // };
-  }, [user, loading]);
+  }, [user, loading, isAuthenticated]);
 
   if (loading || statsLoading) {
     return <Loader text="טוען.." />;
