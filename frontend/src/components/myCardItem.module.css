@@ -47,11 +47,11 @@
 /* ============================= */
 @media (max-width: 495px) {
   .card {
-    max-width: none !important;  
-    width: 170% !important; 
-    margin-right: 30px !important;
-    padding: 0.5rem;
-    box-sizing: border-box;
+   width: 100%;
+   max-width: 100%;
+   margin: 0;
+   padding: 0.75rem;
+   box-sizing: border-box;
   }
 
   .image {

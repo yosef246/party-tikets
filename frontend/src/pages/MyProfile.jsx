@@ -21,7 +21,8 @@ export default function MyProfile() {
 
   // ייבוא כל הנתונים של המשתמש כמו סהכ עמלות כמות צפיות וכו
   useEffect(() => {
-    if (!userId || loading) return;
+    if (loading) return;
+    if (!isAuthenticated || !user) return;
 
     let isMounted = true;
 
@@ -38,11 +39,14 @@ export default function MyProfile() {
 
         if (isMounted) {
           setStats(data);
-          setStatsloading(false);
         }
       } catch (err) {
         console.error("Error fetching stats:", err);
         if (isMounted) setStatsloading(false);
+      } finally {
+        if (isMounted) {
+          setStatsloading(false);
+        }
       }
     }
     fetchStats();
@@ -52,7 +56,7 @@ export default function MyProfile() {
     //   isMounted = false;
     //   clearInterval(interval);
     // };
-  }, [userId, loading]);
+  }, [user, loading]);
 
   if (loading || statsLoading) {
     return <Loader text="טוען.." />;

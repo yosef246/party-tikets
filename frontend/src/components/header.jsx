@@ -12,7 +12,7 @@ function Header() {
   const menuRef = useRef(null); // רפרנס לתפריט המובייל
   const hamburgerRef = useRef(null); // רפרנס לכפתור ההמבורגר
 
-  // זה הuseEffect שמאזין ללחיצה על המסך
+  //  שמאזין ללחיצה על המסך useEffect
   useEffect(() => {
     function handleClickOutside(event) {
       if (

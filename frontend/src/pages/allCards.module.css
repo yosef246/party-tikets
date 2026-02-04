@@ -27,7 +27,7 @@
   .cardsContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
     width: 100%;
     padding: 0.5rem;
     box-sizing: border-box;
