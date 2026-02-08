@@ -15,11 +15,17 @@ export default function CardDetails() {
     if (loading) return;
 
     //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
-    if (!refId) {
-      const searchParams = new URLSearchParams(window.location.search);
-      setRefId(searchParams.get("ref") || userId);
+    const searchParams = new URLSearchParams(window.location.search);
+    const refFromUrl = searchParams.get("ref");
+
+    if (refFromUrl) {
+      setRefId(refFromUrl);
+    } else if (user?._id) {
+      setRefId(user._id);
+    } else {
+      setRefId("guest");
     }
-  }, [user, refId, loading]);
+  }, [user, loading]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
