@@ -51,6 +51,7 @@ export default function CardDetails() {
 
         console.log("post by id:", data);
         setCard(data);
+        setRefId(ref);
       } catch (error) {
         console.error("Error during getting:", error);
         alert(error.message);
