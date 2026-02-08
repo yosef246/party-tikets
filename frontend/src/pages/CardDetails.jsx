@@ -32,7 +32,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading) return;
     async function fetchCard() {
       const ref =
         new URLSearchParams(window.location.search).get("ref") ||
@@ -59,7 +59,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, user, loading]);
+  }, [id, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
