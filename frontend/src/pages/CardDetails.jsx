@@ -82,6 +82,10 @@ export default function CardDetails() {
     }
   }
 
+  if (loading) {
+    return <Loader text="בודק התחברות..." />;
+  }
+
   if (!card || !refId) {
     return <Loader text="טוען..." />;
   }
