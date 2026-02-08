@@ -12,16 +12,18 @@ export default function CardDetails() {
   const [refId, setRefId] = useState(null);
 
   useEffect(() => {
+    if (loading) return;
+
     //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
     if (!refId) {
       const searchParams = new URLSearchParams(window.location.search);
       setRefId(searchParams.get("ref") || userId);
     }
-  }, [user, refId]);
+  }, [user, refId, loading]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading || !refId) return;
+    if (!refId) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
@@ -43,7 +45,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, loading, refId]);
+  }, [id, refId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
