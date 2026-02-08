@@ -21,7 +21,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading) return;
+    if (loading || !refId) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
@@ -43,7 +43,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, loading]);
+  }, [id, loading, refId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
