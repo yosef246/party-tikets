@@ -12,16 +12,15 @@ export default function CardDetails() {
 
   const searchParams = new URLSearchParams(window.location.search);
   const refFromUrl = searchParams.get("ref");
-  const initialRefId = refFromUrl || user?._id || "guest";
-  const [refId, setRefId] = useState(initialRefId);
+  const [refId, setRefId] = useState(refFromUrl || null);
+
   console.log("ref1:", refId);
 
   useEffect(() => {
-    if (userId && !refFromUrl) {
+    if (!user || refFromUrl) {
       setRefId(user._id);
-      console.log("ref2:", refId);
     }
-  }, [user]);
+  }, [user, refFromUrl]);
 
   // useEffect(() => {
   //   if (loading) return;
