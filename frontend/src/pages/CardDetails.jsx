@@ -13,11 +13,16 @@ export default function CardDetails() {
   const searchParams = new URLSearchParams(window.location.search);
   const refFromUrl = searchParams.get("ref");
   const initialRefId = refFromUrl || user?._id || "guest";
-
   const [refId, setRefId] = useState(initialRefId);
 
+  useEffect(() => {
+    if (userId && !refFromUrl) {
+      setRefId(user._id);
+    }
+  }, [user]);
+
   // useEffect(() => {
-  //   if (loading || !user) return;
+  //   if (loading) return;
 
   //   //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
   //   const searchParams = new URLSearchParams(window.location.search);
@@ -37,9 +42,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (loading || !refId) return;
-    console.log("ref:", refId);
-
+    if (!refId) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
