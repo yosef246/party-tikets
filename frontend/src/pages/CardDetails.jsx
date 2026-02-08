@@ -9,11 +9,7 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
-  // const [refId, setRefId] = useState(null);
-
-  const searchParams = new URLSearchParams(window.location.search);
-  const refFromUrl = searchParams.get("ref");
-  const refId = refFromUrl || user?._id || "guest";
+  const [refId, setRefId] = useState(null);
 
   // useEffect(() => {
   //   if (loading) return;
@@ -36,10 +32,14 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (!refId) return;
+    if (loading || !user) return;
     async function fetchCard() {
+      const ref =
+        new URLSearchParams(window.location.search).get("ref") ||
+        user._id ||
+        "guest";
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
+        const response = await fetch(`/api/post/${id}?ref=${ref}`, {
           credentials: "include",
         });
 
@@ -58,7 +58,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, refId]);
+  }, [id, user, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
