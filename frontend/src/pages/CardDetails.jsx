@@ -9,35 +9,23 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
-  const [refId, setRefId] = useState(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get("ref");
-  });
+  const [refId, setRefId] = useState(null);
 
   useEffect(() => {
     if (loading) return;
-    if (refId) return;
 
-    if (user?._id) {
+    //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
+    const searchParams = new URLSearchParams(window.location.search);
+    const refFromUrl = searchParams.get("ref");
+
+    if (refFromUrl) {
+      setRefId(refFromUrl);
+      console.log("refFromUrl:", refFromUrl);
+    } else if (user?._id) {
       setRefId(user._id);
+      console.log("user._id:", user._id);
     }
-  }, [user, loading, refId]);
-
-  // useEffect(() => {
-  //   if (loading) return;
-
-  //   //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
-  //   const searchParams = new URLSearchParams(window.location.search);
-  //   const refFromUrl = searchParams.get("ref");
-
-  //   if (refFromUrl) {
-  //     setRefId(refFromUrl);
-  //     console.log("refFromUrl:", refFromUrl);
-  //   } else if (user?._id) {
-  //     setRefId(user._id);
-  //     console.log("user._id:", user._id);
-  //   }
-  // }, [user, loading]);
+  }, [user, loading]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
