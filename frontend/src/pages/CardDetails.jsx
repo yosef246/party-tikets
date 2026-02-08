@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const userId = user?._id;
   const [refId, setRefId] = useState(null);
 
@@ -21,7 +21,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (!refId) return;
+    if (loading) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
@@ -43,7 +43,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, refId]);
+  }, [id, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
