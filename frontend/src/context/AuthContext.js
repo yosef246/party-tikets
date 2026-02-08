@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
         if (!res.ok) {
           setIsAuthenticated(false);
           setUser(null);
+          return;
         }
 
         const data = await res.json();
