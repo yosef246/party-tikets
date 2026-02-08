@@ -17,7 +17,7 @@ export default function CardDetails() {
   console.log("ref1:", refId);
 
   useEffect(() => {
-    if (!user || refFromUrl) {
+    if (!userId || refFromUrl) {
       setRefId(user._id);
     }
   }, [user, refFromUrl]);
