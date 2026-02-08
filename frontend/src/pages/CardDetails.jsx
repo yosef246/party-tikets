@@ -14,10 +14,12 @@ export default function CardDetails() {
   const refFromUrl = searchParams.get("ref");
   const initialRefId = refFromUrl || user?._id || "guest";
   const [refId, setRefId] = useState(initialRefId);
+  console.log("ref1:", refId);
 
   useEffect(() => {
     if (userId && !refFromUrl) {
       setRefId(user._id);
+      console.log("ref2:", refId);
     }
   }, [user]);
 
@@ -42,7 +44,7 @@ export default function CardDetails() {
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (!refId) return;
+    if (!refId || loading) return;
     async function fetchCard() {
       try {
         const response = await fetch(`/api/post/${id}?ref=${refId}`, {
@@ -64,7 +66,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, refId]);
+  }, [id, refId, loading]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
