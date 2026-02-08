@@ -20,10 +20,13 @@ export default function CardDetails() {
 
     if (refFromUrl) {
       setRefId(refFromUrl);
+      console.log("refFromUrl:", refFromUrl);
     } else if (user?._id) {
       setRefId(user._id);
+      console.log("user._id:", user._id);
     } else {
       setRefId("guest");
+      console.log("guest");
     }
   }, [user, loading]);
 
