@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function MyCardItem(props) {
   const [edit, setEdit] = useState(false);
   const [postData, setPostData] = useState(props);
-  const { id, onDelete } = props;
+  const { id, onDelete, refId } = props;
 
   async function handleDelete() {
     try {
@@ -43,7 +43,7 @@ export default function MyCardItem(props) {
         />
       ) : (
         <>
-          <Link to={`/card-details/${id}`}>
+          <Link to={`/card-details/${id}?ref=${refId}`}>
             <img
               src={postData.imageUrl}
               alt={postData.title}

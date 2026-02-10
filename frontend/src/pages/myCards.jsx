@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 export default function MyCards() {
   const [loding, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const { isAuthenticated, loading } = useContext(AuthContext);
+  const { isAuthenticated, loading, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
@@ -62,6 +62,7 @@ export default function MyCards() {
           <MyCardItem
             id={card._id}
             key={card._id}
+            refId={user._id}
             title={card.title}
             location={card.location}
             price={card.price}
