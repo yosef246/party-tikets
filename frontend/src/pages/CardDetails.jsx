@@ -93,14 +93,13 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            disabled={!refId}
             onClick={() => {
               if (refId) {
                 navigator.clipboard.writeText(
                   `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
                 );
                 alert("קישור הועתק ✔");
-              } else {
+              } else if (!refId || refId == null) {
                 alert("התחבר כדי להעתיק את הקישור ולהרוויח משיתופים");
               }
             }}
