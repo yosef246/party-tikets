@@ -93,6 +93,7 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
+            disabled={!refId}
             onClick={() => {
               if (refId) {
                 navigator.clipboard.writeText(
