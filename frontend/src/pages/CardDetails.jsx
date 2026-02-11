@@ -10,7 +10,7 @@ export default function CardDetails() {
   const [card, setCard] = useState();
   const [refId, setRefId] = useState(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get("ref") || null;
+    return searchParams.get("ref");
   });
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
@@ -93,12 +93,15 @@ export default function CardDetails() {
 
           <button
             className={styles.cardButton}
-            disabled={!refId || refId.trim() === ""}
             onClick={() => {
-              navigator.clipboard.writeText(
-                `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
-              );
-              alert("קישור הועתק ✔");
+              if (refId && refId.trim() !== "") {
+                navigator.clipboard.writeText(
+                  `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
+                );
+                alert("קישור הועתק ✔");
+              } else {
+                alert("התחבר כדי להעתיק את הקישור ולהרוויח משיתופים");
+              }
             }}
           >
             העתק קישור
