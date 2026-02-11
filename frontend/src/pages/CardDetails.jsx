@@ -94,7 +94,7 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              if (refId && refId.trim() !== "") {
+              if (refId) {
                 navigator.clipboard.writeText(
                   `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
                 );
