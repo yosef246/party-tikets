@@ -3,27 +3,47 @@ import styles from "./myCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
 import Loader from "../components/Loader";
-import { AuthContext } from "../context/AuthContext";
+// import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
-  const [loding, setLoading] = useState(false);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+  const [loadingCards, setLoadingCards] = useState(true);
   const [cards, setCards] = useState([]);
-  const { isAuthenticated, loading, user } = useContext(AuthContext);
+  const [refId, setRefId] = useState(null);
+  // const { isAuthenticated, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  //בדיקה שיש טוקאן דרך USECONTEXT
+  //בדיקה שיש טוקאן
   useEffect(() => {
-    if (loding) return;
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth/check-auth", {
+          credentials: "include", // כדי שהשרת יזהה את המשתמש מה-cookie
+        });
+
+        if (!res.ok) {
+          throw new Error("Unauthorized");
+        }
+
+        const data = await res.json();
+
+        setRefId(data.user._id);
+      } catch (err) {
+        console.log("עליך להתחבר כדי לגשת לדף");
+        navigate("/login");
+      } finally {
+        setLoadingAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   //ייבוא כל הכרטיסים של המשתמש בלבד
   useEffect(() => {
-    if (loading) return;
+    if (loadingAuth) return;
+
     async function fetchMyPosts() {
-      setLoading(true);
       try {
         const response = await fetch("/api/post/my-cards", {
           credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
@@ -39,19 +59,20 @@ export default function MyCards() {
         }
       } catch (err) {
         console.error("שגיאה בהבאת הפוסטים של המשתמש:", err);
+      } finally {
+        setLoadingCards(false);
       }
-      setLoading(false);
     }
 
     fetchMyPosts();
-  }, [loading]);
+  }, [loadingAuth]);
 
   // פונקציה שמקבלת id ומסירה אותו מה-state
   function handleDelete(id) {
     setCards((prevCards) => prevCards.filter((card) => card._id !== id));
   }
 
-  if (loding) {
+  if (loadingAuth || loadingCards) {
     return <Loader text="טוען..." />;
   }
 
@@ -62,7 +83,7 @@ export default function MyCards() {
           <MyCardItem
             id={card._id}
             key={card._id}
-            refId={user._id}
+            refId={refId}
             title={card.title}
             location={card.location}
             price={card.price}

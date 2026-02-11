@@ -1,51 +1,24 @@
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+
 import styles from "./CardDetails.module.css";
 import Loader from "../components/Loader";
 
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
-  const { user, loading } = useContext(AuthContext);
-  const userId = user?._id;
   const [refId, setRefId] = useState(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get("ref");
+    return searchParams.get("ref") || null;
   });
-
-  useEffect(() => {
-    if (loading) return;
-    if (refId) return;
-
-    if (user?._id) {
-      setRefId(user._id);
-    }
-  }, [loading, user, refId]);
-  // const [refId, setRefId] = useState(null);
-
-  // useEffect(() => {
-  //   if (loading) return;
-
-  //   //פה אני שומר את הרף של המשתמש הנוכחי ששלח את הכרטיס
-  //   const searchParams = new URLSearchParams(window.location.search);
-  //   const refFromUrl = searchParams.get("ref");
-
-  //   if (refFromUrl) {
-  //     setRefId(refFromUrl);
-  //     console.log("refFromUrl:", refFromUrl);
-  //   } else if (user?._id) {
-  //     setRefId(user._id);
-  //     console.log("user._id:", user._id);
-  //   }
-  // }, [user, loading]);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
-    if (!refId || loading) return;
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
+        const url = refId ? `/api/post/${id}?ref=${refId}` : `/api/post/${id}`;
+        const response = await fetch(url, {
           credentials: "include",
         });
 
@@ -64,7 +37,7 @@ export default function CardDetails() {
     }
 
     fetchCard();
-  }, [id, refId, loading]);
+  }, [id, refId]);
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
@@ -92,11 +65,7 @@ export default function CardDetails() {
     }
   }
 
-  if (loading) {
-    return <Loader text="בודק התחברות..." />;
-  }
-
-  if (!card || !refId) {
+  if (!card) {
     return <Loader text="טוען..." />;
   }
 
@@ -125,9 +94,9 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              if (userId) {
+              if (refId) {
                 navigator.clipboard.writeText(
-                  `https://party-tikets.onrender.com/card-details/${id}?ref=${userId}`
+                  `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
                 );
                 alert("קישור הועתק ✔");
               } else {
