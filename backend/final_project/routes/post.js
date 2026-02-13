@@ -49,7 +49,7 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     //Number of views of the user
     const ref = req.query.ref;
 
-    if (ref && visitorId) {
+    if (ref && visitorId && ref !== visitorId) {
       const exists = await ClickView.findOne({
         post_id: post._id,
         referrer_username: ref,

@@ -8,10 +8,25 @@ import Loader from "../components/Loader";
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
-  const [refId, setRefId] = useState(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    return searchParams.get("ref");
+  const [refId] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("ref");
   });
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  useEffect(() => {
+    async function checkAuth() {
+      const res = await fetch("/api/auth/check-auth", {
+        credentials: "include",
+      });
+      if (!res.ok) return;
+
+      const data = await res.json();
+      setCurrentUserId(data.user._id);
+    }
+
+    checkAuth();
+  }, []);
 
   //ייבוא פוסט אחד לפי האיידי של הפוסט והוספת צפייה באותו פוסט
   useEffect(() => {
@@ -93,14 +108,15 @@ export default function CardDetails() {
           <button
             className={styles.cardButton}
             onClick={() => {
-              if (refId) {
-                navigator.clipboard.writeText(
-                  `https://party-tikets.onrender.com/card-details/${id}?ref=${refId}`
-                );
-                alert("קישור הועתק ✔");
-              } else {
-                alert("התחבר כדי להעתיק את הקישור ולהרוויח משיתופים");
+              if (!currentUserId) {
+                alert("התחבר כדי להעתיק קישור ולהרוויח משיתופים");
+                return;
               }
+
+              navigator.clipboard.writeText(
+                `https://party-tikets.onrender.com/card-details/${id}?ref=${currentUserId}`
+              );
+              alert("קישור הועתק ✔");
             }}
           >
             העתק קישור
