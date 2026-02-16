@@ -93,7 +93,7 @@
 /* כפתור 1 - שמאל */
 .toggle.open button:nth-child(1) {
   opacity: 1;
-  transform: translate(100px, 100px) translateX(-80px) scale(1); /* הוספתי את אותה ההזזה */
+  transform: translate(100px, 100px) translateX(-80px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.1s;
 }
@@ -101,7 +101,7 @@
 /* כפתור 2 - למעלה */
 .toggle.open button:nth-child(2) {
   opacity: 1;
-  transform: translate(100px, 100px) translateY(-80px) scale(1); /* הוספתי את אותה ההזזה */
+  transform: translate(100px, 100px) translateY(-80px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.2s;
 }
@@ -109,7 +109,7 @@
 /* כפתור 3 - אלכסון */
 .toggle.open button:nth-child(3) {
   opacity: 1;
-  transform: translate(100px, 100px) translate(-55px, -55px) scale(1); /* הוספתי את אותה ההזזה */
+  transform: translate(100px, 100px) translate(-55px, -55px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.3s;
 }
@@ -244,27 +244,27 @@
   }
 
   .toggle.open button:nth-child(1) {
-    transform: translate(60px, 60px) translateX(-60px) scale(1);
+    transform: translate(60px, 60px) translateX(-70px) scale(1);
   }
 
   .toggle.open button:nth-child(2) {
-    transform: translate(60px, 60px) translateY(-60px) scale(1);
+    transform: translate(60px, 60px) translateY(-70px) scale(1);
   }
 
   .toggle.open button:nth-child(3) {
-    transform: translate(60px, 60px) translate(-45px, -45px) scale(1);
+    transform: translate(60px, 60px) translate(-50px, -50px) scale(1);
   }
 
   .toggle.open button:nth-child(1):hover {
-    transform: translate(60px, 60px) translateX(-60px) scale(1.15);
+    transform: translate(60px, 60px) translateX(-70px) scale(1.15);
   }
 
   .toggle.open button:nth-child(2):hover {
-    transform: translate(60px, 60px) translateY(-60px) scale(1.15);
+    transform: translate(60px, 60px) translateY(-70px) scale(1.15);
   }
 
   .toggle.open button:nth-child(3):hover {
-    transform: translate(60px, 60px) translate(-45px, -45px) scale(1.15);
+    transform: translate(60px, 60px) translate(-50px, -50px) scale(1.15);
   }
 
   .signup {
