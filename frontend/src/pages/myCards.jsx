@@ -6,24 +6,22 @@ import Loader from "../components/Loader";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
-  const [loding, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const { isAuthenticated, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
   useEffect(() => {
-    if (loding) return;
+    if (loading) return;
     if (!isAuthenticated) {
       navigate("/login");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, loading]);
 
   //ייבוא כל הכרטיסים של המשתמש בלבד
   useEffect(() => {
     if (loading) return;
     async function fetchMyPosts() {
-      setLoading(true);
       try {
         const response = await fetch("/api/post/my-cards", {
           credentials: "include", // כדי לשלוח את הקוקי עם הטוקן
@@ -40,7 +38,6 @@ export default function MyCards() {
       } catch (err) {
         console.error("שגיאה בהבאת הפוסטים של המשתמש:", err);
       }
-      setLoading(false);
     }
 
     fetchMyPosts();
@@ -51,7 +48,7 @@ export default function MyCards() {
     setCards((prevCards) => prevCards.filter((card) => card._id !== id));
   }
 
-  if (loding) {
+  if (loading) {
     return <Loader text="טוען..." />;
   }
 

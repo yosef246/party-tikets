@@ -3,16 +3,16 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
+import { Info, Mail, Edit, User, LogOut, UserPlus, LogIn } from "lucide-react";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, loading, setIsAuthenticated } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  const menuRef = useRef(null); // רפרנס לתפריט המובייל
-  const hamburgerRef = useRef(null); // רפרנס לכפתור ההמבורגר
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
-  //  שמאזין ללחיצה על המסך useEffect
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -119,25 +119,45 @@ function Header() {
         </ul>
       </nav>
 
-      {/* תפריט מובייל בבועה */}
+      {/* תפריט מובייל בבועה עם אייקונים */}
       <div
         ref={menuRef}
         className={`${styles.mobileMenu} ${isOpen ? styles.open : ""}`}
       >
-        <Link to="/about" onClick={() => setIsOpen(false)}>
-          עלינו
+        <Link
+          to="/about"
+          onClick={() => setIsOpen(false)}
+          className={styles.menuItem}
+        >
+          <Info size={24} />
+          <span>עלינו</span>
         </Link>
-        <Link to="/contact" onClick={() => setIsOpen(false)}>
-          צרו קשר
+        <Link
+          to="/contact"
+          onClick={() => setIsOpen(false)}
+          className={styles.menuItem}
+        >
+          <Mail size={24} />
+          <span>צרו קשר</span>
         </Link>
 
         {isAuthenticated ? (
           <>
-            <Link to="/party-cards" onClick={() => setIsOpen(false)}>
-              עריכה
+            <Link
+              to="/party-cards"
+              onClick={() => setIsOpen(false)}
+              className={styles.menuItem}
+            >
+              <Edit size={24} />
+              <span>עריכה</span>
             </Link>
-            <Link to="/profile" onClick={() => setIsOpen(false)}>
-              פרופיל אישי
+            <Link
+              to="/profile"
+              onClick={() => setIsOpen(false)}
+              className={styles.menuItem}
+            >
+              <User size={24} />
+              <span>פרופיל אישי</span>
             </Link>
             <button
               type="button"
@@ -145,18 +165,29 @@ function Header() {
                 setIsOpen(false);
                 handleLogout();
               }}
-              className={styles.navLink}
+              className={`${styles.navLink} ${styles.menuItem}`}
             >
-              התנתקות
+              <LogOut size={24} />
+              <span>התנתקות</span>
             </button>
           </>
         ) : (
           <>
-            <Link to="/register" onClick={() => setIsOpen(false)}>
-              הרשמה
+            <Link
+              to="/register"
+              onClick={() => setIsOpen(false)}
+              className={styles.menuItem}
+            >
+              <UserPlus size={24} />
+              <span>הרשמה</span>
             </Link>
-            <Link to="/login" onClick={() => setIsOpen(false)}>
-              התחברות
+            <Link
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className={styles.menuItem}
+            >
+              <LogIn size={24} />
+              <span>התחברות</span>
             </Link>
           </>
         )}

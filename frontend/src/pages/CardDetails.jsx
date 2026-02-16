@@ -14,6 +14,7 @@ export default function CardDetails() {
   });
   const [currentUserId, setCurrentUserId] = useState(null);
 
+  // בדיקה האם יש למשתמש שנכנס לפוסט טוקאן
   useEffect(() => {
     async function checkAuth() {
       const res = await fetch("/api/auth/check-auth", {
