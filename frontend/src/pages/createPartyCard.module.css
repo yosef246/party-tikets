@@ -77,8 +77,8 @@
 
 .toggle button {
   position: absolute;
-  width: 80px;  /* הגדלתי כדי שיהיה מקום לטקסט */
-  height: 80px;
+  width: 30px;  /* הגדלתי כדי שיהיה מקום לטקסט */
+  height: 30px;
   background: #1976d2;
   border: none;
   border-radius: 50%;
@@ -93,28 +93,28 @@
 
 /* מיקום כל כפתור במעגל */
 .toggle.open button:nth-child(1) {
-  transform: translateX(-140px) scale(1); /* שמאל */
+  transform: translateX(-80px) scale(1); /* שמאל */
 }
 
 .toggle.open button:nth-child(2) {
-  transform: translateY(-140px) scale(1); /* למעלה */
+  transform: translateY(-80px) scale(1); /* למעלה */
 }
 
 .toggle.open button:nth-child(3) {
-  transform: translate(-100px, -100px) scale(1); /* אלכסון */
+  transform: translate(-90px, -90px) scale(1); /* אלכסון */
 }
 
 .toggle button:hover {
-  transform: scale(1.15) translateX(-140px) !important; /* שומר את המיקום בזמן hover */
+  transform: scale(1.15) translateX(-80px) !important; /* שומר את המיקום בזמן hover */
   background: #19528b;
 }
 
 .toggle button:nth-child(2):hover {
-  transform: scale(1.15) translateY(-140px) !important;
+  transform: scale(1.15) translateY(-80px) !important;
 }
 
 .toggle button:nth-child(3):hover {
-  transform: scale(1.15) translate(-100px, -100px) !important;
+  transform: scale(1.15) translate(-90px, -90px) !important;
 }
 
 .signup {

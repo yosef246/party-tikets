@@ -67,19 +67,19 @@ export default function CreatePartyCardPage() {
           <button>
             <Link className={styles.signup} to="/all-cards">
               <Tickets size={20} />
-              <span>כל הכרטיסים</span>
+              {/* <span>כל הכרטיסים</span> */}
             </Link>
           </button>
           <button>
             <Link className={styles.signup} to="/my-cards">
               <User size={20} />
-              <span>הכרטיסים שלך</span>
+              {/* <span>הכרטיסים שלך</span> */}
             </Link>
           </button>
           <button>
             <Link className={styles.signup} to="/payment">
               <CreditCard size={20} />
-              <span>שלם עכשיו</span>
+              {/* <span>שלם עכשיו</span> */}
             </Link>
           </button>
         </div>
