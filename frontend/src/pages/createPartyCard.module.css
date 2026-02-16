@@ -4,27 +4,23 @@
   position: relative;
   color: aliceblue;
   text-align: right;
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem; /* הסרתי את ה-padding-bottom */
   direction: rtl;
 }
 
 /* ============================= */
 /* 🎯 תפריט מעגלי צף */
 /* ============================= */
-.menucontainer {
-  position: fixed;
+.menu {
+  position: fixed; /* שינוי מ-relative ל-fixed */
   right: 20px;
   bottom: 20px;
-  z-index: 1000;
-}
-
-.menu {
-  position: relative;
   width: 280px;
   height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000; /* הוספתי z-index */
 }
 
 /* הכפתור המרכזי */
@@ -93,7 +89,7 @@
 /* כפתור 1 - שמאל */
 .toggle.open button:nth-child(1) {
   opacity: 1;
-  transform: translateX(-90px) scale(1);
+  transform: translateX(-100px) scale(1);
   pointer-events: auto;
   transition-delay: 0.1s;
 }
@@ -101,7 +97,7 @@
 /* כפתור 2 - למעלה */
 .toggle.open button:nth-child(2) {
   opacity: 1;
-  transform: translateY(-90px) scale(1);
+  transform: translateY(-100px) scale(1);
   pointer-events: auto;
   transition-delay: 0.2s;
 }
@@ -109,7 +105,7 @@
 /* כפתור 3 - אלכסון */
 .toggle.open button:nth-child(3) {
   opacity: 1;
-  transform: translate(-65px, -65px) scale(1);
+  transform: translate(-70px, -70px) scale(1);
   pointer-events: auto;
   transition-delay: 0.3s;
 }
@@ -117,17 +113,17 @@
 /* hover על הכפתורים */
 .toggle.open button:nth-child(1):hover {
   background: #125aa2;
-  transform: translateX(-90px) scale(1.15);
+  transform: translateX(-100px) scale(1.15);
 }
 
 .toggle.open button:nth-child(2):hover {
   background: #125aa2;
-  transform: translateY(-90px) scale(1.15);
+  transform: translateY(-100px) scale(1.15);
 }
 
 .toggle.open button:nth-child(3):hover {
   background: #125aa2;
-  transform: translate(-65px, -65px) scale(1.15);
+  transform: translate(-70px, -70px) scale(1.15);
 }
 
 /* עיצוב הלינקים */
@@ -216,14 +212,11 @@
     text-align: center;
   }
 
-  .menucontainer {
-    right: 10px;
-    bottom: 10px;
-  }
-
   .menu {
     width: 200px;
     height: 200px;
+    right: 10px;
+    bottom: 10px;
   }
 
   .mainbutton {
@@ -238,27 +231,27 @@
   }
 
   .toggle.open button:nth-child(1) {
-    transform: translateX(-70px) scale(1);
+    transform: translateX(-75px) scale(1);
   }
 
   .toggle.open button:nth-child(2) {
-    transform: translateY(-70px) scale(1);
+    transform: translateY(-75px) scale(1);
   }
 
   .toggle.open button:nth-child(3) {
-    transform: translate(-50px, -50px) scale(1);
+    transform: translate(-55px, -55px) scale(1);
   }
 
   .toggle.open button:nth-child(1):hover {
-    transform: translateX(-70px) scale(1.15);
+    transform: translateX(-75px) scale(1.15);
   }
 
   .toggle.open button:nth-child(2):hover {
-    transform: translateY(-70px) scale(1.15);
+    transform: translateY(-75px) scale(1.15);
   }
 
   .toggle.open button:nth-child(3):hover {
-    transform: translate(-50px, -50px) scale(1.15);
+    transform: translate(-55px, -55px) scale(1.15);
   }
 
   .signup {
@@ -304,7 +297,7 @@
     font-size: 1.6rem;
   }
 
-  .menucontainer {
+  .menu {
     right: 15px;
     bottom: 15px;
   }
