@@ -77,8 +77,8 @@
 
 .toggle button {
   position: absolute;
-  width: 30px;  /* הגדלתי כדי שיהיה מקום לטקסט */
-  height: 30px;
+  width: 50px;  /* הגדלתי כדי שיהיה מקום לטקסט */
+  height: 50px;
   background: #1976d2;
   border: none;
   border-radius: 50%;
@@ -92,29 +92,42 @@
 }
 
 /* מיקום כל כפתור במעגל */
-.toggle.open button:nth-child(1) {
-  transform: translateX(-80px) scale(1); /* שמאל */
+/* אנימציה של כפתור 1 - שמאל */
+.tpggle.open button:nth-child(1) {
+  opacity: 1;
+  transform: translateX(-90px) scale(1); /* הקטנתי מ-120 ל-90 */
+  pointer-events: auto;
+  transition-delay: 0.1s;
 }
 
-.toggle.open button:nth-child(2) {
-  transform: translateY(-80px) scale(1); /* למעלה */
+/* אנימציה של כפתור 2 - למעלה */
+.tpggle.open button:nth-child(2) {
+  opacity: 1;
+  transform: translateY(-90px) scale(1); /* הקטנתי מ-120 ל-90 */
+  pointer-events: auto;
+  transition-delay: 0.2s;
 }
 
-.toggle.open button:nth-child(3) {
-  transform: translate(-90px, -90px) scale(1); /* אלכסון */
+/* אנימציה של כפתור 3 - אלכסון שמאלי עליון */
+.tpggle.open button:nth-child(3) {
+  opacity: 1;
+  transform: translate(-65px, -65px) scale(1); /* הקטנתי מ-85 ל-65 */
+  pointer-events: auto;
+  transition-delay: 0.3s;
 }
 
-.toggle button:hover {
-  transform: scale(1.15) translateX(-80px) !important; /* שומר את המיקום בזמן hover */
-  background: #19528b;
+/* hover על הכפתורים - עדכן גם את זה */
+.tpggle button:hover {
+  background: #125aa2;
+  transform: translateX(-90px) scale(1.15) !important; /* הקטנתי מ-120 */
 }
 
-.toggle button:nth-child(2):hover {
-  transform: scale(1.15) translateY(-80px) !important;
+.tpggle.open button:nth-child(2):hover {
+  transform: translateY(-90px) scale(1.15) !important; /* הקטנתי מ-120 */
 }
 
-.toggle button:nth-child(3):hover {
-  transform: scale(1.15) translate(-90px, -90px) !important;
+.tpggle.open button:nth-child(3):hover {
+  transform: translate(-65px, -65px) scale(1.15) !important; /* הקטנתי מ-85 */
 }
 
 .signup {
