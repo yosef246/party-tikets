@@ -244,11 +244,11 @@
   }
 
   .toggle.open button:nth-child(1) {
-    transform: translate(60px, 60px) translateX(-65px) scale(1);
+    transform: translate(60px, 60px) translateX(-60px) scale(1);
   }
 
   .toggle.open button:nth-child(2) {
-    transform: translate(60px, 60px) translateY(-65px) scale(1);
+    transform: translate(60px, 60px) translateY(-60px) scale(1);
   }
 
   .toggle.open button:nth-child(3) {
