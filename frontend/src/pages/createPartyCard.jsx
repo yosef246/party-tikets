@@ -62,36 +62,6 @@ export default function CreatePartyCardPage() {
 
   return (
     <div className={styles.middle}>
-      <div className={styles.menu}>
-        <div className={`${styles.toggle} ${open ? styles.open : ""}`}>
-          <button>
-            <Link className={styles.signup} to="/all-cards">
-              <Tickets size={20} />
-              {/* <span>כל הכרטיסים</span> */}
-            </Link>
-          </button>
-          <button>
-            <Link className={styles.signup} to="/my-cards">
-              <User size={20} />
-              {/* <span>הכרטיסים שלך</span> */}
-            </Link>
-          </button>
-          <button>
-            <Link className={styles.signup} to="/payment">
-              <CreditCard size={20} />
-              {/* <span>שלם עכשיו</span> */}
-            </Link>
-          </button>
-        </div>
-
-        <button
-          className={`${styles.mainbutton} ${open ? styles.active : ""}`}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
       <h1>ברוכים הבאים למועדון היחצנים</h1>
       <div className={styles.container}>
         <div className={styles.header}>
@@ -148,6 +118,36 @@ export default function CreatePartyCardPage() {
           />
           <button type="submit">{loading ? "שולח.." : "צור כרטיס"}</button>
         </form>
+      </div>
+
+      <div className={styles.menu}>
+        <div className={`${styles.toggle} ${open ? styles.open : ""}`}>
+          <button>
+            <Link className={styles.signup} to="/all-cards">
+              <Tickets size={20} />
+              {/* <span>כל הכרטיסים</span> */}
+            </Link>
+          </button>
+          <button>
+            <Link className={styles.signup} to="/my-cards">
+              <User size={20} />
+              {/* <span>הכרטיסים שלך</span> */}
+            </Link>
+          </button>
+          <button>
+            <Link className={styles.signup} to="/payment">
+              <CreditCard size={20} />
+              {/* <span>שלם עכשיו</span> */}
+            </Link>
+          </button>
+        </div>
+
+        <button
+          className={`${styles.mainbutton} ${open ? styles.active : ""}`}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
     </div>
   );
