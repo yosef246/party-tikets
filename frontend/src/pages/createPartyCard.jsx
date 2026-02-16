@@ -2,6 +2,7 @@ import styles from "./createPartyCard.module.css";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Tickets, User, CreditCard, Menu, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 
 export default function CreatePartyCardPage() {
@@ -61,26 +62,33 @@ export default function CreatePartyCardPage() {
 
   return (
     <div className={styles.middle}>
-      <div className={styles.menucontainer}>
-        <div className={`${styles.submenu} ${open ? styles.open : ""}`}>
+      <div className={styles.menu}>
+        <div className={`${styles.toggle} ${open ? styles.open : ""}`}>
           <button>
             <Link className={styles.signup} to="/all-cards">
-              כל הכרטיסים
+              <Tickets size={20} />
+              <span>כל הכרטיסים</span>
             </Link>
           </button>
           <button>
             <Link className={styles.signup} to="/my-cards">
-              הכרטיסים שלך
+              <User size={20} />
+              <span>הכרטיסים שלך</span>
             </Link>
           </button>
           <button>
             <Link className={styles.signup} to="/payment">
-              שלם עכשיו
+              <CreditCard size={20} />
+              <span>שלם עכשיו</span>
             </Link>
           </button>
         </div>
-        <button className={styles.mainbutton} onClick={() => setOpen(!open)}>
-          M
+
+        <button
+          className={`${styles.mainbutton} ${open ? styles.active : ""}`}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 

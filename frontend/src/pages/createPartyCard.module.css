@@ -15,6 +15,36 @@
   bottom: 4px;
   z-index: 1000;
 }
+.menu {
+  position:relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu .toggle {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #333;
+   font-size: 2rem;
+   cursor: pointer;
+   transition: 1.25s;
+   z-index: 5;
+}
+.menu.active .toggle {
+  transform: rotate(360deg);
+  box-shadow: 
+  0 6px 8px rgba(0, 0, 0, 0.15),
+  0 0 0 2px #333,
+  0 0 0 8px #fff;
+}
 
 .mainbutton {
   width: 60px;
