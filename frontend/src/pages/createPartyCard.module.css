@@ -16,34 +16,124 @@
   z-index: 1000;
 }
 .menu {
-  position:relative;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
   width: 280px;
   height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
-.menu .toggle {
-  position: relative;
+
+.mainbutton {
+  position: absolute;
   height: 60px;
   width: 60px;
   background: #fff;
   border-radius: 50%;
+  border: none;
   display: flex;
-   align-items: center;
-   justify-content: center;
-   color: #333;
-   font-size: 2rem;
-   cursor: pointer;
-   transition: 1.25s;
-   z-index: 5;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  cursor: pointer;
+  transition: all 1.25s;
+  z-index: 5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-.menu.active .toggle {
-  transform: rotate(360deg);
+
+.mainbutton:hover {
+  transform: scale(1.1);
+}
+
+.mainbutton.active {
+  transform: rotate(180deg);
   box-shadow: 
-  0 6px 8px rgba(0, 0, 0, 0.15),
-  0 0 0 2px #333,
-  0 0 0 8px #fff;
+    0 6px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 2px #333,
+    0 0 0 8px #fff;
+}
+
+/* הכפתורים שמסתובבים */
+.tpggle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.tpggle.open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.tpggle button {
+  position: absolute;
+  width: 80px;  /* הגדלתי כדי שיהיה מקום לטקסט */
+  height: 80px;
+  background: #1976d2;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  transform: scale(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* מיקום כל כפתור במעגל */
+.tpggle.open button:nth-child(1) {
+  transform: translateX(-140px) scale(1); /* שמאל */
+}
+
+.tpggle.open button:nth-child(2) {
+  transform: translateY(-140px) scale(1); /* למעלה */
+}
+
+.tpggle.open button:nth-child(3) {
+  transform: translate(-100px, -100px) scale(1); /* אלכסון */
+}
+
+.tpggle button:hover {
+  transform: scale(1.15) translateX(-140px) !important; /* שומר את המיקום בזמן hover */
+  background: #19528b;
+}
+
+.tpggle button:nth-child(2):hover {
+  transform: scale(1.15) translateY(-140px) !important;
+}
+
+.tpggle button:nth-child(3):hover {
+  transform: scale(1.15) translate(-100px, -100px) !important;
+}
+
+.signup {
+  color: white;
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.signup span {
+  display: block;
+  line-height: 1.2;
 }
 
 .mainbutton {
