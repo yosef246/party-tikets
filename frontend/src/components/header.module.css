@@ -144,6 +144,55 @@
 }
 
 /* ============================= */
+/* 💬 Tooltip - הסבר מרחף */
+/* ============================= */
+.menuItem {
+  position: relative;
+}
+
+.menuItem[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 120%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, left 0.3s ease;
+  z-index: 1001;
+}
+
+.menuItem[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, left 0.3s ease;
+  z-index: 1001;
+}
+
+.menuItem[data-tooltip]:hover::before,
+.menuItem[data-tooltip]:hover::after {
+  opacity: 1;
+  left: 115%;
+}
+
+.menuItem[data-tooltip]:hover::after {
+  left: 105%;
+}
+
+/* ============================= */
 /* 💻 טלפון - עד 495 */
 /* ============================= */
 @media (max-width: 495px) {
@@ -174,7 +223,7 @@
   }
   
   .mobileMenu {
-    width: 180px;
+    width: 40px;
   }
   
   .menuItem {

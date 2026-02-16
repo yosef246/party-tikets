@@ -128,17 +128,17 @@ function Header() {
           to="/about"
           onClick={() => setIsOpen(false)}
           className={styles.menuItem}
+          data-tooltip="עלינו" //הסבר מרחף
         >
           <Info size={24} />
-          <span>עלינו</span>
         </Link>
         <Link
           to="/contact"
           onClick={() => setIsOpen(false)}
           className={styles.menuItem}
+          data-tooltip="צרו קשר" //הסבר מרחף
         >
           <Mail size={24} />
-          <span>צרו קשר</span>
         </Link>
 
         {isAuthenticated ? (
@@ -147,17 +147,17 @@ function Header() {
               to="/party-cards"
               onClick={() => setIsOpen(false)}
               className={styles.menuItem}
+              data-tooltip="עריכה" //הסבר מרחף
             >
               <Edit size={24} />
-              <span>עריכה</span>
             </Link>
             <Link
               to="/profile"
               onClick={() => setIsOpen(false)}
               className={styles.menuItem}
+              data-tooltip="פרופיל אישי" //הסבר מרחף
             >
               <User size={24} />
-              <span>פרופיל אישי</span>
             </Link>
             <button
               type="button"
@@ -166,9 +166,9 @@ function Header() {
                 handleLogout();
               }}
               className={`${styles.navLink} ${styles.menuItem}`}
+              data-tooltip="התנתקות" //הסבר מרחף
             >
               <LogOut size={24} />
-              <span>התנתקות</span>
             </button>
           </>
         ) : (
@@ -177,17 +177,17 @@ function Header() {
               to="/register"
               onClick={() => setIsOpen(false)}
               className={styles.menuItem}
+              data-tooltip="הרשמה" //הסבר מרחף
             >
               <UserPlus size={24} />
-              <span>הרשמה</span>
             </Link>
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
               className={styles.menuItem}
+              data-tooltip="התחברות" //הסבר מרחף
             >
               <LogIn size={24} />
-              <span>התחברות</span>
             </Link>
           </>
         )}
