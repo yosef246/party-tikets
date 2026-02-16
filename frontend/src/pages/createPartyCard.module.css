@@ -1,6 +1,6 @@
 .middle {
-  background: linear-gradient(to top,  #004B8E,#010528);
-  height: 140vh;
+  background: linear-gradient(to top, #004B8E, #010528);
+  min-height: 100vh;
   position: relative;
   color: aliceblue;
   text-align: right;
@@ -8,56 +8,58 @@
   direction: rtl;
 }
 
-/* כפתור התפריט הצף */
+/* ============================= */
+/* 🎯 תפריט מעגלי צף */
+/* ============================= */
 .menucontainer {
-  position:fixed;
+  position: fixed;
   right: 20px;
-  bottom: 4px;
+  bottom: 20px;
   z-index: 1000;
 }
 
 .menu {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+  position: relative;
   width: 280px;
   height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
 }
 
+/* הכפתור המרכזי */
 .mainbutton {
   position: absolute;
-  height: 60px;
   width: 60px;
-  background: #fff;
-  border-radius: 50%;
+  height: 60px;
+  background-color: #247186;
+  color: white;
   border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333;
-  cursor: pointer;
-  transition: all 1.25s;
-  z-index: 5;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 10;
 }
 
 .mainbutton:hover {
   transform: scale(1.1);
+  background-color: #1b5d6f;
 }
 
 .mainbutton.active {
-  transform: rotate(180deg);
+  transform: rotate(135deg);
   box-shadow: 
-    0 6px 8px rgba(0, 0, 0, 0.15),
-    0 0 0 2px #333,
-    0 0 0 8px #fff;
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 0 0 3px #fff,
+    0 0 0 6px #247186;
 }
 
-/* הכפתורים שמסתובבים */
+/* מיכל הכפתורים */
 .toggle {
   position: absolute;
   width: 100%;
@@ -65,20 +67,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.toggle.open {
-  pointer-events: auto;
-  opacity: 1;
 }
 
 .toggle button {
   position: absolute;
-  width: 50px;  /* הגדלתי כדי שיהיה מקום לטקסט */
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background: #1976d2;
   border: none;
   border-radius: 50%;
@@ -86,50 +80,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.5s ease;
-  transform: scale(0);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  
+  /* התחלה: כפתורים במרכז ובלתי נראים */
+  opacity: 0;
+  transform: translate(0, 0) scale(0);
+  pointer-events: none;
+  
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* מיקום כל כפתור במעגל */
-/* אנימציה של כפתור 1 - שמאל */
-.tpggle.open button:nth-child(1) {
+/* כפתור 1 - שמאל */
+.toggle.open button:nth-child(1) {
   opacity: 1;
-  transform: translateX(-90px) scale(1); /* הקטנתי מ-120 ל-90 */
+  transform: translateX(-90px) scale(1);
   pointer-events: auto;
   transition-delay: 0.1s;
 }
 
-/* אנימציה של כפתור 2 - למעלה */
-.tpggle.open button:nth-child(2) {
+/* כפתור 2 - למעלה */
+.toggle.open button:nth-child(2) {
   opacity: 1;
-  transform: translateY(-90px) scale(1); /* הקטנתי מ-120 ל-90 */
+  transform: translateY(-90px) scale(1);
   pointer-events: auto;
   transition-delay: 0.2s;
 }
 
-/* אנימציה של כפתור 3 - אלכסון שמאלי עליון */
-.tpggle.open button:nth-child(3) {
+/* כפתור 3 - אלכסון */
+.toggle.open button:nth-child(3) {
   opacity: 1;
-  transform: translate(-65px, -65px) scale(1); /* הקטנתי מ-85 ל-65 */
+  transform: translate(-65px, -65px) scale(1);
   pointer-events: auto;
   transition-delay: 0.3s;
 }
 
-/* hover על הכפתורים - עדכן גם את זה */
-.tpggle button:hover {
+/* hover על הכפתורים */
+.toggle.open button:nth-child(1):hover {
   background: #125aa2;
-  transform: translateX(-90px) scale(1.15) !important; /* הקטנתי מ-120 */
+  transform: translateX(-90px) scale(1.15);
 }
 
-.tpggle.open button:nth-child(2):hover {
-  transform: translateY(-90px) scale(1.15) !important; /* הקטנתי מ-120 */
+.toggle.open button:nth-child(2):hover {
+  background: #125aa2;
+  transform: translateY(-90px) scale(1.15);
 }
 
-.tpggle.open button:nth-child(3):hover {
-  transform: translate(-65px, -65px) scale(1.15) !important; /* הקטנתי מ-85 */
+.toggle.open button:nth-child(3):hover {
+  background: #125aa2;
+  transform: translate(-65px, -65px) scale(1.15);
 }
 
+/* עיצוב הלינקים */
 .signup {
   color: white;
   text-decoration: none;
@@ -150,96 +151,15 @@
   line-height: 1.2;
 }
 
-.mainbutton {
-  width: 60px;
-  height: 55px;
-  background-color: #247186;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-}
-
-.mainbutton:hover {
-  background-color: #1b5d6f;
-}
-
-.submenu {
-  position: absolute;
-  bottom: 85px;  
-  right: 0;
-  margin: 0;     
-  display: none;
-  flex-direction: column;
-  gap: 8px;     
-}
-
-.submenu.open {
-  display: flex;
-}
-
-.submenu button {
-  width: 113px;
-  margin-top: 8px;
-  padding: 0.4rem 0.8rem;
-  background-color: #247186;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: none;
-}
-
-.submenu.open button {
-  animation: bubbleIn 0.4s ease forwards;
-}
-
-.submenu.open button:nth-child(1) {
-  animation-delay: 0s;
-}
-.submenu.open button:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.submenu.open button:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-@keyframes bubbleIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.submenu button:hover {
-  background-color: #125aa2;
-}
-
-
-.signup {
-  display: inline-block;
-  color: white;
-  border: none;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-/* תיבת טופס */
+/* ============================= */
+/* 📝 תיבת טופס */
+/* ============================= */
 .container {
   max-width: 500px;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 2rem;
-  background: linear-gradient(to top,  #004B8E,#010528);
+  background: linear-gradient(to top, #004B8E, #010528);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
   text-align: center;
   direction: rtl;
@@ -291,40 +211,64 @@
 /* ============================= */
 @media (max-width: 495px) {
   .middle {
-    height: auto;
+    min-height: 100vh;
     padding: 1rem;
     text-align: center;
   }
 
   .menucontainer {
-    position: fixed;
-    top: auto;
-    bottom: 20px;
     right: 10px;
+    bottom: 10px;
   }
 
-  .submenu {
-    bottom: 60px; 
-    right: 5px;
+  .menu {
+    width: 200px;
+    height: 200px;
   }
 
   .mainbutton {
-    position:fixed;
-    right: 10px;
-    bottom: 3px;
-    z-index: 1000;
     width: 50px;
     height: 50px;
-    font-size: 16px;
-    margin: 0.5rem;
+    font-size: 20px;
+  }
+
+  .toggle button {
+    width: 55px;
+    height: 55px;
+  }
+
+  .toggle.open button:nth-child(1) {
+    transform: translateX(-70px) scale(1);
+  }
+
+  .toggle.open button:nth-child(2) {
+    transform: translateY(-70px) scale(1);
+  }
+
+  .toggle.open button:nth-child(3) {
+    transform: translate(-50px, -50px) scale(1);
+  }
+
+  .toggle.open button:nth-child(1):hover {
+    transform: translateX(-70px) scale(1.15);
+  }
+
+  .toggle.open button:nth-child(2):hover {
+    transform: translateY(-70px) scale(1.15);
+  }
+
+  .toggle.open button:nth-child(3):hover {
+    transform: translate(-50px, -50px) scale(1.15);
+  }
+
+  .signup {
+    font-size: 0.6rem;
   }
 
   .container {
-    width: 80%;
+    width: 90%;
     padding: 1.5rem;
-    height: auto;
-    padding: 20px;
-    margin: 40px auto;
+    margin: 20px auto;
   }
 
   .header h2 {
@@ -348,7 +292,7 @@
 /* ============================= */
 @media (max-width: 1398px) {
   .middle {
-    height: auto;
+    min-height: 100vh;
     padding: 1.5rem;
   }
 
@@ -361,7 +305,7 @@
   }
 
   .menucontainer {
-    top: 400px;
     right: 15px;
+    bottom: 15px;
   }
 }
