@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Post, ClickView, Purchases } from "../models/post.js";
 import User from "../models/user.js";
 import Tag from "../models/tag.js";
-import purify from "../../utils/sanitize.js";
+import sanitizeBody from "../utils/sanitize.js";
 import {
   createPostValitation,
   updatePostValitation,
@@ -169,14 +169,12 @@ router.get("/tag", async (req, res) => {
 router.post("/", [verifyToken], async (req, res) => {
   console.log("req.user:", req.user);
 
-  Object.keys(req.body).forEach((key) => {
-    //אם הערך שווה למערך אז תיכנס לתוך המערך ותבדוק האם יש בעיה אבל תשאיר לי אותו כמערך
-    if (Array.isArray(req.body[key])) {
-      req.body[key] = req.body[key].map((tag) => purify.sanitize(tag));
-    } else {
-      req.body[key] = purify.sanitize(req.body[key]); //ואם הוא לא מערך תמשיך את הבדיקה כרגיל
-    }
-  });
+  const sanitizeError = sanitizeBody(req);
+  if (sanitizeError) {
+    return res.status(sanitizeError.statusCode).json({
+      message: sanitizeError.message,
+    });
+  }
 
   const { error } = createPostValitation.validate(req.body);
   if (error) return res.status(400).json(error.details[0].message);
@@ -187,14 +185,12 @@ router.post("/", [verifyToken], async (req, res) => {
 
 //PUT post
 router.put("/:id", [verifyToken], async (req, res) => {
-  Object.keys(req.body).forEach((key) => {
-    //אם הערך שווה למערך אז תיכנס לתוך המערך ותבדוק האם יש בעיה אבל תשאיר לי אותו כמערך
-    if (Array.isArray(req.body[key])) {
-      req.body[key] = req.body[key].map((tag) => purify.sanitize(tag));
-    } else {
-      req.body[key] = purify.sanitize(req.body[key]); //ואם הוא לא מערך תמשיך את הבדיקה כרגיל
-    }
-  });
+  const sanitizeError = sanitizeBody(req);
+  if (sanitizeError) {
+    return res.status(sanitizeError.statusCode).json({
+      message: sanitizeError.message,
+    });
+  }
 
   const { error } = updatePostValitation.validate(req.body);
   if (error) return res.status(400).json(error.details[0].message);

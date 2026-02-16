@@ -48,7 +48,7 @@ export default function EditPostForm({ id, post, onUpdate, onCancel }) {
       }
     } catch (err) {
       console.error("שגיאה בעדכון:", err);
-      alert("עדכון נכשל");
+      alert(err.message);
     } finally {
       setLoading(false);
     }

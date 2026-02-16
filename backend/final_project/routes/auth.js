@@ -1,6 +1,6 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
-import purify from "../../utils/sanitize.js";
+import sanitizeBody from "../../utils/sanitize.js";
 import { loginValitation, registerValitation } from "../../valitations/user.js";
 import NewUser from "../models/user.js";
 import { generateToken, verifyTokenOptional } from "../../utils/token.js";
@@ -9,11 +9,12 @@ import { verifyToken } from "../../utils/token.js";
 const router = Router();
 
 router.post("/register", async (req, res) => {
-  //עובר לי גם על שם פרטי שם משפחה וגם על אימייל שלא נכנס אליהם קוד זדוני
-  Object.keys(req.body).forEach((key) => {
-    req.body[key] = purify.sanitize(req.body[key]); //מנקה לך את הקוד שנכנס מקטעי קוד או סקריפטים זדוניים
-  });
-
+  const sanitizeError = sanitizeBody(req);
+  if (sanitizeError) {
+    return res.status(sanitizeError.statusCode).json({
+      message: sanitizeError.message,
+    });
+  }
   const { error } = registerValitation.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -86,10 +87,12 @@ router.post("/forgot-password", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  //עובר לי גם על שם פרטי שם משפחה וגם על אימייל שלא נכנס אליהם קוד זדוני
-  Object.keys(req.body).forEach((key) => {
-    req.body[key] = purify.sanitize(req.body[key]); //מנקה לך את הקוד שנכנס מקטעי קוד או סקריפטים זדוניים
-  });
+  const sanitizeError = sanitizeBody(req);
+  if (sanitizeError) {
+    return res.status(sanitizeError.statusCode).json({
+      message: sanitizeError.message,
+    });
+  }
 
   const { error } = loginValitation.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
