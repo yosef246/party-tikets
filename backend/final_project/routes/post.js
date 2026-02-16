@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Post, ClickView, Purchases } from "../models/post.js";
 import User from "../models/user.js";
 import Tag from "../models/tag.js";
-import sanitizeBody from "../utils/sanitize.js";
+import sanitizeBody from "../../utils/sanitize.js";
 import {
   createPostValitation,
   updatePostValitation,
