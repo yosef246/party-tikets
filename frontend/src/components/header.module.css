@@ -143,18 +143,13 @@
   flex: 1;
 }
 
-
 /* ============================= */
 /* 💬 Tooltip - הסבר מרחף */
 /* ============================= */
-.menuItem {
-  position: relative;
-}
-
 .menuItem[data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
-  right: 120%; /* שינוי מ-left ל-right! */
+  right: 120%;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.9);
@@ -165,32 +160,13 @@
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease, right 0.3s ease; /* שינוי מ-left ל-right */
+  transition: opacity 0.3s ease, right 0.3s ease;
   z-index: 1001;
 }
 
-.menuItem[data-tooltip]::after {
-  content: '';
-  position: absolute;
-  right: 110%; /* שינוי מ-left ל-right! */
-  top: 50%;
-  transform: translateY(-50%);
-  border: 6px solid transparent;
-  border-right-color: rgba(0, 0, 0, 0.9); /* שינוי מ-border-left-color */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, right 0.3s ease; /* שינוי מ-left ל-right */
-  z-index: 1001;
-}
-
-.menuItem[data-tooltip]:hover::before,
-.menuItem[data-tooltip]:hover::after {
+.menuItem[data-tooltip]:hover::before {
   opacity: 1;
-  right: 115%; /* שינוי מ-left ל-right! */
-}
-
-.menuItem[data-tooltip]:hover::after {
-  right: 105%; /* שינוי מ-left ל-right! */
+  right: 115%;
 }
 
 /* ============================= */
