@@ -93,7 +93,7 @@
 /* כפתור 1 - שמאל */
 .toggle.open button:nth-child(1) {
   opacity: 1;
-  transform: translate(100px, 100px) translateX(-90px) scale(1); 
+  transform: translate(100px, 100px) translateX(-100px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.1s;
 }
@@ -101,7 +101,7 @@
 /* כפתור 2 - למעלה */
 .toggle.open button:nth-child(2) {
   opacity: 1;
-  transform: translate(100px, 100px) translateY(-90px) scale(1); 
+  transform: translate(100px, 100px) translateY(-100px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.2s;
 }
@@ -109,7 +109,7 @@
 /* כפתור 3 - אלכסון */
 .toggle.open button:nth-child(3) {
   opacity: 1;
-  transform: translate(100px, 100px) translate(-65px, -65px) scale(1); 
+  transform: translate(100px, 100px) translate(-75px, -75px) scale(1); 
   pointer-events: auto;
   transition-delay: 0.3s;
 }
@@ -117,17 +117,17 @@
 /* hover על הכפתורים */
 .toggle.open button:nth-child(1):hover {
   background: #125aa2;
-  transform: translate(100px, 100px) translateX(-90px) scale(1.15);
+  transform: translate(100px, 100px) translateX(-100px) scale(1.15);
 }
 
 .toggle.open button:nth-child(2):hover {
   background: #125aa2;
-  transform: translate(100px, 100px) translateY(-90px) scale(1.15);
+  transform: translate(100px, 100px) translateY(-100px) scale(1.15);
 }
 
 .toggle.open button:nth-child(3):hover {
   background: #125aa2;
-  transform: translate(100px, 100px) translate(-65px, -65px) scale(1.15);
+  transform: translate(100px, 100px) translate(-75px, -75px) scale(1.15);
 }
 
 /* עיצוב הלינקים */
@@ -228,6 +228,10 @@
     height: 50px;
     font-size: 20px;
     transform: translate(60px, 60px);
+  }
+  
+  .mainbutton:hover {
+    transform: translate(60px, 60px) scale(1.1);
   }
   
   .mainbutton.active {
