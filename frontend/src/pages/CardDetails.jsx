@@ -6,11 +6,20 @@ import Loader from "../components/Loader";
 export default function CardDetails() {
   const { id } = useParams();
   const [card, setCard] = useState();
+  const [message, setMessage] = useState("");
   const [refId] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     return params.get("ref");
   });
   const [currentUserId, setCurrentUserId] = useState(null);
+
+  // ✅ הודעה נעלמת אחרי 3 שניות
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => setMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   // בדיקה האם יש למשתמש שנכנס לפוסט טוקאן
   useEffect(() => {
@@ -45,7 +54,7 @@ export default function CardDetails() {
         setCard(data);
       } catch (error) {
         console.error("Error during getting:", error);
-        alert(error.message);
+        setMessage(error.message);
       }
     }
 
@@ -70,11 +79,11 @@ export default function CardDetails() {
         throw new Error(data.message || "Error purchasing ticket");
       }
 
-      alert("רכישה בוצעה בהצלחה !");
+      setMessage("רכישה בוצעה בהצלחה !");
       console.log(data);
     } catch (error) {
       console.error("Error during getting:", error);
-      alert(error.message);
+      setMessage(error.message);
     }
   }
 
@@ -98,7 +107,6 @@ export default function CardDetails() {
           </p>
           <p>
             <strong>📅 תאריך:</strong>
-            {""}
             {new Date(card.date).toLocaleDateString("he-IL")}
           </p>
           <p>
@@ -109,14 +117,14 @@ export default function CardDetails() {
             className={styles.cardButton}
             onClick={() => {
               if (!currentUserId) {
-                alert("התחבר כדי להעתיק קישור ולהרוויח משיתופים");
+                setMessage("התחבר כדי להעתיק קישור ולהרוויח משיתופים");
                 return;
               }
 
               navigator.clipboard.writeText(
                 `https://party-tikets.onrender.com/card-details/${id}?ref=${currentUserId}`
               );
-              alert("קישור הועתק ✔");
+              setMessage("קישור הועתק ✔");
             }}
           >
             העתק קישור
