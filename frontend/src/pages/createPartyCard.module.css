@@ -4,7 +4,7 @@
   position: relative;
   color: aliceblue;
   text-align: right;
-  padding: 2rem; /* הסרתי את ה-padding-bottom */
+  padding: 2rem; 
   direction: rtl;
 }
 
@@ -12,7 +12,7 @@
 /* 🎯 תפריט מעגלי צף */
 /* ============================= */
 .menu {
-  position: fixed; /* שינוי מ-relative ל-fixed */
+  position: fixed; 
   right: 20px;
   bottom: 20px;
   width: 280px;
@@ -20,10 +20,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* הוספתי z-index */
+  z-index: 1000; 
 }
 
-/* הכפתור המרכזי */
 /* הכפתור המרכזי */
 .mainbutton {
   position: absolute;
@@ -41,9 +40,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 10;
-  
-  /* הזזה חזקה ימינה למטה */
-  transform: translate(100px, 100px); /* ימינה 100px, למטה 100px */
+  transform: translate(100px, 100px); 
 }
 
 .mainbutton:hover {
@@ -86,8 +83,7 @@
   opacity: 0;
   transform: translate(0, 0) scale(0);
   pointer-events: none;
-  
- transition: all 0.3s ease-out;
+  transition: all 0.6s ease-out;
 }
 
 /* כפתור 1 - שמאל */
