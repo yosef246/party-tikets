@@ -7,13 +7,6 @@
   padding-top: 2rem;
 }
 
-.loading {
-  font-size: 1.2rem;
-  color: #0c0101;
-  text-align: center;
-  margin: 20px 0;
-}
-
 .cardDetails {
   max-width: 800px;
   margin: 2rem auto;
@@ -68,6 +61,11 @@
   margin-left: 20px;
 }
 
+.cardButton:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
 /* 📱 טלפון - עד 495px */
 @media (max-width: 495px) {
    .middle {
@@ -86,11 +84,6 @@
 
   .cardContent p {
     font-size: 0.95rem;
-  }
-
-  .middle {
-    height: auto;
-    padding-top: 1rem;
   }
 
 }

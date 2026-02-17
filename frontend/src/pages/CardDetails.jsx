@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-
+import { useEffect, useState } from "react";
 import styles from "./CardDetails.module.css";
 import Loader from "../components/Loader";
 
@@ -100,7 +98,8 @@ export default function CardDetails() {
           </p>
           <p>
             <strong>📅 תאריך:</strong>
-            {new Date(card.date).toLocaleDateString()}
+            {""}
+            {new Date(card.date).toLocaleDateString("he-IL")}
           </p>
           <p>
             <strong>📝 תיאור:</strong> {card.body}

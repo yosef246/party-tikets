@@ -42,8 +42,8 @@ export default function RegisterPage() {
       setName("");
       setEmail("");
       setPassword("");
-      navigate("/party-cards");
       sendWelcomeEmail(name, email); // שליחת מייל לאחר הירשמות
+      navigate("/party-cards");
     } catch (error) {
       console.error("Error during registration:", error);
       alert(error.message);
