@@ -83,7 +83,7 @@
   opacity: 0;
   transform: translate(0, 0) scale(0);
   pointer-events: none;
-  transition: all 0.3s ease-out;
+  transition: all 0.6s ease-out;
 }
 
 /* כפתור 1 - שמאל */
@@ -91,7 +91,7 @@
   opacity: 1;
   transform: translate(100px, 100px) translateX(-100px) scale(1); 
   pointer-events: auto;
-  transition-delay: 0.2s;
+  transition-delay: 0.1s;
 }
 
 /* כפתור 2 - למעלה */
@@ -99,7 +99,7 @@
   opacity: 1;
   transform: translate(100px, 100px) translateY(-100px) scale(1); 
   pointer-events: auto;
-  transition-delay: 0.4s;
+  transition-delay: 0.2s;
 }
 
 /* כפתור 3 - אלכסון */
@@ -107,7 +107,7 @@
   opacity: 1;
   transform: translate(100px, 100px) translate(-75px, -75px) scale(1); 
   pointer-events: auto;
-  transition-delay: 0.6s;
+  transition-delay: 0.3s;
 }
 
 /* hover על הכפתורים */
@@ -237,18 +237,22 @@
   .toggle button {
     width: 55px;
     height: 55px;
+    transition: all 0.3s ease-out;
   }
 
   .toggle.open button:nth-child(1) {
     transform: translate(60px, 60px) translateX(-77px) scale(1);
+    transition-delay: 0.05s; 
   }
 
   .toggle.open button:nth-child(2) {
     transform: translate(60px, 60px) translateY(-77px) scale(1);
+    transition-delay: 0.1s; 
   }
 
   .toggle.open button:nth-child(3) {
     transform: translate(60px, 60px) translate(-57px, -57px) scale(1);
+    transition-delay: 0.15s; 
   }
 
   .signup {
