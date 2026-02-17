@@ -113,6 +113,8 @@ export default function CardDetails() {
             <strong>📝 תיאור:</strong> {card.body}
           </p>
 
+          {message && <p className={styles.message}>{message}</p>}
+
           <button
             className={styles.cardButton}
             onClick={() => {

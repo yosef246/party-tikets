@@ -6,14 +6,14 @@ import { Tickets, User, CreditCard, Menu, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 
 export default function CreatePartyCardPage() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, loading } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [price, setPrice] = useState("");
   const [body, setBody] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingCard, setLoadingCard] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export default function CreatePartyCardPage() {
 
   async function handleSubmit(e) {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
-    setLoading(true);
+    setLoadingCard(true);
     try {
       const response = await fetch("/api/post/", {
         method: "POST",
@@ -56,7 +56,7 @@ export default function CreatePartyCardPage() {
       console.error("Error during logined:", error);
       alert(error.message);
     } finally {
-      setLoading(false);
+      setLoadingCard(false);
     }
   }
 
@@ -116,7 +116,7 @@ export default function CreatePartyCardPage() {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
-          <button type="submit">{loading ? "שולח.." : "צור כרטיס"}</button>
+          <button type="submit">{loadingCard ? "שולח.." : "צור כרטיס"}</button>
         </form>
       </div>
 
