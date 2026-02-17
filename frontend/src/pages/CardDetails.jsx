@@ -16,7 +16,7 @@ export default function CardDetails() {
   // ✅ הודעה נעלמת אחרי 3 שניות
   useEffect(() => {
     if (message) {
-      const timer = setTimeout(() => setMessage(""), 3000);
+      const timer = setTimeout(() => setMessage(""), 1500);
       return () => clearTimeout(timer);
     }
   }, [message]);

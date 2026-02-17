@@ -85,7 +85,9 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     const ref = req.body.ref;
 
     if (!ref) {
-      return res.status(400).send({ message: "you dont have Ref" });
+      return res
+        .status(400)
+        .send({ message: "אתה לא יכול לקנות רק המשתמשים בקישור" });
     }
 
     const purchases = await Purchases.create({
