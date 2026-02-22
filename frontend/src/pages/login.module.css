@@ -7,17 +7,6 @@
   padding-top: 2rem;
 }
 
-.message {
-  background: rgba(255, 255, 255, 0.1);
-  color: #61dafb;
-  padding: 10px 16px;
-  border-radius: 8px;
-  margin: 10px 0;
-  font-size: 1rem;
-  text-align: center;
-  border: 1px solid rgba(97, 218, 251, 0.3);
-}
-
 .loadingWrapper {
   display: flex;
   flex-direction: column;

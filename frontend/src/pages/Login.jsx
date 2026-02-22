@@ -1,13 +1,11 @@
 import styles from "./login.module.css";
 import { useState, useContext } from "react";
-import Message from "../components/message";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Loader from "../components/Loader";
 
 export default function LoginPage() {
-  const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -39,14 +37,14 @@ export default function LoginPage() {
       }
 
       console.log("Login successful:", data);
-      setMessage("התחברת בהצלחה !");
+      alert("נכנסת בהצלחה!");
       setEmail("");
       setPassword("");
       setIsAuthenticated(true);
-      setTimeout(() => navigate("/party-cards"), 1500); // ✅ מחכה שההודעה תוצג
+      navigate("/party-cards");
     } catch (error) {
       console.error("Error during logined:", error);
-      setMessage(error.message);
+      alert(error.message);
     } finally {
       setLoading(false);
     }
@@ -87,11 +85,6 @@ export default function LoginPage() {
             הרשמה עכשיו
           </Link>
         </form>
-        <Message
-          message={message}
-          setMessage={setMessage}
-          className={styles.message}
-        />
       </div>
     </div>
   );

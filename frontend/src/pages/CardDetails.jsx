@@ -156,11 +156,7 @@ export default function CardDetails() {
               <strong>📝 תיאור:</strong> {card.body}
             </p>
 
-            <Message
-              message={message}
-              setMessage={setMessage}
-              className={styles.message}
-            />
+            <Message message={message} setMessage={setMessage} />
 
             <button
               className={styles.cardButton}

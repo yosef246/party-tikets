@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import styles from ".message.module.css";
 
-export default function Message({ message, setMessage, className }) {
+export default function Message({ message, setMessage }) {
   // ✅ הודעה נעלמת אחרי 3 שניות
   useEffect(() => {
     if (message) {
@@ -11,5 +12,5 @@ export default function Message({ message, setMessage, className }) {
 
   if (!message) return null;
 
-  return <p className={className}>{message}</p>;
+  return <p className={styles.message}>{message}</p>;
 }

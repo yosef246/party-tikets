@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import Message from "../components/message";
 import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
 
 export default function AllCards() {
-  const [message, setMessage] = useState("");
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
@@ -27,14 +25,14 @@ export default function AllCards() {
         const data = await res.json();
 
         if (!data.user.hasPaid) {
-          setMessage("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
+          alert("אין לך הרשאות , עליך לשלם בכדי להמשיך לדף הבא");
           navigate("/party-cards");
           return;
         }
 
         console.log("המשתמש מחובר:", data);
       } catch (err) {
-        setMessage("עליך להתחבר כדי לגשת לדף");
+        console.log("עליך להתחבר כדי לגשת לדף");
         navigate("/login");
       } finally {
         setIsCheckingAuth(false); // הבדיקה הסתיימה
@@ -91,11 +89,6 @@ export default function AllCards() {
           />
         ))}
       </div>
-      <Message
-        message={message}
-        setMessage={setMessage}
-        className={styles.message}
-      />
     </div>
   ) : (
     <p className={styles.loading}>לא נמצאו כרטיסים</p>
