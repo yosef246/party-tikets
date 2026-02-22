@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import styles from ".message.module.css";
+import styles from "./message.module.css";
 
 export default function Message({ message, setMessage }) {
   // ✅ הודעה נעלמת אחרי 3 שניות
