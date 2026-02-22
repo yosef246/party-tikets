@@ -90,12 +90,15 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
         .send({ message: "אתה לא יכול לקנות רק המשתמשים בקישור" });
     }
 
-    const purchases = await Purchases.create({
-      post_id: post._id,
-      referrer_username: ref, // מי פירסם את הכרטיס
-      Purchaser_id: PurchaserId, // מזהה את הקונה של הכרטיס כדי לדעת מי קנה וכמה
-      price: post.price,
-    });
+    let purchases;
+    if (ref && PurchaserId && ref !== PurchaserId) {
+      purchases = await Purchases.create({
+        post_id: post._id,
+        referrer_username: ref, // מי פירסם את הכרטיס
+        Purchaser_id: PurchaserId, // מזהה את הקונה של הכרטיס כדי לדעת מי קנה וכמה
+        price: post.price,
+      });
+    }
 
     res.status(200).send({ message: "Purchase saved", data: purchases });
   } catch (error) {
