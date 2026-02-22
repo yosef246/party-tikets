@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Message from "../components/message";
 import styles from "./myCardItem.module.css";
 import EditPostForm from "./editFormData";
 import { Link } from "react-router-dom";
 
 export default function MyCardItem(props) {
+  const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
   const [postData, setPostData] = useState(props);
   const { id, onDelete } = props;
@@ -21,10 +23,10 @@ export default function MyCardItem(props) {
         throw new Error(data.message || "Failed to delete post");
       }
 
-      alert("הכרטיס נמחק בהצלחה");
+      setMessage("הכרטיס נמחק בהצלחה");
       onDelete();
     } catch (error) {
-      alert("משהו השתבש");
+      setMessage("משהו השתבש");
       console.error("Error deleting post:", error);
     }
   }
@@ -72,6 +74,11 @@ export default function MyCardItem(props) {
               לשנות
             </button>
           </div>
+          <Message
+            message={message}
+            setMessage={setMessage}
+            className={styles.message}
+          />
         </>
       )}
     </div>

@@ -12,26 +12,29 @@ import CardDetails from "./pages/CardDetails";
 import PaymentPage from "./pages/PaymentPage";
 import MyProfile from "./pages/MyProfile";
 import { AuthProvider } from "./context/AuthContext";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
     <>
-      <AuthProvider>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/party-cards" element={<CreatePartyCard />} />
-          <Route path="/all-cards" element={<AllCards />} />
-          <Route path="/my-cards" element={<MyCards />} />
-          <Route path="/card-details/:id" element={<CardDetails />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/profile" element={<MyProfile />} />
-        </Routes>
-      </AuthProvider>
+      <HelmetProvider>
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/party-cards" element={<CreatePartyCard />} />
+            <Route path="/all-cards" element={<AllCards />} />
+            <Route path="/my-cards" element={<MyCards />} />
+            <Route path="/card-details/:id" element={<CardDetails />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/profile" element={<MyProfile />} />
+          </Routes>
+        </AuthProvider>
+      </HelmetProvider>
     </>
   );
 }

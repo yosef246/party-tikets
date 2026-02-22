@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Message from "../components/message";
 import styles from "./CardDetails.module.css";
 import Loader from "../components/Loader";
+import { Helmet } from "react-helmet-async";
 
 export default function CardDetails() {
   const { id } = useParams();
@@ -12,14 +14,6 @@ export default function CardDetails() {
     return params.get("ref");
   });
   const [currentUserId, setCurrentUserId] = useState(null);
-
-  // ✅ הודעה נעלמת אחרי 3 שניות
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => setMessage(""), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
 
   // בדיקה האם יש למשתמש שנכנס לפוסט טוקאן
   useEffect(() => {
@@ -92,54 +86,108 @@ export default function CardDetails() {
   }
 
   return (
-    <div className={styles.middle}>
-      <div className={styles.cardDetails}>
-        <div className={styles.cardImage}>
-          <img src={card.imageUrl} alt={card.title} />
-        </div>
-        <div className={styles.cardContent}>
-          <h2>{card.title}</h2>
-          <p>
-            <strong>📍 מיקום:</strong> {card.location}
-          </p>
-          <p>
-            <strong>מחיר כרטיס:</strong> ₪{card.price}
-          </p>
-          <p>
-            <strong>📅 תאריך:</strong>
-            {new Date(card.date).toLocaleDateString("he-IL")}
-          </p>
-          <p>
-            <strong>📝 תיאור:</strong> {card.body}
-          </p>
+    <>
+      {/* ✅ SEO דינמי לכל כרטיס */}
+      <Helmet>
+        <title>{card.title} - Party Tickets</title>
+        <meta name="description" content={card.body} />
+        <link
+          rel="canonical"
+          href={`https://party-tikets.onrender.com/card-details/${id}`}
+        />
 
-          {message && <p className={styles.message}>{message}</p>}
+        {/* Open Graph דינמי */}
+        <meta property="og:title" content={card.title} />
+        <meta property="og:description" content={card.body} />
+        <meta property="og:image" content={card.imageUrl} />
+        <meta
+          property="og:url"
+          content={`https://party-tikets.onrender.com/card-details/${id}`}
+        />
+        <meta property="og:type" content="article" />
 
-          <button
-            className={styles.cardButton}
-            onClick={() => {
-              if (!currentUserId) {
-                setMessage("התחבר כדי להעתיק קישור ולהרוויח משיתופים");
-                return;
-              }
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={card.title} />
+        <meta name="twitter:description" content={card.body} />
+        <meta name="twitter:image" content={card.imageUrl} />
 
-              navigator.clipboard.writeText(
-                `https://party-tikets.onrender.com/card-details/${id}?ref=${currentUserId}`
-              );
-              setMessage("קישור הועתק ✔");
-            }}
-          >
-            העתק קישור
-          </button>
+        {/* ✅ Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: card.title,
+            description: card.body,
+            image: card.imageUrl,
+            location: {
+              "@type": "Place",
+              name: card.location,
+            },
+            offers: {
+              "@type": "Offer",
+              price: card.price,
+              priceCurrency: "ILS",
+              availability: "https://schema.org/InStock",
+            },
+            startDate: card.date,
+          })}
+        </script>
+      </Helmet>
 
-          <button
-            className={styles.cardButton}
-            onClick={() => handlePurchase(id, refId)}
-          >
-            לחץ לתשלום
-          </button>
+      <div className={styles.middle}>
+        <div className={styles.cardDetails}>
+          <div className={styles.cardImage}>
+            <img src={card.imageUrl} alt={card.title} />
+          </div>
+          <div className={styles.cardContent}>
+            <h2>{card.title}</h2>
+            <p>
+              <strong>📍 מיקום:</strong> {card.location}
+            </p>
+            <p>
+              <strong>מחיר כרטיס:</strong> ₪{card.price}
+            </p>
+            <p>
+              <strong>📅 תאריך:</strong>
+              {new Date(card.date).toLocaleDateString("he-IL")}
+            </p>
+            <p>
+              <strong>📝 תיאור:</strong> {card.body}
+            </p>
+
+            <Message
+              message={message}
+              setMessage={setMessage}
+              className={styles.message}
+            />
+
+            <button
+              className={styles.cardButton}
+              onClick={() => {
+                if (!currentUserId) {
+                  setMessage("התחבר כדי להעתיק קישור ולהרוויח משיתופים");
+                  return;
+                }
+
+                navigator.clipboard.writeText(
+                  `https://party-tikets.onrender.com/card-details/${id}?ref=${currentUserId}`
+                );
+                setMessage("קישור הועתק ✔");
+              }}
+            >
+              העתק קישור
+            </button>
+
+            <button
+              className={styles.cardButton}
+              onClick={() => handlePurchase(id, refId)}
+            >
+              לחץ לתשלום
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

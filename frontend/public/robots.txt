@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /profile
+Disallow: /party-cards
+Disallow: /my-cards
+
+Sitemap: https://party-tikets.onrender.com/sitemap.xml
