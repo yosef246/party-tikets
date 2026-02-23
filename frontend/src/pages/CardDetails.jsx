@@ -95,8 +95,6 @@ export default function CardDetails() {
           rel="canonical"
           href={`https://party-tikets.onrender.com/card-details/${id}`}
         />
-
-        {/* Open Graph דינמי */}
         <meta property="og:title" content={card.title} />
         <meta property="og:description" content={card.body} />
         <meta property="og:image" content={card.imageUrl} />
@@ -105,14 +103,14 @@ export default function CardDetails() {
           content={`https://party-tikets.onrender.com/card-details/${id}`}
         />
         <meta property="og:type" content="article" />
-
-        {/* Twitter Card */}
+        <meta property="og:site_name" content="Party Tickets" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={card.title} />
         <meta name="twitter:description" content={card.body} />
         <meta name="twitter:image" content={card.imageUrl} />
+        <meta name="language" content="Hebrew" />
 
-        {/* ✅ Structured Data */}
+        {/* ✅ Event Schema */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -120,6 +118,7 @@ export default function CardDetails() {
             name: card.title,
             description: card.body,
             image: card.imageUrl,
+            startDate: card.date,
             location: {
               "@type": "Place",
               name: card.location,
@@ -129,8 +128,47 @@ export default function CardDetails() {
               price: card.price,
               priceCurrency: "ILS",
               availability: "https://schema.org/InStock",
+              url: `https://party-tikets.onrender.com/card-details/${id}`,
             },
-            startDate: card.date,
+            organizer: {
+              "@type": "Organization",
+              name: "Party Tickets",
+              url: "https://party-tikets.onrender.com",
+            },
+          })}
+        </script>
+
+        {/* ✅ FAQ Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: `איך קונים כרטיס ל${card.title}?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `לחץ על כפתור לחץ לתשלום ורכוש את הכרטיס ל${card.title} במחיר ₪${card.price}.`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: `איפה מתקיים האירוע ${card.title}?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `האירוע מתקיים ב${card.location}.`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: "איך מרוויחים עמלה על כרטיסים?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "העתק את הקישור האישי שלך ושתף אותו. על כל רכישה דרך הקישור שלך תקבל עמלה.",
+                },
+              },
+            ],
           })}
         </script>
       </Helmet>

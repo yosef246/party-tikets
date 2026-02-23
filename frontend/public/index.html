@@ -21,6 +21,7 @@
     <meta name="creator" content="Yosef Palas" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Yosef Palas" />
+    <meta name="language" content="Hebrew" />
 
     <!-- Open Graph (שיתוף בסושיאל) -->
     <meta property="og:title" content="Party Tickets - כרטיסים למסיבות" />
@@ -29,6 +30,7 @@
     <meta property="og:url" content="https://party-tikets.onrender.com" />
     <meta property="og:image" content="https://party-tikets.onrender.com/og-image.jpg" />
     <meta property="og:locale" content="he_IL" />
+    <meta property="og:site_name" content="Party Tickets" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -36,6 +38,71 @@
     <meta name="twitter:description" content="מצא וקנה כרטיסים למסיבות הכי שוות!" />
     <meta name="twitter:image" content="https://party-tikets.onrender.com/og-image.jpg" />
 
+     <!-- ✅ AEO - Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Party Tickets",
+      "url": "https://party-tikets.onrender.com",
+      "description": "פלטפורמה לרכישת כרטיסים למסיבות ואירועים בישראל",
+      "founder": "Yosef Palas",
+      "foundingLocation": "Israel"
+    }
+    </script>
+
+    <!-- ✅ AEO - WebSite Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Party Tickets",
+      "url": "https://party-tikets.onrender.com",
+      "description": "מצא וקנה כרטיסים למסיבות הכי שוות בישראל",
+      "inLanguage": "he",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://party-tikets.onrender.com/party-cards?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- ✅ AEO - FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "איך קונים כרטיס למסיבה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "בוחרים אירוע מהרשימה, לוחצים על לחץ לתשלום ומשלימים את הרכישה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "איך מרוויחים עמלה על כרטיסים?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "נרשמים, מעתיקים קישור אישי לכרטיס ומשתפים אותו. על כל רכישה דרך הקישור שלך תקבל עמלה בהעברה בנקאית."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "האם צריך ניסיון כדי להצטרף?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא! המערכת פתוחה לכולם ללא ניסיון, ללא ראיון, ללא קשר לגיל או מיקום."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="canonical" href="https://party-tikets.onrender.com" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 

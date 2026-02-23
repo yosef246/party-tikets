@@ -35,6 +35,58 @@ export default function HomePage() {
           name="twitter:description"
           content="שתף קישורים לאירועים והרווח עמלה!"
         />
+        <meta name="language" content="Hebrew" />
+
+        {/* ✅ WebSite Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Party Tickets",
+            url: "https://party-tikets.onrender.com",
+            description: "פלטפורמה לרכישת כרטיסים למסיבות ואירועים בישראל",
+            potentialAction: {
+              "@type": "SearchAction",
+              target:
+                "https://party-tikets.onrender.com/party-cards?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          })}
+        </script>
+
+        {/* ✅ FAQ Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "איך מרוויחים עמלה על כרטיסים?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "נרשמים, בוחרים מסיבה, משתפים קישור אישי ומקבלים עמלה על כל כרטיס שנמכר דרך הקישור שלך.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "האם צריך ניסיון כדי להצטרף?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "לא! המערכת פתוחה לכולם ללא ניסיון, ללא ראיון, ללא קשר לגיל או מיקום.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "איך מקבלים את התשלום?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "התשלום מתבצע בהעברה בנקאית ישירה לחשבון שלך.",
+                },
+              },
+            ],
+          })}
+        </script>
       </Helmet>
 
       <div className={styles.container}>

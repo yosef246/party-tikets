@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styles from "./message.module.css";
 
 export default function Message({ message, setMessage }) {
-  // ✅ הודעה נעלמת אחרי 3 שניות
+  // ✅ הודעה נעלמת אחרי 1.5 שניות
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => setMessage(""), 1500);
