@@ -137,40 +137,6 @@ export default function CardDetails() {
             },
           })}
         </script>
-
-        {/* ✅ FAQ Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: `איך קונים כרטיס ל${card.title}?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `לחץ על כפתור לחץ לתשלום ורכוש את הכרטיס ל${card.title} במחיר ₪${card.price}.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: `איפה מתקיים האירוע ${card.title}?`,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: `האירוע מתקיים ב${card.location}.`,
-                },
-              },
-              {
-                "@type": "Question",
-                name: "איך מרוויחים עמלה על כרטיסים?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "העתק את הקישור האישי שלך ושתף אותו. על כל רכישה דרך הקישור שלך תקבל עמלה.",
-                },
-              },
-            ],
-          })}
-        </script>
       </Helmet>
 
       <div className={styles.middle}>

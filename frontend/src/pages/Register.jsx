@@ -79,40 +79,6 @@ export default function RegisterPage() {
           content="https://party-tikets.onrender.com/register"
         />
         <meta property="og:type" content="website" />
-
-        {/* ✅ FAQ Schema */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "איך נרשמים למערכת Party Tickets?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "מזינים שם משתמש, אימייל וסיסמה ולוחצים על הרשמה. התהליך לוקח פחות מדקה.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "האם ההרשמה בחינם?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "כן! ההרשמה חינמית לחלוטין ופתוחה לכולם ללא ניסיון או ראיון.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "מה מקבלים אחרי ההרשמה?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "גישה מלאה למערכת, קישור אישי לכל כרטיס ועמלה על כל רכישה דרך הקישור שלך.",
-                },
-              },
-            ],
-          })}
-        </script>
       </Helmet>
 
       <div className={styles.middle}>
