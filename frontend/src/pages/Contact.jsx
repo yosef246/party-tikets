@@ -1,63 +1,133 @@
 import styles from "./contact.module.css";
+import { Helmet } from "react-helmet-async";
 
 export default function ContactPage() {
   return (
-    <div className={styles.middle}>
-      <h1>נשמח לשמוע ממך</h1>
+    <>
+      <Helmet>
+        <title>צרו קשר - Party Tickets</title>
+        <meta
+          name="description"
+          content="צרו איתנו קשר בכל שאלה על כרטיסים למסיבות, שיתופי פעולה או עמלות. נשמח לעזור!"
+        />
+        <link
+          rel="canonical"
+          href="https://party-tikets.onrender.com/contact"
+        />
+        <meta property="og:title" content="צרו קשר - Party Tickets" />
+        <meta
+          property="og:description"
+          content="צרו איתנו קשר בכל שאלה על כרטיסים למסיבות ושיתופי פעולה."
+        />
+        <meta
+          property="og:url"
+          content="https://party-tikets.onrender.com/contact"
+        />
+        <meta property="og:type" content="website" />
 
-      <section className={styles.section1}>
-        <h2>? יש לך שאלה</h2>
-        <p>
-          אנחנו כאן כדי לעזור! בין אם אתה יחצן מתחיל, שותף פוטנציאלי או פשוט
-          סקרן לדעת עוד – נשמח לתת מענה.
-        </p>
-      </section>
+        {/* ✅ ContactPage Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "צרו קשר - Party Tickets",
+            url: "https://party-tikets.onrender.com/contact",
+            description: "דף יצירת קשר של Party Tickets",
+            contactOption: {
+              "@type": "ContactPoint",
+              telephone: "050-123-4567",
+              email: "support@yourpartysite.co.il",
+              contactType: "customer support",
+              hoursAvailable: "Mo-Fr 09:00-18:00",
+              availableLanguage: "Hebrew",
+            },
+          })}
+        </script>
 
-      <hr className={styles.sectiondivider} />
+        {/* ✅ FAQ Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "איך אפשר ליצור קשר עם Party Tickets?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "ניתן לפנות במייל support@yourpartysite.co.il או בטלפון 050-123-4567 בימים א'-ה' בין 9:00-18:00.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "האם אפשר לשתף פעולה עם Party Tickets?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "כן! בעלי מועדונים ומפיקי מסיבות מוזמנים לפנות אלינו לשיתופי פעולה.",
+                },
+              },
+            ],
+          })}
+        </script>
+      </Helmet>
 
-      <section className={styles.section2}>
-        <h2>? איך אפשר לפנות אלינו</h2>
-        <ul>
-          <li>
-            <strong>מייל:</strong> support@yourpartysite.co.il
-          </li>
-          <li>
-            <strong>טלפון:</strong> 050-123-4567 (ימים א'-ה', 9:00-18:00)
-          </li>
-          <li>
-            <strong>אינסטגרם:</strong>{" "}
-            <a
-              href="https://instagram.com/yourpartysite"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @yourpartysite
-            </a>
-          </li>
-        </ul>
-      </section>
+      <div className={styles.middle}>
+        <h1>נשמח לשמוע ממך</h1>
 
-      <hr className={styles.sectiondivider} />
+        <section className={styles.section1}>
+          <h2>? יש לך שאלה</h2>
+          <p>
+            אנחנו כאן כדי לעזור! בין אם אתה יחצן מתחיל, שותף פוטנציאלי או פשוט
+            סקרן לדעת עוד – נשמח לתת מענה.
+          </p>
+        </section>
 
-      <section className={styles.section3}>
-        <h2>? רוצה לשתף אותנו</h2>
-        <p>
-          אם אתה בעל מועדון, מפיק מסיבות, או יש לך רעיון יצירתי לשיתוף פעולה –
-          דבר איתנו ונשמח לשמוע.
-        </p>
-      </section>
+        <hr className={styles.sectiondivider} />
 
-      <hr className={styles.sectiondivider} />
+        <section className={styles.section2}>
+          <h2>? איך אפשר לפנות אלינו</h2>
+          <ul>
+            <li>
+              <strong>מייל:</strong> support@yourpartysite.co.il
+            </li>
+            <li>
+              <strong>טלפון:</strong> 050-123-4567 (ימים א'-ה', 9:00-18:00)
+            </li>
+            <li>
+              <strong>אינסטגרם:</strong>{" "}
+              <a
+                href="https://instagram.com/yourpartysite"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                @yourpartysite
+              </a>
+            </li>
+          </ul>
+        </section>
 
-      <div className={styles.cta}>
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=support@yourpartysite.co.il"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          שלח לנו מייל
-        </a>
+        <hr className={styles.sectiondivider} />
+
+        <section className={styles.section3}>
+          <h2>? רוצה לשתף אותנו</h2>
+          <p>
+            אם אתה בעל מועדון, מפיק מסיבות, או יש לך רעיון יצירתי לשיתוף פעולה –
+            דבר איתנו ונשמח לשמוע.
+          </p>
+        </section>
+
+        <hr className={styles.sectiondivider} />
+
+        <div className={styles.cta}>
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@yourpartysite.co.il"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            שלח לנו מייל
+          </a>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
