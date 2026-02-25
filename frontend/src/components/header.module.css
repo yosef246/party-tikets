@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .header {
   background-color: #01052a;
   padding: 20px;
@@ -62,13 +64,17 @@
   color: #61dafb;
   text-decoration: none;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 900;
   transition: color 0.3s;
   position: absolute;  
   left: 40px;
   top: 30px;
   z-index: 1000;
+  letter-spacing: -1px;
+  display: inline-block;
+  font-family: 'Pacifico', cursive;
 }
+
 
 .icon:hover {
   color: #edeff2;
@@ -145,45 +151,6 @@
 
 
 /* ============================= */
-/* 💻 טלפון - עד 495 */
-/* ============================= */
-@media (max-width: 495px) {
-  .header{
-    padding: 30px 20px;
-    min-height: 20px; 
-    position: relative;
-  }
-
-  .icon {
-    font-size: 1.5rem;  
-    left: 60px; 
-    top: 33px;
-  }
-
-  .navList {
-    display: none;
-  }
-
-  .hamburger {
-    display: block;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 1000;
-  }
-  
-  .mobileMenu {
-    width: 40px;
-  }
-  
-  .menuItem {
-    font-size: 1rem;
-  }
-}
-
-/* ============================= */
 /* 💻 טאבלט - עד 1398px */
 /* ============================= */
 @media (max-width: 1398px) {
@@ -208,5 +175,48 @@
     font-size: 1.8rem;
     margin-left: -50px;
     transform: translateY(-10px);
+  }
+}
+
+/* ============================= */
+/* 💻 טלפון - עד 495px */
+/* ============================= */
+@media (max-width: 495px) {
+  .header {
+    padding: 30px 20px;
+    min-height: 20px;
+    position: relative;
+  }
+
+  .icon {
+    font-size: 1.4rem;
+    left: 25px;
+    top: 25px;
+    letter-spacing: -1px;
+    font-family: 'Pacifico', cursive;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .navList {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .mobileMenu {
+    width: 40px;
+  }
+
+  .menuItem {
+    font-size: 1rem;
   }
 }
