@@ -45,6 +45,11 @@ function Header() {
       if (!response.ok) {
         alert(data.message || "שגיאה בהתנתקות");
       } else {
+        // ✅ איפוס צ'אט Tidio
+        if (window.tidioChatApi) {
+          window.tidioChatApi.reset();
+        }
+
         alert(data.message);
         setIsAuthenticated(false);
         navigate("/login");
