@@ -13,8 +13,23 @@ import PaymentPage from "./pages/PaymentPage";
 import MyProfile from "./pages/MyProfile";
 import { AuthProvider } from "./context/AuthContext";
 import { HelmetProvider } from "react-helmet-async";
+import { useEffect } from "react";
 
 function App() {
+  //מאפס את Tidio
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.reload();
+      },
+      5 * 60 * 1000
+    ); // ✅ כל 5 דקות
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <HelmetProvider>
