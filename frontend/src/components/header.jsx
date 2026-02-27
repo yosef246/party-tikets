@@ -45,16 +45,16 @@ function Header() {
       if (!response.ok) {
         alert(data.message || "שגיאה בהתנתקות");
       } else {
-        // ✅ איפוס צ'אט Tidio - מחיקת localStorage
-        Object.keys(localStorage).forEach((key) => {
-          if (key.startsWith("tidio")) {
-            localStorage.removeItem(key);
-          }
-        });
+        // ✅ איפוס מלא
+        localStorage.clear();
+        sessionStorage.clear();
 
         alert(data.message);
         setIsAuthenticated(false);
         navigate("/login");
+
+        // ✅ רענון דף כדי לאפס את Tidio לחלוטין
+        window.location.reload();
       }
     } catch (error) {
       alert(error.message);
