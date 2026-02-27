@@ -103,12 +103,6 @@ export default function ContactPage() {
         </section>
 
         <hr className={styles.sectiondivider} />
-
-        <div className={styles.cta}>
-          <button onClick={() => window.tidioChatApi?.open()}>
-            פתח צ'אט עכשיו 💬
-          </button>
-        </div>
       </div>
     </>
   );
