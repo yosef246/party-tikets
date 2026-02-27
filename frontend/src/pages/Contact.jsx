@@ -86,24 +86,10 @@ export default function ContactPage() {
 
         <section className={styles.section2}>
           <h2>? איך אפשר לפנות אלינו</h2>
-          <ul>
-            <li>
-              <strong>מייל:</strong> support@yourpartysite.co.il
-            </li>
-            <li>
-              <strong>טלפון:</strong> 050-123-4567 (ימים א'-ה', 9:00-18:00)
-            </li>
-            <li>
-              <strong>אינסטגרם:</strong>{" "}
-              <a
-                href="https://instagram.com/yourpartysite"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @yourpartysite
-              </a>
-            </li>
-          </ul>
+          <p>
+            הדרך המהירה ביותר היא דרך הצ'אט שלנו — זמין 24/7 בפינה הימנית
+            התחתונה של המסך 💬
+          </p>
         </section>
 
         <hr className={styles.sectiondivider} />
@@ -112,20 +98,16 @@ export default function ContactPage() {
           <h2>? רוצה לשתף אותנו</h2>
           <p>
             אם אתה בעל מועדון, מפיק מסיבות, או יש לך רעיון יצירתי לשיתוף פעולה –
-            דבר איתנו ונשמח לשמוע.
+            דבר איתנו דרך הצ'אט ונשמח לשמוע.
           </p>
         </section>
 
         <hr className={styles.sectiondivider} />
 
         <div className={styles.cta}>
-          <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@yourpartysite.co.il"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            שלח לנו מייל
-          </a>
+          <button onClick={() => window.tidioChatApi?.open()}>
+            פתח צ'אט עכשיו 💬
+          </button>
         </div>
       </div>
     </>
