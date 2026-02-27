@@ -18,16 +18,11 @@ import { useEffect } from "react";
 function App() {
   //מאפס את Tidio
   useEffect(() => {
-    const interval = setInterval(
-      () => {
-        localStorage.clear();
-        sessionStorage.clear();
-        window.location.reload();
-      },
-      5 * 60 * 1000
-    ); // ✅ כל 5 דקות
-
-    return () => clearInterval(interval);
+    Object.keys(localStorage).forEach((key) => {
+      if (key.toLowerCase().includes("tidio")) {
+        localStorage.removeItem(key);
+      }
+    });
   }, []);
 
   return (
