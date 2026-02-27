@@ -45,11 +45,12 @@ function Header() {
       if (!response.ok) {
         alert(data.message || "שגיאה בהתנתקות");
       } else {
-        // ✅ איפוס צ'אט Tidio
-        if (window.tidioChatApi) {
-          window.tidioChatApi.close();
-          window.tidioChatApi.setVisitorData({ clear: true });
-        }
+        // ✅ איפוס צ'אט Tidio - מחיקת localStorage
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith("tidio")) {
+            localStorage.removeItem(key);
+          }
+        });
 
         alert(data.message);
         setIsAuthenticated(false);
