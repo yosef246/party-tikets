@@ -47,7 +47,8 @@ function Header() {
       } else {
         // ✅ איפוס צ'אט Tidio
         if (window.tidioChatApi) {
-          window.tidioChatApi.reset();
+          window.tidioChatApi.close();
+          window.tidioChatApi.setVisitorData({ clear: true });
         }
 
         alert(data.message);
