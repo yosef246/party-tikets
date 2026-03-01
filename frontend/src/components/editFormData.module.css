@@ -32,26 +32,6 @@
   background-color: #0b5096;
 }
 
-/* ============================= */
-/* 📱 טלפון - עד 495px */
-/* ============================= */
-@media (max-width: 495px) {
-  .form input, textarea {
-    width: 95%;
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-
-  .form button {
-    width: 45%; /* שורה אחת עם שני כפתורים אם יש */
-    font-size: 0.9rem;
-    padding: 0.5rem 0.8rem;
-  }
-
-  .form h3 {
-    font-size: 1rem;
-  }
-}
 
 /* ============================= */
 /* 💻 טאבלט - עד 1398px */
@@ -71,5 +51,27 @@
 
   .form h3 {
     font-size: 1.2rem;
+  }
+}
+
+
+/* ============================= */
+/* 📱 טלפון - עד 495px */
+/* ============================= */
+@media (max-width: 495px) {
+  .form input, textarea {
+    width: 95%;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .form button {
+    width: 45%; /* שורה אחת עם שני כפתורים אם יש */
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .form h3 {
+    font-size: 1rem;
   }
 }

@@ -1,6 +1,6 @@
 .container {
   direction: rtl;
-  height: 125vh;
+   min-height: 100vh; 
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to top,  #004B8E,#010528);
   color: #f0f0f0;

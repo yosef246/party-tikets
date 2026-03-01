@@ -43,6 +43,25 @@
   margin: 6px 0;
 }
 
+/* 💻 טאבלט - עד 1398px */
+@media (max-width: 1398px) {
+  .statsFloating {
+    width: 420px;
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .statsFloating h2 {
+    font-size: 20px;
+  }
+
+  .statsDescription,
+  .statsList p {
+    font-size: 16px;
+  }
+}
+
+
 /* 📱 טלפון - עד 495px */
 @media (max-width: 495px) {
   .statsFloating {
@@ -61,20 +80,3 @@
   }
 }
 
-/* 💻 טאבלט - עד 1398px */
-@media (max-width: 1398px) {
-  .statsFloating {
-    width: 420px;
-    padding: 16px;
-    font-size: 15px;
-  }
-
-  .statsFloating h2 {
-    font-size: 20px;
-  }
-
-  .statsDescription,
-  .statsList p {
-    font-size: 16px;
-  }
-}

@@ -22,17 +22,6 @@
   text-align: right;
 }
 
-/* 📱 טלפון - עד 495px */
-@media (max-width: 495px) {
-  .cardsContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    width: 100%;
-    padding: 0.5rem;
-    box-sizing: border-box;
-  }
-}
 
 /* 💻 טאבלט - עד 1398px */
 @media (max-width: 1398px) {
@@ -40,5 +29,19 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 10px;
     padding: 15px;
+  }
+}
+
+
+
+/* 📱 טלפון - עד 495px */
+@media (max-width: 495px) {
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 20px;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
 }

@@ -31,21 +31,6 @@
   color: #555;
 }
 
-/* טלפון */
-@media (max-width: 495px) {
-  .loaderwrapper {
-    height: 200px;
-    gap: 8px;
-  }
-  .spinner {
-    width: 30px;
-    height: 30px;
-    border-width: 3px;
-  }
-  .loaderwrapper p {
-    font-size: 12px;
-  }
-}
 
 /* טאבלט */
 @media (max-width: 1398px) {
@@ -60,5 +45,22 @@
   }
   .loaderwrapper p {
     font-size: 14px;
+  }
+}
+
+
+/* טלפון */
+@media (max-width: 495px) {
+  .loaderwrapper {
+    height: 200px;
+    gap: 8px;
+  }
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+  .loaderwrapper p {
+    font-size: 12px;
   }
 }

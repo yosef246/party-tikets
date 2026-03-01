@@ -42,6 +42,27 @@
   background-color: #1d1d62;
 }
 
+
+/* ============================= */
+/* 💻 טאבלט - עד 1398px */
+/* ============================= */
+@media (max-width: 1398px) {
+  .card {
+    max-width: 350px;
+    margin: 0.8rem auto;
+  }
+
+  .content {
+    font-size: 1rem;
+  }
+
+  .button {
+    padding: 0.55rem 0.9rem;
+    font-size: 1rem;
+  }
+}
+
+
 /* ============================= */
 /* 📱 טלפון - עד 495px */
 /* ============================= */
@@ -70,21 +91,3 @@
   }
 }
 
-/* ============================= */
-/* 💻 טאבלט - עד 1398px */
-/* ============================= */
-@media (max-width: 1398px) {
-  .card {
-    max-width: 350px;
-    margin: 0.8rem auto;
-  }
-
-  .content {
-    font-size: 1rem;
-  }
-
-  .button {
-    padding: 0.55rem 0.9rem;
-    font-size: 1rem;
-  }
-}

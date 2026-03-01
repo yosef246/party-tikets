@@ -1,6 +1,6 @@
 .middle {
   background: linear-gradient(to top,  #004B8E,#010528);
-  height: 130vh;
+  min-height: 100vh;
   position: relative;
   color: aliceblue;
   text-align: center;
@@ -20,7 +20,7 @@
 
 .formContainer {
   width: 400px;
-  height: 740px;
+  height: auto;
   margin: 50px auto;
   padding: 30px;
   background: linear-gradient(to top,  #004B8E,#010528);

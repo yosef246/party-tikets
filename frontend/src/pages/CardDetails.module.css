@@ -1,6 +1,6 @@
 .middle {
   background: linear-gradient(to top,  #004B8E,#010528);
-  height: 140vh;
+  min-height: 100vh;
   position: relative;
   color: aliceblue;
   text-align: center;
@@ -66,6 +66,24 @@
   transform: scale(1.05);
 }
 
+
+/* 💻 טאבלט - עד 1398px */
+@media (max-width: 1398px) {
+  .cardDetails {
+    max-width: 700px;
+  }
+
+  .cardContent h2 {
+    font-size: 1.8rem;
+  }
+
+  .cardContent p {
+    font-size: 1rem;
+  }
+
+}
+
+
 /* 📱 טלפון - עד 495px */
 @media (max-width: 495px) {
    .middle {
@@ -84,22 +102,6 @@
 
   .cardContent p {
     font-size: 0.95rem;
-  }
-
-}
-
-/* 💻 טאבלט - עד 1398px */
-@media (max-width: 1398px) {
-  .cardDetails {
-    max-width: 700px;
-  }
-
-  .cardContent h2 {
-    font-size: 1.8rem;
-  }
-
-  .cardContent p {
-    font-size: 1rem;
   }
 
 }
