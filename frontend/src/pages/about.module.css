@@ -1,11 +1,11 @@
 .middle {
-  background: linear-gradient(to top,  #004B8E,#010528);
-  min-height: 100vh;
-  position: relative;
-  color: aliceblue;
-  text-align: right;
-  padding: 2rem 2rem 0 2rem;
   direction: rtl;
+  min-height: 100vh; 
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to top,  #004B8E,#010528);
+  color: #f0f0f0;
+  padding: 2rem;
+  text-align: right;
 }
 
 h1 {

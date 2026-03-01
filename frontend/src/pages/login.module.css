@@ -1,10 +1,11 @@
 .middle {
+  direction: rtl;
+  min-height: 100vh; 
+  font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to top,  #004B8E,#010528);
-  min-height: 100vh;
-  position: relative;
-  color: aliceblue;
-  text-align: center;
-  padding-top: 2rem;
+  color: #f0f0f0;
+  padding: 2rem;
+  text-align: right;
 }
 
 .loadingWrapper {
