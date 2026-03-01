@@ -75,7 +75,7 @@ export default function ContactPage() {
         <h1>נשמח לשמוע ממך</h1>
 
         <section className={styles.section1}>
-          <h2>? יש לך שאלה</h2>
+          <h2> יש לך שאלה ?</h2>
           <p>
             אנחנו כאן כדי לעזור! בין אם אתה יחצן מתחיל, שותף פוטנציאלי או פשוט
             סקרן לדעת עוד – נשמח לתת מענה.
@@ -85,7 +85,7 @@ export default function ContactPage() {
         <hr className={styles.sectiondivider} />
 
         <section className={styles.section2}>
-          <h2>? איך אפשר לפנות אלינו</h2>
+          <h2> איך אפשר לפנות אלינו ?</h2>
           <p>
             הדרך המהירה ביותר היא דרך הצ'אט שלנו — זמין 24/7 בפינה הימנית
             התחתונה של המסך 💬
@@ -95,7 +95,7 @@ export default function ContactPage() {
         <hr className={styles.sectiondivider} />
 
         <section className={styles.section3}>
-          <h2>? רוצה לשתף אותנו</h2>
+          <h2> רוצה לשתף אותנו ?</h2>
           <p>
             אם אתה בעל מועדון, מפיק מסיבות, או יש לך רעיון יצירתי לשיתוף פעולה –
             דבר איתנו דרך הצ'אט ונשמח לשמוע.
