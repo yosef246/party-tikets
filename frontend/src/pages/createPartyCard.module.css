@@ -14,7 +14,7 @@
 .menu {
   position: fixed; 
   right: 20px;
-  bottom: 20px;
+  bottom: 35px;
   width: 280px;
   height: 280px;
   display: flex;
@@ -239,7 +239,7 @@
     width: 200px;
     height: 200px;
     right: 10px;
-    bottom: 80px;
+    bottom: 39px;
   }
 
   .mainbutton {
