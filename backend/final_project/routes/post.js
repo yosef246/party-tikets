@@ -43,13 +43,16 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send({ message: "Post not found" });
 
-    const realIp = req.headers["x-forwarded-for"]?.split(",")[0];
+    const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip;
     const visitorId = req.user?.id || realIp;
 
     //Number of views of the user
     const ref = req.query.ref;
 
     if (ref && visitorId && ref !== visitorId) {
+      // ✅ וודא שאף אחד מהם לא null/undefined
+      if (!ref || !visitorId) return;
+
       const exists = await ClickView.findOne({
         post_id: post._id,
         referrer_username: ref,
@@ -87,7 +90,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     if (!ref) {
       return res
         .status(400)
-        .send({ message: "אתה לא יכול לקנות רק המשתמשים בקישור" });
+        .send({ message: "אתה לא יכול לקנות רק המשתמשים דרך הקישור" });
     }
 
     let purchases;
