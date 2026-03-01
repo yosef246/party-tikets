@@ -24,7 +24,6 @@ router.post("/register", async (req, res) => {
     return res.status(400).send({ message: "Email already exist!" });
 
   const salt = await bcrypt.genSalt(10); //יוצר לך רצף גיבריש שמצטרף לסיסמא כדי לאבטח אותה
-  console.log("salt:", salt);
 
   req.body.password = await bcrypt.hash(req.body.password, salt); //הופך את הסיסמא ממספרים לגיבריש ומוסיף את הרצף שיצרנו מקודם לסיסמא
   console.log("password:", req.body.password);

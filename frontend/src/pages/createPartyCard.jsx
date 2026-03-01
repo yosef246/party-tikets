@@ -1,11 +1,13 @@
 import styles from "./createPartyCard.module.css";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Message from "../components/message";
 import { Link } from "react-router-dom";
 import { Tickets, User, CreditCard, Menu, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 
 export default function CreatePartyCardPage() {
+  const [message, setMessage] = useState("");
   const { isAuthenticated, loading } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -29,7 +31,7 @@ export default function CreatePartyCardPage() {
     e.preventDefault(); //נועד למנוע את הרענון של הדף כאשר טופס נשלח אוטומטית
     setLoadingCard(true);
     try {
-      const response = await fetch("http://localhost:3000/api/post/", {
+      const response = await fetch("/api/post/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +47,7 @@ export default function CreatePartyCardPage() {
       }
 
       console.log("upload successful:", data);
-      alert("הכרטיס נוצר בהצלחה!");
+      setMessage("הכרטיס נוצר בהצלחה!");
       setTitle("");
       setLocation("");
       setDate("");
@@ -54,7 +56,7 @@ export default function CreatePartyCardPage() {
       setImageUrl("");
     } catch (error) {
       console.error("Error during logined:", error);
-      alert(error.message);
+      setMessage(error.message);
     } finally {
       setLoadingCard(false);
     }
@@ -116,6 +118,7 @@ export default function CreatePartyCardPage() {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
+          <Message message={message} setMessage={setMessage} />
           <button type="submit">{loadingCard ? "שולח.." : "צור כרטיס"}</button>
         </form>
       </div>
