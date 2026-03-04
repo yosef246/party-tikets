@@ -4,10 +4,10 @@ dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function SendWelcomeEmail(user) {
+export async function SendWelcomeEmail(newUser) {
   await resend.emails.send({
     from: "Party Tickets <onboarding@resend.dev>",
-    to: user.email,
+    to: newUser.email,
     subject: "ברוך הבא ל-PARTY TICKETS 🎉",
     html: `
       <div style="font-family: system-ui, sans-serif, Arial;
@@ -17,7 +17,7 @@ export async function SendWelcomeEmail(user) {
                   direction: rtl;">
         <div style="max-width: 600px; margin: auto; padding: 16px; line-height: 1.6;">
 
-          <p>🎉 <strong>PARTY TICKETS</strong> <strong>${user.username} ברוך הבא</strong></p>
+          <p>🎉 <strong>PARTY TICKETS</strong> <strong>${newUser.username} ברוך הבא</strong></p>
 
           <p>
             אנחנו שמחים שבחרת להצטרף אלינו! החשבון שלך נוצר בהצלחה &mdash;

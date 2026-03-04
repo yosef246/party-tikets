@@ -32,7 +32,8 @@ router.post("/register", async (req, res) => {
   try {
     const newUser = await NewUser.create(req.body);
 
-    await SendRegistrationEmail(user);
+    // שליחת המייל הרשמה בפעם הראשונה
+    await SendRegistrationEmail(newUser);
 
     //יצירת טוקאן
     const tokenProps = {
