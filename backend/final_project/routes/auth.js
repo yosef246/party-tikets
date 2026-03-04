@@ -33,7 +33,11 @@ router.post("/register", async (req, res) => {
     const newUser = await NewUser.create(req.body);
 
     // שליחת המייל הרשמה בפעם הראשונה
-    await SendRegistrationEmail(newUser);
+    try {
+      await SendRegistrationEmail(newUser);
+    } catch (err) {
+      console.error("Failed to send welcome email:", err);
+    }
 
     //יצירת טוקאן
     const tokenProps = {
