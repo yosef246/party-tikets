@@ -112,7 +112,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
       const user = await User.findById(PurchaserId);
       if (user?.email) {
         await resend.emails.send({
-          from: "Party Tickets <noreply@yourpartysite.co.il>",
+          from: "Party Tickets <onboarding@resend.dev>",
           to: user.email,
           subject: `קבלה לרכישת כרטיס - ${post.title}`,
           html: `
