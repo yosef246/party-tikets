@@ -12,6 +12,9 @@ import {
   verifyToken,
   verifyTokenOptional,
 } from "../../utils/token.js";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const router = Router();
 
@@ -101,6 +104,28 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
         Purchaser_id: PurchaserId, // מזהה את הקונה של הכרטיס כדי לדעת מי קנה וכמה
         price: post.price,
       });
+
+      //שליחת המייל לאחר קנייתת כרטיס
+      const user = await User.findById(PurchaserId);
+      if (user?.email) {
+        await resend.emails.send({
+          from: "Party Tickets <noreply@yourpartysite.co.il>",
+          to: email,
+          subject: `קבלה לרכישת כרטיס - ${post.title}`,
+          html: `
+      <div dir="rtl">
+        <h2>תודה על רכישתך! 🎉</h2>
+        <p><strong>שלום ${user.email},</strong></p>
+        <p><strong>אירוע:</strong> ${post.title}</p>
+        <p><strong>מיקום:</strong> ${post.location}</p>
+        <p><strong>תאריך:</strong> ${new Date(post.date).toLocaleDateString("he-IL")}</p>
+        <p><strong>מחיר:</strong> ₪${post.price}</p>
+        <hr/>
+        <p>Party Tickets</p>
+      </div>
+    `,
+        });
+      }
     }
 
     res.status(200).send({ message: "Purchase saved", data: purchases });

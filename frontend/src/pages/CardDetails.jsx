@@ -181,7 +181,9 @@ export default function CardDetails() {
 
             <button
               className={styles.cardButton}
-              onClick={() => handlePurchase(id, refId)}
+              onClick={() =>
+                handlePurchase(id, refId && refId !== "null" ? refId : null)
+              }
             >
               לחץ לתשלום
             </button>
