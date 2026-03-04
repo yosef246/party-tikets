@@ -43,7 +43,7 @@ export default function RegisterPage() {
       setName("");
       setEmail("");
       setPassword("");
-      // sendWelcomeEmail(name, email); // שליחת מייל לאחר הירשמות
+      // sendWelcomeEmail(name, email); // emailJS שליחת מייל לאחר הירשמות
       navigate("/party-cards");
     } catch (error) {
       console.error("Error during registration:", error);
