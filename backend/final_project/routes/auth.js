@@ -5,7 +5,7 @@ import { loginValitation, registerValitation } from "../../valitations/user.js";
 import NewUser from "../models/user.js";
 import { generateToken, verifyTokenOptional } from "../../utils/token.js";
 import { verifyToken } from "../../utils/token.js";
-import { SendRegistrationEmail } from "../../utils/SendRegistrationEmail.js";
+import { SendWelcomeEmail } from "../../utils/SendRegistrationEmail.js";
 
 const router = Router();
 
@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
 
     // שליחת המייל הרשמה בפעם הראשונה
     try {
-      await SendRegistrationEmail(newUser);
+      await SendWelcomeEmail(newUser);
     } catch (err) {
       console.error("Failed to send welcome email:", err);
     }
