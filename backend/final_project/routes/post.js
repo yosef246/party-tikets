@@ -107,7 +107,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
       const user = await User.findById(PurchaserId);
       if (user?.email) {
         await sendReceiptEmail(user, post, purchases);
-      }
+      } //צריך להוסיף מה לעשות במקרה של משתמש שלא מחובר כי אין לו מייל שיישלח אליו הקבלה.
     }
 
     res.status(200).send({ message: "Purchase saved", data: purchases });

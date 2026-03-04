@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./register.module.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import sendWelcomeEmail from "../components/emailjsRegister";
+// import sendWelcomeEmail from "../components/emailjsRegister";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
 
@@ -43,7 +43,7 @@ export default function RegisterPage() {
       setName("");
       setEmail("");
       setPassword("");
-      sendWelcomeEmail(name, email); // שליחת מייל לאחר הירשמות
+      // sendWelcomeEmail(name, email); // שליחת מייל לאחר הירשמות
       navigate("/party-cards");
     } catch (error) {
       console.error("Error during registration:", error);
