@@ -1,5 +1,4 @@
 import { Router } from "express";
-import dotenv from "dotenv";
 import { Post, ClickView, Purchases } from "../models/post.js";
 import User from "../models/user.js";
 import Tag from "../models/tag.js";
@@ -13,11 +12,7 @@ import {
   verifyToken,
   verifyTokenOptional,
 } from "../../utils/token.js";
-import { Resend } from "resend";
-//env מאפשר לי להשתמש בערכים שנמצאים בקובץ
-dotenv.config();
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { sendReceiptEmail } from "../../utils/sendReceiptEmail.js";
 
 const router = Router();
 
@@ -111,23 +106,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
       //שליחת המייל לאחר קנייתת כרטיס
       const user = await User.findById(PurchaserId);
       if (user?.email) {
-        await resend.emails.send({
-          from: "Party Tickets <onboarding@resend.dev>",
-          to: user.email,
-          subject: `קבלה לרכישת כרטיס - ${post.title}`,
-          html: `
-      <div dir="rtl">
-        <h2>תודה על רכישתך! 🎉</h2>
-        <p><strong>שלום ${user.username},</strong></p>
-        <p><strong>אירוע:</strong> ${post.title}</p>
-        <p><strong>מיקום:</strong> ${post.location}</p>
-        <p><strong>תאריך:</strong> ${new Date(post.date).toLocaleDateString("he-IL")}</p>
-        <p><strong>מחיר:</strong> ₪${post.price}</p>
-        <hr/>
-        <p>Party Tickets</p>
-      </div>
-    `,
-        });
+        await sendReceiptEmail(user, post, purchases);
       }
     }
 
