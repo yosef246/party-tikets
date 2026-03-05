@@ -14,6 +14,7 @@ export default function CardDetails() {
     return params.get("ref");
   });
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [guestEmail, setGuestEmail] = useState("");
 
   // בדיקה האם יש למשתמש שנכנס לפוסט טוקאן
   useEffect(() => {
@@ -57,6 +58,11 @@ export default function CardDetails() {
 
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
+    if (!currentUserId && !guestEmail) {
+      setMessage("אנא הכנס אימייל לקבלת הקבלה");
+      return;
+    }
+
     try {
       const res = await fetch(`/api/post/${id}/purchases/`, {
         method: "POST",
@@ -66,15 +72,17 @@ export default function CardDetails() {
         credentials: "include",
         body: JSON.stringify({
           ref,
+          guestEmail,
         }),
       });
+
       const data = await res.json();
+
       if (!res.ok) {
         throw new Error(data.message || "Error purchasing ticket");
       }
 
       setMessage("רכישה בוצעה בהצלחה !");
-      console.log(data);
     } catch (error) {
       console.error("Error during getting:", error);
       setMessage(error.message);
@@ -159,6 +167,19 @@ export default function CardDetails() {
             <p>
               <strong>📝 תיאור:</strong> {card.body}
             </p>
+
+            {/* אם אין לו טוקאן אז אין לו גם מייל ולכן נבקש ממנו כאם מייל לקבלת הרכישה */}
+            {!currentUserId && (
+              <div>
+                <input
+                  type="email"
+                  className={styles.guestEmailInput}
+                  placeholder="הכנס אימייל לקבלת קבלה"
+                  value={guestEmail}
+                  onChange={(e) => setGuestEmail(e.target.value)}
+                />
+              </div>
+            )}
 
             <Message message={message} setMessage={setMessage} />
 

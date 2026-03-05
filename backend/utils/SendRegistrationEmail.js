@@ -8,7 +8,7 @@ export async function SendWelcomeEmail(newUser) {
   await resend.emails.send({
     from: "Party Tickets <onboarding@resend.dev>",
     to: newUser.email,
-    subject: "PARTY TICKETS 🎉 ברוך הבא ל",
+    subject: " PARTY TIKETS🎉 ברוך הבא ל",
     html: `
       <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
         <div style="background: linear-gradient(to right, #004B8E, #010528); padding: 30px; border-radius: 10px; text-align: center;">
@@ -67,6 +67,9 @@ export async function SendWelcomeEmail(newUser) {
             צוות <strong>PARTY TICKETS</strong>
           </p>
 
+        </div>
+        <div style="text-align: center; margin-top: 20px; color: #888; font-size: 12px;">
+          <p>Party Tickets © 2025</p>
         </div>
       </div>
     `,

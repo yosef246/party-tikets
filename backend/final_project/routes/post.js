@@ -86,12 +86,11 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     const PurchaserId = req.user?.id || realIp;
     console.log("PurchaserId :", PurchaserId);
 
+    const guestEmail = req.body.guestEmail;
     const ref = req.body.ref;
 
     if (!ref) {
-      return res
-        .status(400)
-        .send({ message: "אתה לא יכול לקנות רק המשתמשים דרך הקישור" });
+      return res.status(400).send({ message: "ניתן לקנות רק דרך קישור שיתוף" });
     }
 
     let purchases;
@@ -103,11 +102,21 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
         price: post.price,
       });
 
-      //שליחת המייל לאחר קנייתת כרטיס
-      const user = await User.findById(PurchaserId);
+      //שליחת המייל לאחר קניית כרטיס
+      let user;
+      if (req.user) {
+        user = await User.findById(req.user.id);
+      } else {
+        // משתמש אורח
+        user = {
+          username: "משתמש לא רשום במערכת",
+          email: req.body.guestEmail,
+        };
+      }
+
       if (user?.email) {
         await sendReceiptEmail(user, post, purchases);
-      } //צריך להוסיף מה לעשות במקרה של משתמש שלא מחובר כי אין לו מייל שיישלח אליו הקבלה.
+      }
     }
 
     res.status(200).send({ message: "Purchase saved", data: purchases });

@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
     try {
       await SendWelcomeEmail(newUser);
     } catch (err) {
-      console.error("Failed to send welcome email:", err);
+      console.error("שליחת המייל נכשלה:", err);
     }
 
     //יצירת טוקאן
