@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./paymentPage.module.css";
+import Message from "../components/message";
+import PaymentSkeleton from "../components/Skeleton/PaymentSkeleton";
 import { useNavigate } from "react-router-dom";
 
 export default function PaymentPage() {
+  const [loadingSkeleton, setLoadingSkeleton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [haspaid, setHaspaid] = useState(false);
@@ -15,25 +18,13 @@ export default function PaymentPage() {
   const navigate = useNavigate();
   const initialForm = { name: "", cardNumber: "", expiry: "", cvv: "" };
 
-  // אם יש הודעה, מפעילים טיימר למחיקה שלה
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setLoading(false);
-        setMessage("");
-      }, 1000);
-
-      // ניקוי הטיימר אם הקומפוננטה תוסר לפני הזמן
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   //בדיקה שיש טוקאן
   useEffect(() => {
+    setLoadingSkeleton(true);
     const checkAuth = async () => {
       try {
         const res = await fetch("/api/auth/check-auth", {
@@ -55,6 +46,8 @@ export default function PaymentPage() {
       } catch (err) {
         console.log("עליך להתחבר כדי לגשת לדף");
         navigate("/login");
+      } finally {
+        setLoadingSkeleton(false);
       }
     };
 
@@ -109,6 +102,10 @@ export default function PaymentPage() {
       setMessage("שגיאה במחיקה");
     }
   };
+
+  if (loadingSkeleton) {
+    return <PaymentSkeleton />;
+  }
 
   return (
     <div className={styles.paymentContainer}>
@@ -166,8 +163,13 @@ export default function PaymentPage() {
             מחק עכשיו
           </button>
         )}
-
-        {message && <p className={styles.successMsg}>{message}</p>}
+        {message && (
+          <Message
+            message={message}
+            setMessage={setMessage}
+            setLoading={setLoading}
+          />
+        )}
       </div>
     </div>
   );

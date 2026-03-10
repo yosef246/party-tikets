@@ -43,7 +43,7 @@ router.post("/topay", [verifyToken], async (req, res) => {
 
     res.status(200).json({
       message: "התשלום בוצע בהצלחה!",
-      user: updatedUser,
+      user: updatedUser, //שולח כדי לבדוק האם המשתמש שילם
       pay: payment,
     });
   } catch (error) {

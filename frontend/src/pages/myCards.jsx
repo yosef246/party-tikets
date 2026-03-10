@@ -3,6 +3,7 @@ import styles from "./myCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
 import Loader from "../components/Loader";
+import MyCardsSkeleton from "../components/Skeleton/MyCardsSkeleton";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
@@ -52,7 +53,7 @@ export default function MyCards() {
   }
 
   if (loadingCard) {
-    return <Loader text="טוען..." />;
+    return <MyCardsSkeleton />;
   }
 
   return cards.length > 0 ? (
