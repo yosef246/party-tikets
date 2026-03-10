@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Message from "../components/message";
 import { Link } from "react-router-dom";
-import Loader from "../components/Loader";
+import Looader from "../components/Loader";
 import { Tickets, User, CreditCard, Menu, X, Loader } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 
@@ -64,7 +64,7 @@ export default function CreatePartyCardPage() {
   }
 
   if (loading) {
-    return <Loader text="טוען" />;
+    return <Looader text="טוען" />;
   }
 
   return (
