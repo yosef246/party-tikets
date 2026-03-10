@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./MyProfile.module.css";
-import Loader from "../components/Loader";
+import StatsSkeleton from "../components/Skeleton/StatsProfileSkeleton";
 
 export default function MyProfile() {
   const [stats, setStats] = useState(null);
@@ -52,7 +52,7 @@ export default function MyProfile() {
   }, [loading]);
 
   if (loading || statsLoading) {
-    return <Loader text="טוען.." />;
+    return <StatsSkeleton />;
   }
 
   return (

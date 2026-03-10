@@ -18,6 +18,7 @@ WORKDIR /app/final_project
 
 # חשיפה של פורט
 EXPOSE 3003
+# 3001
 
 # הפעלה עם nodemon
 # CMD ["npx", "nodemon", "app.js"]

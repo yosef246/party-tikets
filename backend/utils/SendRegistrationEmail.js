@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function SendWelcomeEmail(newUser) {
   await resend.emails.send({
-    from: "Party Tickets <onboarding@resend.dev>",
+    from: "Party Tickets <onboarding@resend.dev>", //כרגע שולח קבלה רק למייל שלי כי אין לי דומיין אמיתי
     to: newUser.email,
     subject: " PARTY TIKETS🎉 ברוך הבא ל",
     html: `

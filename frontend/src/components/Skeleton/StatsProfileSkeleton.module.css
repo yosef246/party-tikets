@@ -1,0 +1,57 @@
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.middle {
+  background: linear-gradient(to top, #004B8E, #010528);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.statsFloating {
+  background: linear-gradient(to top, #004B8E, #010528);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  width: 620px;
+  max-width: 100%;
+}
+
+.title {
+  height: 28px;
+  width: 50%;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0a1628 25%, #1a2a4a 50%, #0a1628 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.description {
+  height: 18px;
+  width: 80%;
+  margin: 0 auto 12px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0a1628 25%, #1a2a4a 50%, #0a1628 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 20px 0;
+}
+
+.line {
+  height: 22px;
+  border-radius: 8px;
+  margin: 0 auto 16px; 
+  background: linear-gradient(90deg, #0a1628 25%, #1a2a4a 50%, #0a1628 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

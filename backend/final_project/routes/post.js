@@ -90,7 +90,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
     const ref = req.body.ref;
 
     if (!ref) {
-      return res.status(400).send({ message: "ניתן לקנות רק דרך קישור שיתוף" });
+      return res.status(400).send({ message: "ניתן לקנות רק דרך קישור משותף" });
     }
 
     let purchases;
@@ -109,7 +109,7 @@ router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
       } else {
         // משתמש אורח
         user = {
-          username: "משתמש לא רשום במערכת",
+          username: "משתמש לא מחובר למערכת",
           email: req.body.guestEmail,
         };
       }

@@ -3,6 +3,7 @@ import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
+import CardSkeleton from "../components/Skeleton/AllCardSkeleton";
 
 export default function AllCards() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
@@ -67,8 +68,17 @@ export default function AllCards() {
   }, [isCheckingAuth]);
 
   if (loading) {
-    return <Loader text="טוען..." />;
+    return (
+      <div className={styles.middle}>
+        <div className={styles.cardsContainer}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <CardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
   }
+
   if (isCheckingAuth) {
     return <Loader text="בודק הרשאות..." />;
   }

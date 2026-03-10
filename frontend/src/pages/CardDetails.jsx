@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Message from "../components/message";
 import styles from "./CardDetails.module.css";
-import Loader from "../components/Loader";
 import { Helmet } from "react-helmet-async";
+import CardDetailsSkeleton from "../components/Skeleton/CardDetailsSkeleton";
 
 export default function CardDetails() {
   const { id } = useParams();
@@ -14,7 +14,7 @@ export default function CardDetails() {
     return params.get("ref");
   });
   const [currentUserId, setCurrentUserId] = useState(null);
-  const [guestEmail, setGuestEmail] = useState("");
+  const [guestEmail, setGuestEmail] = useState(""); //הכנסת המייל למשתמש שלא מחובר למערכת
 
   // בדיקה האם יש למשתמש שנכנס לפוסט טוקאן
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function CardDetails() {
   //פונקציה לתשלום והצגת מספר הרכישות של המשתמש במונגו
   async function handlePurchase(id, ref) {
     if (!currentUserId && !guestEmail) {
-      setMessage("אנא הכנס אימייל לקבלת הקבלה");
+      setMessage("אנא הכנס אימייל להפקת קבלה");
       return;
     }
 
@@ -82,7 +82,8 @@ export default function CardDetails() {
         throw new Error(data.message || "Error purchasing ticket");
       }
 
-      setMessage("רכישה בוצעה בהצלחה !");
+      setMessage("רכישה בוצעה בהצלחה נשלחה קבלה למייל!");
+      setGuestEmail("");
     } catch (error) {
       console.error("Error during getting:", error);
       setMessage(error.message);
@@ -90,7 +91,7 @@ export default function CardDetails() {
   }
 
   if (!card) {
-    return <Loader text="טוען..." />;
+    return <CardDetailsSkeleton />;
   }
 
   return (
@@ -174,7 +175,7 @@ export default function CardDetails() {
                 <input
                   type="email"
                   className={styles.guestEmailInput}
-                  placeholder="הכנס אימייל לקבלת קבלה"
+                  placeholder="הכנס אימייל להפקת קבלה"
                   value={guestEmail}
                   onChange={(e) => setGuestEmail(e.target.value)}
                 />

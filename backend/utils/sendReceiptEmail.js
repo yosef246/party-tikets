@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendReceiptEmail(user, post, purchases) {
   await resend.emails.send({
-    from: "Party Tickets <onboarding@resend.dev>",
+    from: "Party Tickets <onboarding@resend.dev>", //כרגע שולח קבלה רק למייל שלי כי אין לי דומיין אמיתי
     to: user.email,
     subject: `קבלה לרכישת כרטיס - ${post.title}`,
     html: `
@@ -37,7 +37,7 @@ export async function sendReceiptEmail(user, post, purchases) {
               <td style="padding: 12px;">₪${post.price}</td>
             </tr>
             <tr style="background-color: #f0f4ff;">
-              <td style="padding: 12px; font-weight: bold;">🔖 מספר הזמנה</td>
+              <td style="padding: 12px; font-weight: bold;">🔖 מספר רכישה</td>
               <td style="padding: 12px;">${purchases._id}</td>
             </tr>
           </table>
