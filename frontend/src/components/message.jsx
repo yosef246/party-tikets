@@ -6,7 +6,7 @@ export default function Message({ message, setMessage, setLoading }) {
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => setMessage(""), 1500);
-      setLoading(false); // קיים ספציפית בדף התשלום payment
+      if (setLoading) setLoading(false); // קיים ספציפית בדף התשלום payment
       return () => clearTimeout(timer);
     }
   }, [message]);
