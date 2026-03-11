@@ -6,8 +6,8 @@ import Loader from "../components/Loader";
 import AllCardSkeleton from "../components/Skeloton/AllCardSkeleton";
 
 export default function AllCards() {
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
-  const [loading, setLoading] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true); //לבדוק שיש טוקאן
+  const [loading, setLoading] = useState(false); //לייבוא הכרטיסים
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
@@ -64,6 +64,7 @@ export default function AllCards() {
       }
       setLoading(false);
     }
+
     fetchData();
   }, [isCheckingAuth]);
 

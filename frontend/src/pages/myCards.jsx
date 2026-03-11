@@ -7,8 +7,8 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
   const [loadingCard, setLoadingCard] = useState(false); //לייבוא הכרטיסים
-  const [cards, setCards] = useState([]);
   const { isAuthenticated, loading } = useContext(AuthContext); //לבדוק שיש טוקאן
+  const [cards, setCards] = useState([]);
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
