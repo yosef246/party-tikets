@@ -38,7 +38,7 @@ router.get("/my-cards", [verifyToken], async (req, res) => {
   }
 });
 
-//GET all posts by :id
+//GET all posts by :id and creating viewing
 router.get("/:id", [verifyTokenOptional], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -76,7 +76,7 @@ router.get("/:id", [verifyTokenOptional], async (req, res) => {
   }
 });
 
-//POST Amount of freedom for the user
+//POST Creating a user purchase and sending an email
 router.post("/:id/purchases", [verifyTokenOptional], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);

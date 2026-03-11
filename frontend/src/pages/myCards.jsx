@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import styles from "./myCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
-import Loader from "../components/Loader";
 import MyCardsSkeleton from "../components/Skeleton/MyCardsSkeleton";
 import { AuthContext } from "../context/AuthContext";
 
@@ -10,6 +9,9 @@ export default function MyCards() {
   const [loadingCard, setLoadingCard] = useState(false); //לייבוא הכרטיסים
   const [cards, setCards] = useState([]);
   const { isAuthenticated, loading } = useContext(AuthContext); //לבדוק שיש טוקאן
+  const [cardsCount, setCardsCount] = useState(
+    parseInt(localStorage.getItem("cardsCount")) || 6
+  ); // לפני שהנתונים נטענו — השתמש במספר שמור מהפעם הקודמת
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
@@ -34,10 +36,11 @@ export default function MyCards() {
 
         if (!response.ok) {
           throw new Error(data.message || "upload failed");
-        } else {
-          console.log("כל הכרטיסים", data);
-          setCards(data);
         }
+
+        console.log("כל הכרטיסים", data);
+        setCards(data);
+        setCardsCount(data.length);
       } catch (err) {
         console.error("שגיאה בהבאת הפוסטים של המשתמש:", err);
       }
@@ -53,7 +56,7 @@ export default function MyCards() {
   }
 
   if (loadingCard) {
-    return <MyCardsSkeleton />;
+    return <MyCardsSkeleton count={cardsCount} />;
   }
 
   return cards.length > 0 ? (

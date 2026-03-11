@@ -35,9 +35,12 @@ export default function CardDetails() {
   useEffect(() => {
     async function fetchCard() {
       try {
-        const response = await fetch(`/api/post/${id}?ref=${refId}`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `/api/post/${id}${refId && refId !== "null" ? `?ref=${refId}` : ""}`,
+          {
+            credentials: "include",
+          }
+        );
 
         const data = await response.json();
 
