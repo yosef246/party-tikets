@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./paymentPage.module.css";
 import Message from "../components/message";
-import PaymentSkeleton from "../components/Skeleton/PaymentSkeleton";
+import PaymentSkeleton from "../components/Skeloton/PaymentSkeleton";
 import { useNavigate } from "react-router-dom";
 
 export default function PaymentPage() {

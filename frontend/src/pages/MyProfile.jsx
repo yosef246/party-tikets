@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import styles from "./MyProfile.module.css";
-import StatsSkeleton from "../components/Skeleton/StatsProfileSkeleton";
+import StatsSkeleton from "../components/Skeloton/StatsProfileSkeleton";
 
 export default function MyProfile() {
   const [stats, setStats] = useState(null);

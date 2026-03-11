@@ -2,16 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import styles from "./myCards.module.css";
 import { useNavigate } from "react-router-dom";
 import MyCardItem from "../components/myCardItem";
-import MyCardsSkeleton from "../components/Skeleton/MyCardsSkeleton";
+import MyCardsSkeleton from "../components/Skeloton/MyCardsSkeleton";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyCards() {
   const [loadingCard, setLoadingCard] = useState(false); //לייבוא הכרטיסים
   const [cards, setCards] = useState([]);
   const { isAuthenticated, loading } = useContext(AuthContext); //לבדוק שיש טוקאן
-  const [cardsCount, setCardsCount] = useState(
-    parseInt(localStorage.getItem("cardsCount"))
-  ); // לפני שהנתונים נטענו — השתמש במספר שמור מהפעם הקודמת
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן דרך USECONTEXT
@@ -40,7 +37,6 @@ export default function MyCards() {
 
         console.log("כל הכרטיסים", data);
         setCards(data);
-        setCardsCount(data.length);
       } catch (err) {
         console.error("שגיאה בהבאת הפוסטים של המשתמש:", err);
       }
@@ -56,7 +52,7 @@ export default function MyCards() {
   }
 
   if (loadingCard) {
-    return <MyCardsSkeleton count={cardsCount} />;
+    return <MyCardsSkeleton />;
   }
 
   return cards.length > 0 ? (

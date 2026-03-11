@@ -3,15 +3,12 @@ import styles from "./allCards.module.css";
 import { useNavigate } from "react-router-dom";
 import CardItem from "../components/cardItem";
 import Loader from "../components/Loader";
-import MyCardsSkeleton from "../components/Skeleton/MyCardsSkeleton";
+import AllCardSkeleton from "../components/Skeloton/AllCardSkeleton";
 
 export default function AllCards() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true); //  מצב בדיקה
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const [cardsCount, setCardsCount] = useState(
-    parseInt(localStorage.getItem("cardsCount"))
-  ); // לפני שהנתונים נטענו — השתמש במספר שמור מהפעם הקודמת
   const navigate = useNavigate();
 
   //בדיקה שיש טוקאן
@@ -62,7 +59,6 @@ export default function AllCards() {
         }
 
         setCards(data);
-        setCardsCount(data.length);
       } catch (err) {
         console.log("ייבוא הכרטיסים נכשל", err);
       }
@@ -72,7 +68,15 @@ export default function AllCards() {
   }, [isCheckingAuth]);
 
   if (loading) {
-    return <MyCardsSkeleton count={cardsCount} />;
+    return (
+      <div className={styles.middle}>
+        <div className={styles.cardsContainer}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <AllCardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (isCheckingAuth) {

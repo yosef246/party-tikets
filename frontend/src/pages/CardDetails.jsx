@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Message from "../components/message";
 import styles from "./CardDetails.module.css";
 import { Helmet } from "react-helmet-async";
-import CardDetailsSkeleton from "../components/Skeleton/CardDetailsSkeleton";
+import CardDetailsSkeleton from "../components/Skeloton/CardDetailsSkeleton";
 
 export default function CardDetails() {
   const { id } = useParams();

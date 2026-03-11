@@ -1,6 +1,6 @@
 import styles from "./AllCardSkeleton.module.css";
 
-export default function CardSkeleton() {
+export default function AllCardSkeleton() {
   return (
     <div className={styles.card}>
       <div className={styles.image} />
