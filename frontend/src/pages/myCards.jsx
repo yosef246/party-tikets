@@ -10,7 +10,7 @@ export default function MyCards() {
   const [cards, setCards] = useState([]);
   const { isAuthenticated, loading } = useContext(AuthContext); //לבדוק שיש טוקאן
   const [cardsCount, setCardsCount] = useState(
-    parseInt(localStorage.getItem("cardsCount")) || 6
+    parseInt(localStorage.getItem("cardsCount"))
   ); // לפני שהנתונים נטענו — השתמש במספר שמור מהפעם הקודמת
   const navigate = useNavigate();
 
